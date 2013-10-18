@@ -1,7 +1,7 @@
 <li>
   <%= link_to affiliation.name, affiliation %>
   <% if current_user.admin? && !current_user?(user) %>
-    | <%= link_to "delete", user, method: :delete,
+    | <%= link_to "delete", affiliation, method: :delete,
                                   data: { confirm: "You sure?" } %>
   <% end %>
 </li>

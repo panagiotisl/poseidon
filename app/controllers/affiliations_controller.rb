@@ -24,6 +24,13 @@ class AffiliationsController < ApplicationController
     end
   end
 
+  def destroy
+    Affiliation.find(params[:id]).destroy
+    flash[:success] = "Affiliation destroyed."
+    redirect_to affiliations_url
+  end
+
+
   private
   
     def affiliation_params
