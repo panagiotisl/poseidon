@@ -7,4 +7,9 @@ module UsersHelper
     gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
     image_tag(gravatar_url, alt: user.name, class: "gravatar")
   end
+  
+  def works_for(user)
+    affiliation = Affiliation.find(user.affiliation_id)
+    "Works for " + affiliation.name unless affiliation.category == 'Other'
+  end
 end

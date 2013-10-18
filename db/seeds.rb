@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+affiliation = Affiliation.create(name: 'Other', category: 'Other')
+#affiliation = Affiliation.first
+admin = User.create(name: 'Admin', email: 'admin@example.com', password:'foobar', password_confirmation:'foobar', affiliation_id: affiliation.id, admin: true)
+Affiliation.create(name: 'Kampanis', category: 'Shipping')
