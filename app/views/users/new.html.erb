@@ -18,6 +18,7 @@
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation %>
       
+      <%= f.label :affiliation_id, "Affiliation" %>
 	  <%= select "user", "affiliation_id", Affiliation.all.collect {|p| [ p.name, p.id ] }, { :include_blank => false } %>
       
       <%= f.submit "Create my account", class: "btn btn-large btn-primary" %>

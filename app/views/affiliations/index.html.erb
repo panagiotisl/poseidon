@@ -1,0 +1,10 @@
+<% provide(:title, 'All affiliations') %>
+<h1>All users</h1>
+
+<%= will_paginate %>
+
+<ul class="affiliations">
+  <%= render @affiliations %>
+</ul>
+
+<%= will_paginate %>

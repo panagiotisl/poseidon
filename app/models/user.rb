@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
                                    class_name:  "Relationship",
                                    dependent:   :destroy
   has_many :followers, through: :reverse_relationships, source: :follower
-  belongs_to :affiliations, class_name: "Affiliation"
+  belongs_to :affiliations, primary_key: "id", foreign_key: "affiliation_id"
   before_save { self.email = email.downcase }
   before_create :create_remember_token
   validates :name, presence: true, length: { maximum: 50 }
