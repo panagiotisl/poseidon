@@ -1,0 +1,10 @@
+<% provide(:title, 'All Shipping Companies') %>
+<h1>All users</h1>
+
+<%= will_paginate %>
+
+<ul class="shippingCompanies">
+  <%= render @shipping_companies %>
+</ul>
+
+<%= will_paginate %>

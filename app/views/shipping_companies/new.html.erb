@@ -1,0 +1,18 @@
+<% provide(:title, 'Add a Shipping Company') %>
+<h1>Add a Shipping Company</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@shipping_company) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.label :country_id, "Country" %>
+      <%= select "shipping_company", "country_id", Country.all.collect {|p| [ p.printableName, p.id ] }, { :include_blank => false } %>
+      
+      <%= f.submit "Create this Shiping Company", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

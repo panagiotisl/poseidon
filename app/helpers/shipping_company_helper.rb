@@ -1,0 +1,2 @@
+module ShippingCompanyHelper
+end
