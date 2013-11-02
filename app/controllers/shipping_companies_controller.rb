@@ -4,7 +4,7 @@ class ShippingCompaniesController < ApplicationController
   before_action :admin_user,     only: [:destroy]
 
   def index
-    @shipping_companies = ShippingCompany.paginate(page: params[:page])
+    @shipping_companies = ShippingCompany.reorder("name ASC").paginate(page: params[:page])
   end
   
   def show
