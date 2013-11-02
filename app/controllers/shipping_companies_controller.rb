@@ -1,6 +1,7 @@
 class ShippingCompaniesController < ApplicationController
 
-  before_action :admin_user,     only: [:index, :show, :new, :create]
+#  before_action :admin_user,     only: [:index, :show, :new, :create]
+  before_action :admin_user,     only: [:destroy]
 
   def index
     @shipping_companies = ShippingCompany.paginate(page: params[:page])
@@ -16,7 +17,7 @@ class ShippingCompaniesController < ApplicationController
 
   def create
     @shipping_company = ShippingCompany.new(shipping_company_params)
-    if @shipping_company.save
+    if verify_recaptcha(@shipping_company) && @shipping_company.save!
       flash[:success] = "Shipping Company Saved!"
       redirect_to @shipping_company
     else
@@ -27,14 +28,14 @@ class ShippingCompaniesController < ApplicationController
   def destroy
     ShippingCompany.find(params[:id]).destroy
     flash[:success] = "Shipping Company destroyed."
-    redirect_to affiliations_url
+    redirect_to shipping_companies_url
   end
 
 
   private
   
     def shipping_company_params
-      params.require(:shipping_company).permit(:name, :category_id)
+      params.require(:shipping_company).permit(:name, :country_id)
     end
     
     def admin_user

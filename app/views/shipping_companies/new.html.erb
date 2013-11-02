@@ -11,6 +11,9 @@
 
       <%= f.label :country_id, "Country" %>
       <%= select "shipping_company", "country_id", Country.all.collect {|p| [ p.printableName, p.id ] }, { :include_blank => false } %>
+
+      <%= f.label :wv, "Are you human?" %>
+      <%= recaptcha_tags :ssl => true, :ajax => true %>
       
       <%= f.submit "Create this Shiping Company", class: "btn btn-large btn-primary" %>
     <% end %>

@@ -7,8 +7,8 @@ SampleApp::Application.routes.draw do
   resources :sessions,      only: [:new, :create, :destroy]
   resources :microposts,    only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
-  resources :affiliations,  only: [:create, :show, :index]
-  resources :shipping_companies,  only: [:create, :show, :index]
+  resources :affiliations,  only: [:create, :show, :index, :destroy]
+  resources :shipping_companies,  only: [:create, :show, :index, :destroy]
   root to: 'static_pages#home'
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'
