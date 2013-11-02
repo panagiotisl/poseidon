@@ -1,6 +1,6 @@
 <li>
   <%= link_to shipping_company.name, shipping_company %>
-  <% if current_user.admin? %>
+  <% if signed_in? and current_user.admin? %>
     | <%= link_to "delete", shipping_company, method: :delete,
                                   data: { confirm: "You sure?" } %>
   <% end %>
