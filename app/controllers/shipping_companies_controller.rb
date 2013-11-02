@@ -17,7 +17,7 @@ class ShippingCompaniesController < ApplicationController
 
   def create
     @shipping_company = ShippingCompany.new(shipping_company_params)
-    if verify_recaptcha(@shipping_company) && @shipping_company.save!
+    if verify_recaptcha(@shipping_company) && @shipping_company.save
       flash[:success] = "Shipping Company Saved!"
       redirect_to @shipping_company
     else
