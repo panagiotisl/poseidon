@@ -6,22 +6,33 @@ class UsersController < ApplicationController
 
   def index
     @users = User.paginate(page: params[:page])
+    render :template => 'users/index'
   end
 
+
+  #def show
+  #  @user = User.find(params[:id])
+  #  @microposts = @user.microposts.paginate(page: params[:page])
+  #end
+
   def show
+    #@user = eval("#{params[:controller].classify}.find(params[:id])")
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
+    render :template => 'users/show'
   end
+
 
   def new
     @user = User.new
   end
 
   def create
-    @user = User.new(user_params)
+    type = params[:user][:type]
+    @user = SCUser.new(sc_user_params)
     if @user.save
       sign_in @user
-      flash[:success] = "Welcome to the Sample App!"
+      flash[:success] = "Welcome to POSEIDON!"
       redirect_to @user
     else
       render 'new'
@@ -63,7 +74,11 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :affiliation_id)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    end
+
+    def sc_user_params
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :shipping_company_id)
     end
 
     # Before filters

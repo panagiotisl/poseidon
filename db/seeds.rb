@@ -8,13 +8,12 @@
 
 
 
-other = Category.create(name:'Other')
-shipping = Category.create(name:'Shipping')
+#other = Category.create(name:'Other')
+#shipping = Category.create(name:'Shipping')
 
-affiliation = Affiliation.create(name: 'Other', category_id: other.id)
+#affiliation = Affiliation.create(name: 'Other', category_id: other.id)
 #affiliation = Affiliation.first
-admin = User.create(name: 'Admin', email: 'admin@example.com', password:'foobar', password_confirmation:'foobar', affiliation_id: affiliation.id, admin: true)
-Affiliation.create(name: 'Kampanis', category_id: shipping.id)
+#Affiliation.create(name: 'Kampanis', category_id: shipping.id)
 
 greece = Country.create(iso: 'GR', name: 'GREECE', printableName: 'Greece', iso3: 'GRC', numCode: 300)
 Country.create(iso: 'FR', name: 'FRANCE', printableName: 'France', iso3: 'FRA', numCode: 250)
@@ -22,4 +21,6 @@ Country.create(iso: 'IT', name: 'ITALY', printableName: 'Italy', iso3: 'ITA', nu
 Country.create(iso: 'IL', name: 'ISRAEL', printableName: 'Israel', iso3: 'ISR', numCode: 376)
 
 
-c1 = ShippingCompany.create(name: "Kampanis", country_id: greece.id)
+c1 = ShippingCompany.create(name: "Kampanis", country_id: greece.id, address: "Fifth Avenue 23", telephone: "+30 2105544345", email: "info@kampanis.gr") 
+
+admin = User.create(name: 'Admin', email: 'admin@example.com', password:'foobar', password_confirmation:'foobar', admin: true)

@@ -32,10 +32,11 @@ class ShippingCompaniesController < ApplicationController
   end
 
 
+
   private
   
     def shipping_company_params
-      params.require(:shipping_company).permit(:name, :country_id)
+      params.require(:shipping_company).permit(:name, :email, :address, :telephone, :country_id)
     end
     
     def admin_user
@@ -43,7 +44,6 @@ class ShippingCompaniesController < ApplicationController
         flash[:error] = "You do not have permission to view this page!"
         redirect_to(root_url)
       end
-         
-    end    
+    end
 
 end

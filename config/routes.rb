@@ -9,6 +9,7 @@ SampleApp::Application.routes.draw do
   resources :relationships, only: [:create, :destroy]
   resources :affiliations,  only: [:create, :show, :index, :destroy]
   resources :shipping_companies,  only: [:create, :show, :index, :destroy]
+  resources :agents,  only: [:create, :show, :index, :destroy]
   root to: 'static_pages#home'
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'
@@ -19,4 +20,5 @@ SampleApp::Application.routes.draw do
 
   match '/new-company',	to: 'affiliations#new',	via: 'get'
   match '/new-shipping-company', :to => 'shipping_companies#new', :as => :new_shipping_company, via: 'get'
+  match '/new-agent-supplier', :to => 'agents#new', :as => :new_agent, via: 'get'
 end

@@ -1,6 +1,6 @@
-class CreateShippingCompanies < ActiveRecord::Migration
+class CreateAgents < ActiveRecord::Migration
   def change
-    create_table :shipping_companies do |t|
+    create_table :agents do |t|
       t.string :name
       t.string :email
       t.string :address

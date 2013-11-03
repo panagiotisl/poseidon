@@ -9,7 +9,9 @@ module UsersHelper
   end
   
   def works_for(user)
-    affiliation = Affiliation.find(user.affiliation_id)
-    "Works for " + affiliation.name #unless affiliation.category == 'Other'
+    if user.kind_of? SCUser then
+      sc = ShippingCompany.find(user.shipping_company_id)
+      link_to sc.name, sc
+    end
   end
 end

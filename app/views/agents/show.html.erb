@@ -1,0 +1,17 @@
+<% provide(:title, @agent.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= @agent.name %>, <%= @agent.country.printableName %>
+      </h1>
+      Address: <%= @agent.address %><br />
+      Telephone: <%= @agent.telephone %><br />
+      e-mail: <%= @agent.email %>
+    </section>
+    <section>
+    </section>
+  </aside>
+  <div class="span8">
+  </div>
+</div>

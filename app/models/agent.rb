@@ -1,4 +1,4 @@
-class ShippingCompany < ActiveRecord::Base
+class Agent < ActiveRecord::Base
   belongs_to :country
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i

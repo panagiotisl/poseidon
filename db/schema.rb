@@ -11,19 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131101074206) do
+ActiveRecord::Schema.define(version: 20131103073220) do
 
-  create_table "affiliations", force: true do |t|
+  create_table "agents", force: true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "category_id"
-  end
-
-  add_index "affiliations", ["name"], name: "index_affiliations_on_name", unique: true, using: :btree
-
-  create_table "categories", force: true do |t|
-    t.string   "name"
+    t.string   "email"
+    t.string   "address"
+    t.string   "telephone"
+    t.boolean  "enabled"
+    t.integer  "country_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -60,6 +56,10 @@ ActiveRecord::Schema.define(version: 20131101074206) do
 
   create_table "shipping_companies", force: true do |t|
     t.string   "name"
+    t.string   "email"
+    t.string   "address"
+    t.string   "telephone"
+    t.boolean  "enabled"
     t.integer  "country_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -68,12 +68,14 @@ ActiveRecord::Schema.define(version: 20131101074206) do
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "email"
+    t.boolean  "admin"
+    t.integer  "shipping_company_id"
+    t.integer  "agent_id"
+    t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "password_digest"
     t.string   "remember_token"
-    t.boolean  "admin"
-    t.integer  "affiliation_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

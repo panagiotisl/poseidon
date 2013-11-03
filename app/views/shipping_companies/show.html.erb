@@ -3,8 +3,11 @@
   <aside class="span4">
     <section>
       <h1>
-        <%= @shipping_company.name %>
+        <%= @shipping_company.name %>, <%= @shipping_company.country.printableName %>
       </h1>
+      Address: <%= @shipping_company.address %><br />
+      Telephone: <%= @shipping_company.telephone %><br />
+      e-mail: <%= @shipping_company.email %>
     </section>
     <section>
     </section>
