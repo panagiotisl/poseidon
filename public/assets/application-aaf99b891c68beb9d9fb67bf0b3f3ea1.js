@@ -10216,7 +10216,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
   fetchReplacement = function(url) {
     var safeUrl,
       _this = this;
-
     triggerEvent('page:fetch');
     safeUrl = removeHash(url);
     if (xhr != null) {
@@ -10228,7 +10227,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     xhr.setRequestHeader('X-XHR-Referer', referer);
     xhr.onload = function() {
       var doc;
-
       triggerEvent('page:receive');
       if (invalidContent(xhr) || assetsChanged((doc = createDocument(xhr.responseText)))) {
         return document.location.reload();
@@ -10257,7 +10255,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
   fetchHistory = function(state) {
     var page;
-
     cacheCurrentPage();
     if (page = pageCache[state.position]) {
       if (xhr != null) {
@@ -10285,7 +10282,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
   constrainPageCacheTo = function(limit) {
     var key, value;
-
     for (key in pageCache) {
       if (!__hasProp.call(pageCache, key)) continue;
       value = pageCache[key];
@@ -10311,7 +10307,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
   executeScriptTags = function() {
     var attr, copy, nextSibling, parentNode, script, scripts, _i, _j, _len, _len1, _ref1, _ref2;
-
     scripts = Array.prototype.slice.call(document.body.getElementsByTagName('script'));
     for (_i = 0, _len = scripts.length; _i < _len; _i++) {
       script = scripts[_i];
@@ -10333,7 +10328,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
   removeNoscriptTags = function() {
     var noscript, noscriptTags, _i, _len;
-
     noscriptTags = Array.prototype.slice.call(document.body.getElementsByTagName('noscript'));
     for (_i = 0, _len = noscriptTags.length; _i < _len; _i++) {
       noscript = noscriptTags[_i];
@@ -10353,7 +10347,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
   reflectRedirectedUrl = function(xhr) {
     var location;
-
     if ((location = xhr.getResponseHeader('X-XHR-Current-Location')) && location !== document.location.pathname + document.location.search) {
       return window.history.replaceState(currentState, '', location + document.location.hash);
     }
@@ -10389,7 +10382,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
   removeHash = function(url) {
     var link;
-
     link = url;
     if (url.href == null) {
       link = document.createElement('A');
@@ -10400,7 +10392,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
   triggerEvent = function(name) {
     var event;
-
     event = document.createEvent('Events');
     event.initEvent(name, true, true);
     return document.dispatchEvent(event);
@@ -10412,7 +10403,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
   extractTrackAssets = function(doc) {
     var node, _i, _len, _ref1, _results;
-
     _ref1 = doc.head.childNodes;
     _results = [];
     for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
@@ -10426,7 +10416,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
   assetsChanged = function(doc) {
     var fetchedAssets;
-
     loadedAssets || (loadedAssets = extractTrackAssets(document));
     fetchedAssets = extractTrackAssets(doc);
     return fetchedAssets.length !== loadedAssets.length || intersection(fetchedAssets, loadedAssets).length !== loadedAssets.length;
@@ -10434,7 +10423,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
   intersection = function(a, b) {
     var value, _i, _len, _ref1, _results;
-
     if (a.length > b.length) {
       _ref1 = [b, a], a = _ref1[0], b = _ref1[1];
     }
@@ -10450,7 +10438,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
   extractTitleAndBody = function(doc) {
     var title;
-
     title = doc.querySelector('title');
     return [title != null ? title.textContent : void 0, doc.body, CSRFToken.get(doc).token, 'runScripts'];
   };
@@ -10458,7 +10445,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
   CSRFToken = {
     get: function(doc) {
       var tag;
-
       if (doc == null) {
         doc = document;
       }
@@ -10469,7 +10455,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     },
     update: function(latest) {
       var current;
-
       current = this.get();
       if ((current.token != null) && (latest != null) && current.token !== latest) {
         return current.node.setAttribute('content', latest);
@@ -10479,20 +10464,17 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
   browserCompatibleDocumentParser = function() {
     var createDocumentUsingDOM, createDocumentUsingParser, createDocumentUsingWrite, e, testDoc, _ref1;
-
     createDocumentUsingParser = function(html) {
       return (new DOMParser).parseFromString(html, 'text/html');
     };
     createDocumentUsingDOM = function(html) {
       var doc;
-
       doc = document.implementation.createHTMLDocument('');
       doc.documentElement.innerHTML = html;
       return doc;
     };
     createDocumentUsingWrite = function(html) {
       var doc;
-
       doc = document.implementation.createHTMLDocument('');
       doc.open('replace');
       doc.write(html);
@@ -10524,7 +10506,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
   handleClick = function(event) {
     var link;
-
     if (!event.defaultPrevented) {
       link = extractLink(event);
       if (link.nodeName === 'A' && !ignoreClick(event, link)) {
@@ -10536,7 +10517,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
   extractLink = function(event) {
     var link;
-
     link = event.target;
     while (!(!link.parentNode || link.nodeName === 'A')) {
       link = link.parentNode;
@@ -10554,14 +10534,12 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
   nonHtmlLink = function(link) {
     var url;
-
     url = removeHash(link);
     return url.match(/\.[a-z]+(\?.*)?$/g) && !url.match(/\.html?(\?.*)?$/g);
   };
 
   noTurbolink = function(link) {
     var ignore;
-
     while (!(ignore || link === document)) {
       ignore = link.getAttribute('data-no-turbolink') != null;
       link = link.parentNode;
@@ -10585,7 +10563,6 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
     document.addEventListener('click', installClickHandlerLast, true);
     return window.addEventListener('popstate', function(event) {
       var _ref1;
-
       if ((_ref1 = event.state) != null ? _ref1.turbolinks : void 0) {
         return fetchHistory(event.state);
       }
@@ -12930,6 +12907,30 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 }).call(this);
 (function() {
 
+
+}).call(this);
+(function() {
+
+
+}).call(this);
+(function() {
+  $(function() {
+    $('#user_shipping_company_id').parent().hide();
+    $('#user_agent_id').parent().hide();
+    return $('#user_type').change(function() {
+      var type;
+      type = $('#user_type :selected').text();
+      if (type === 'Shipping Company employee') {
+        $('#user_agent_id').parent().hide();
+        $('#user_agent_id').empty();
+        return $('#user_shipping_company_id').parent().show();
+      } else if (type === 'Agent/Supplier employee') {
+        $('#user_shipping_company_id').parent().hide();
+        $('#user_shipping_company_id').empty();
+        return $('#user_agent_id').parent().show();
+      }
+    });
+  });
 
 }).call(this);
 // This is a manifest file that'll be compiled into application.js, which will include all the files
