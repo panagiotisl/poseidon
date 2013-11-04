@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action :admin_user,     only: :destroy
 
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.order(:name).paginate(page: params[:page])
     render :template => 'users/index'
   end
 
@@ -29,7 +29,13 @@ class UsersController < ApplicationController
 
   def create
     type = params[:user][:type]
-    @user = SCUser.new(sc_user_params)
+    if(type == SCUser.name)
+      @user = SCUser.new(sc_user_params)
+    elsif(type == AUser.name)
+      @user = AUser.new(a_user_params)
+    else
+      render 'new'
+    end
     if @user.save
       sign_in @user
       flash[:success] = "Welcome to POSEIDON!"
@@ -81,6 +87,9 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :email, :password, :password_confirmation, :shipping_company_id)
     end
 
+    def a_user_params
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :agent_id)
+    end
     # Before filters
 
     def correct_user

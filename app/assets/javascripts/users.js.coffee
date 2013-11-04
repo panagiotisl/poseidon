@@ -7,11 +7,11 @@ $ ->
   $('#user_agent_id').parent().hide()
   $('#user_type').change ->
     type = $('#user_type :selected').text()
-    if type == 'Shipping Company employee'
-      $('#user_agent_id').parent().hide()
-      $('#user_agent_id').empty()
-      $('#user_shipping_company_id').parent().show()
-    else if type == 'Agent/Supplier employee'
-      $('#user_shipping_company_id').parent().hide()
-      $('#user_shipping_company_id').empty()
-      $('#user_agent_id').parent().show()
+    if type == 'Shipping Company Employee'
+      $('#agent').hide()
+      $("#user_agent_id")[0].options[0].selected = true;
+      $('#shipping_company').show()
+    else if type == 'Agent/Supplier Employee'
+      $('#shipping_company').hide()
+      $("#user_shipping_company_id")[0].options[0].selected = true;
+      $('#agent').show()

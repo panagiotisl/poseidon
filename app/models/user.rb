@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :password, length: { minimum: 6 }
 
+  TYPE = [['Shipping Company Employee', 'SCUser'], ['Agent/Supplier Employee', 'AUser']]
   
   def User.new_remember_token
     SecureRandom.urlsafe_base64

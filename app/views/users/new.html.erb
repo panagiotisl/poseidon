@@ -6,16 +6,16 @@
       <%= render 'shared/error_messages', object: f.object %>
 
       <%= f.label "Type" %>
-      <%= f.select :type, ["Shipping Company employee", "Agent/Supplier employee"], { :include_blank => true } %>
+      <%= f.select :type, User::TYPE, { :include_blank => true } %>
 
-      <div class="shipping_company">
+      <div id="shipping_company">
       <%= f.label :shipping_company_id, "Shipping Company" %>
-	  <%= select "user", "shipping_company_id", ShippingCompany.order(:name).all.collect {|p| [ p.name, p.id ] }, { :include_blank => true } %>
+      <%= select "user", "shipping_company_id", ShippingCompany.order(:name).all.collect {|p| [ p.name, p.id ] }, { :include_blank => true } %>
       </div>
 
-      <div class="agent">
+      <div id="agent">
       <%= f.label :agent_id, "Agent/Supplier" %>
-	  <%= select "user", "agent_id", Agent.order(:name).all.collect {|p| [ p.name, p.id ] }, { :include_blank => true } %>
+      <%= select "user", "agent_id", Agent.order(:name).all.collect {|p| [ p.name, p.id ] }, { :include_blank => true } %>
       </div>
 
       <%= f.label :name %>
