@@ -8,8 +8,14 @@ SampleApp::Application.routes.draw do
   resources :microposts,    only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
   resources :affiliations,  only: [:create, :show, :index, :destroy]
-  resources :shipping_companies,  only: [:create, :show, :index, :destroy]
-  resources :agents,  only: [:create, :show, :index, :destroy]
+  resources :shipping_companies,  only: [:create, :show, :index, :destroy] do
+    match '/new-employee', :to => 'users#new_sce', :as => :new_sce, via: 'get'
+    match '/new-employee', :to => 'users#create_sce', :as => :create_sce, via: 'post'
+  end
+  resources :agents,  only: [:create, :show, :index, :destroy] do
+    match '/new-employee', :to => 'users#new_ase', :as => :new_ase, via: 'get'
+    match '/new-employee', :to => 'users#create_ase', :as => :create_ase, via: 'post'
+  end
   root to: 'static_pages#home'
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'

@@ -1,0 +1,27 @@
+<% provide(:title, 'Sign up') %>
+<h1>Create user for <%= ShippingCompany.find(params[:shipping_company_id]).name %></h1>
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for @user, :url => url_for(:controller => 'users', :action => 'create_sce') do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation %>
+
+      <%= f.hidden_field :type, :value => "SCUser" %>
+
+      <%= f.hidden_field :shipping_company_id, :value => params[:shipping_company_id] %>
+      
+      <%= f.submit "Create this account", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
