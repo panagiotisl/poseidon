@@ -3,8 +3,8 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
-  $('#user_shipping_company_id').parent().hide()
-  $('#user_agent_id').parent().hide()
+  $('#shipping_company').hide()
+  $('#agent').hide()
   $('#user_type').change ->
     type = $('#user_type :selected').text()
     if type == 'Shipping Company Employee'
