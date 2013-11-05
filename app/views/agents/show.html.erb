@@ -7,11 +7,8 @@
       </h1>
       Address: <%= @agent.address %><br />
       Telephone: <%= @agent.telephone %><br />
-      e-mail: <%= @agent.email %>
-    </section>
-    <section>
+      e-mail: <%= @agent.email %><br />
+      <%= link_to "Add employee", agent_new_ase_path(:agent_id => params[:id]), :method => "get" %>
     </section>
   </aside>
-  <div class="span8">
-  </div>
 </div>

@@ -17,8 +17,6 @@
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation %>
 
-      <%= f.hidden_field :type, :value => "SCUser" %>
-
       <%= f.hidden_field :shipping_company_id, :value => params[:shipping_company_id] %>
       
       <%= f.submit "Create this account", class: "btn btn-large btn-primary" %>

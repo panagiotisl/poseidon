@@ -17,8 +17,6 @@
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation %>
 
-      <%= f.hidden_field :type, :value => "AUser" %>
-
       <%= f.hidden_field :agent_id, :value => params[:agent_id] %>
       
       <%= f.submit "Create this account", class: "btn btn-large btn-primary" %>

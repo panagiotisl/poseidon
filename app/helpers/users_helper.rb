@@ -9,7 +9,10 @@ module UsersHelper
   end
   
   def works_for(user)
-    if user.kind_of? SCUser then
+    if user.kind_of? AUser then
+      a = Agent.find(user.agent_id)
+      link_to a.name, a
+    elsif user.kind_of? SCUser then
       sc = ShippingCompany.find(user.shipping_company_id)
       link_to sc.name, sc
     end
