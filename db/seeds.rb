@@ -6,20 +6,14 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-
-
-#other = Category.create(name:'Other')
-#shipping = Category.create(name:'Shipping')
-
-#affiliation = Affiliation.create(name: 'Other', category_id: other.id)
-#affiliation = Affiliation.first
-#Affiliation.create(name: 'Kampanis', category_id: shipping.id)
-
 greece = Country.create(iso: 'GR', name: 'GREECE', printableName: 'Greece', iso3: 'GRC', numCode: 300)
 Country.create(iso: 'FR', name: 'FRANCE', printableName: 'France', iso3: 'FRA', numCode: 250)
 Country.create(iso: 'IT', name: 'ITALY', printableName: 'Italy', iso3: 'ITA', numCode: 380)
 Country.create(iso: 'IL', name: 'ISRAEL', printableName: 'Israel', iso3: 'ISR', numCode: 376)
 
+Port.create(name: 'Port of Nisos Naxos', country_id: greece.id, lat:'37.1', lng:'25.366667')
+Port.create(name: 'Port of Nauplia', country_id: greece.id, lat:'37.566667', lng:'22.8')
+Port.create(name: 'Port of Piraeus', country_id: greece.id, lat:'37.933333', lng:'23.633333')
 
 c1 = ShippingCompany.create(name: "Kampanis", country_id: greece.id, address: "Fifth Avenue 23", telephone: "+30 2105544345", email: "info@kampanis.gr")
 a1 = Agent.create(name: "BestAgents", country_id: greece.id, address: "Sporadon 23", telephone: "+30 2104543245", email: "info@bestagents.gr")
@@ -28,5 +22,3 @@ admin = User.create(name: 'Admin', email: 'admin@example.com', password:'foobar'
 
 SCUser.create(name: 'Mike', email: 'mike@bestagents.gr', password:'foobar', password_confirmation:'foobar', shipping_company_id: c1.id)
 AUser.create(name: 'Scottie', email: 'scottie@kampanis.gr', password:'foobar', password_confirmation:'foobar', agent_id: a1.id)
-
-

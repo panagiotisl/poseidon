@@ -6,5 +6,5 @@ class ShippingCompany < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
   validates :address, presence: true
   validates :telephone, presence: true
-
+  validates :country_id, presence: true
 end

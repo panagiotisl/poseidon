@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131103073220) do
+ActiveRecord::Schema.define(version: 20131106103733) do
 
   create_table "agents", force: true do |t|
     t.string   "name"
@@ -42,6 +42,26 @@ ActiveRecord::Schema.define(version: 20131103073220) do
   end
 
   add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at", using: :btree
+
+  create_table "operations", force: true do |t|
+    t.integer  "agent_id"
+    t.integer  "port_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "operations", ["agent_id", "port_id"], name: "index_operations_on_agent_id_and_port_id", unique: true, using: :btree
+  add_index "operations", ["agent_id"], name: "index_operations_on_agent_id", using: :btree
+  add_index "operations", ["port_id"], name: "index_operations_on_port_id", using: :btree
+
+  create_table "ports", force: true do |t|
+    t.string   "name"
+    t.decimal  "lat",        precision: 15, scale: 10
+    t.decimal  "lng",        precision: 15, scale: 10
+    t.integer  "country_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "relationships", force: true do |t|
     t.integer  "follower_id"

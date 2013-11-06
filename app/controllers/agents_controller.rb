@@ -28,10 +28,16 @@ class AgentsController < ApplicationController
   def destroy
     Agent.find(params[:id]).destroy
     flash[:success] = "Agent/Supplier destroyed."
-    redirect_to shipping_companies_url
+    redirect_to agents_url
   end
 
+  def operating_on?(port)
+    ports.find_by(port_id: port.id)
+  end
 
+  def operates_on!(port)
+    operations.create!(port_id: port.id)
+  end
 
   private
   
