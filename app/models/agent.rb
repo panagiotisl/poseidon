@@ -9,4 +9,17 @@ class Agent < ActiveRecord::Base
   validates :address, presence: true
   validates :telephone, presence: true
   validates :country_id, presence: true
+
+  def operating_on?(port)
+    ports.find_by(port_id: port.id)
+  end
+
+  def operate_on!(port)
+    operations.create!(port_id: port.id)
+  end
+
+  def stop_operating_on!(port)
+    operations.find_by(port_id: port.id).destroy!
+  end
+
 end

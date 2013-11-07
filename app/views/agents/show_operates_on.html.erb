@@ -1,0 +1,18 @@
+<% provide(:title, @title) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1><%= @agent.name %></h1>
+      <span><%= link_to "view my profile", @agent %></span>
+    </section>
+  </aside>
+  <div class="span8">
+    <h3><%= @title %></h3>
+    <% if @ports.any? %>
+      <ul class="ports">
+        <%= render @ports %>
+      </ul>
+      <%= will_paginate @ports %>
+    <% end %>
+  </div>
+</div>

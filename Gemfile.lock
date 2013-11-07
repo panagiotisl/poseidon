@@ -75,6 +75,8 @@ GEM
       railties (>= 3.0.0)
     faker (1.1.2)
       i18n (~> 0.5)
+    fancybox-rails (0.2.1)
+      railties (>= 3.1.0)
     ffi (1.9.0)
     formatador (0.2.4)
     gherkin (2.12.1)
@@ -228,6 +230,7 @@ DEPENDENCIES
   database_cleaner!
   factory_girl_rails (= 4.2.0)
   faker (= 1.1.2)
+  fancybox-rails
   growl (= 1.0.3)
   guard-rspec (= 2.5.0)
   guard-spork (= 1.5.0)

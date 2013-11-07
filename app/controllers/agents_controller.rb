@@ -31,12 +31,11 @@ class AgentsController < ApplicationController
     redirect_to agents_url
   end
 
-  def operating_on?(port)
-    ports.find_by(port_id: port.id)
-  end
-
-  def operates_on!(port)
-    operations.create!(port_id: port.id)
+  def operating_on
+    @title = "Ports Operating On"
+    @agent = Agent.find(params[:id])
+    @ports = @agent.ports.paginate(page: params[:page])
+    render 'show_operates_on'
   end
 
   private

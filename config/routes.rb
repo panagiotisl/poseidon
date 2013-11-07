@@ -12,6 +12,9 @@ SampleApp::Application.routes.draw do
     match '/new-employee', :to => 'users#create_sce', :as => :create_sce, via: 'post'
   end
   resources :agents,  only: [:new, :create, :show, :index, :destroy] do
+    member do
+      get :operating_on
+    end
     match '/new-employee', :to => 'users#new_ase', :as => :new_ase, via: 'get'
     match '/new-employee', :to => 'users#create_ase', :as => :create_ase, via: 'post'
   end
