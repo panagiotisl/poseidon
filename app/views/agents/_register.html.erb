@@ -1,0 +1,6 @@
+<%= form_for(agent.operations.build(port_id: port.id, agent_id: agent.id),
+             remote: true) do |f| %>
+  <div><%= f.hidden_field :port_id %></div>
+  <div><%= f.hidden_field :agent_id %></div>
+  <%= f.submit "Register", class: "btn btn-mini btn-primary" %>
+<% end %>

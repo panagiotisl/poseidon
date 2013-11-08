@@ -1,0 +1,5 @@
+<%= form_for(agent.operations.find_by(port_id: port.id),
+             html: { method: :delete },
+             remote: true) do |f| %>
+  <%= f.submit "Unregister", class: "btn btn-danger btn-mini" %>
+<% end %>

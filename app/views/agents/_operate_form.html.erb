@@ -1,0 +1,7 @@
+  <div id="operate_form_<%= port.id %>">
+  <% if @agent.operating_on?(port) %>
+    <%= render 'unregister', :agent => @agent, :port => port %>
+  <% else %>
+    <%= render 'register', :agent => @agent, :port => port %>
+  <% end %>
+  </div>

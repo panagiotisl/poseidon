@@ -15,14 +15,14 @@ Port.create(name: 'Port of Nisos Naxos', country_id: greece.id, lat:'37.1', lng:
 Port.create(name: 'Port of Nauplia', country_id: greece.id, lat:'37.566667', lng:'22.8')
 Port.create(name: 'Port of Piraeus', country_id: greece.id, lat:'37.933333', lng:'23.633333')
 
-Operation.create(agent_id: 1, port_id: 1)
-Operation.create(agent_id: 1, port_id: 2)
-Operation.create(agent_id: 1, port_id: 3)
-
 c1 = ShippingCompany.create(name: "Kampanis", country_id: greece.id, address: "Fifth Avenue 23", telephone: "+30 2105544345", email: "info@kampanis.gr")
 a1 = Agent.create(name: "BestAgents", country_id: greece.id, address: "Sporadon 23", telephone: "+30 2104543245", email: "info@bestagents.gr")
 
+#Operation.create(agent_id: 1, port_id: 1)
+Operation.create(agent_id: 1, port_id: 2)
+Operation.create(agent_id: 1, port_id: 3)
+
 admin = User.create(name: 'Admin', email: 'admin@example.com', password:'foobar', password_confirmation:'foobar', admin: true)
 
-SCUser.create(name: 'Mike', email: 'mike@bestagents.gr', password:'foobar', password_confirmation:'foobar', shipping_company_id: c1.id)
-AUser.create(name: 'Scottie', email: 'scottie@kampanis.gr', password:'foobar', password_confirmation:'foobar', agent_id: a1.id)
+SCUser.create(name: 'Mike', email: 'mike@kampanis.gr', password:'foobar', password_confirmation:'foobar', shipping_company_id: c1.id)
+AUser.create(name: 'Scottie', email: 'scottie@bestagents.gr', password:'foobar', password_confirmation:'foobar', agent_id: a1.id)

@@ -1,5 +1,4 @@
 <li>
-  <strong><%= port.name %></strong><br />
-  <%= port.country.printableName %><br />
-  <%= link_to "Map", "http://maps.googleapis.com/maps/api/staticmap?center=#{port.lat},#{port.lng}&zoom=13&size=600x400&maptype=roadmap&&sensor=true&filename=#{port.name}.png", { :class => "grouped_elements", :rel => "#{port.id}" } %>
+  <div class="box2"><%= link_to port.name, "http://maps.googleapis.com/maps/api/staticmap?center=#{port.lat},#{port.lng}&zoom=13&size=600x400&maptype=roadmap&&sensor=true&filename=#{port.name}.png", { :class => "grouped_elements", :rel => "#{port.id}" } %></div>
+  <div class="box2"><%= render 'operate_form', :port => port %></div>
 </li>

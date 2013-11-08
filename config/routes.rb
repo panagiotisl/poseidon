@@ -7,13 +7,14 @@ SampleApp::Application.routes.draw do
   resources :sessions,      only: [:new, :create, :destroy]
   resources :microposts,    only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
+  resources :operations, only: [:create, :destroy]
   resources :shipping_companies,  only: [:new, :create, :show, :index, :destroy] do
     match '/new-employee', :to => 'users#new_sce', :as => :new_sce, via: 'get'
     match '/new-employee', :to => 'users#create_sce', :as => :create_sce, via: 'post'
   end
   resources :agents,  only: [:new, :create, :show, :index, :destroy] do
     member do
-      get :operating_on
+      get :manage_ports
     end
     match '/new-employee', :to => 'users#new_ase', :as => :new_ase, via: 'get'
     match '/new-employee', :to => 'users#create_ase', :as => :create_ase, via: 'post'
