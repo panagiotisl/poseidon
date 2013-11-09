@@ -1,9 +1,10 @@
 class OperationsController < ApplicationController
 
   def create
-    @port = Port.find(params[:operation][:port_id])
+#    @port = Port.find(params[:operation][:port_id])
+    @port_id = params[:operation][:port_id]
     @agent = Agent.find(params[:operation][:agent_id])
-    @agent.register!(@port)
+    @agent.register!(@port_id)
     respond_to do |format|
       format.html { redirect_to controller:'agents', action: 'manage_ports', id: @agent.id }
       format.js
@@ -12,11 +13,11 @@ class OperationsController < ApplicationController
 
   def destroy
     @operation = Operation.find(params[:id])
-    @port = @operation.port
+    @port_id = @operation.port_id
     @agent = @operation.agent
-    @agent.unregister!(@port)
+    @operation.unregister!
     respond_to do |format|
-      format.html { redirect_to controller:'agents', action: 'manage_ports', id: @agent.id }
+      format.html { redirect_to controller:'agents', action: 'manage_ports', id: @operation.agent_id }
       format.js
     end
   end

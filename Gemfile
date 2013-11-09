@@ -10,6 +10,7 @@ gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
 gem 'recaptcha', :require => 'recaptcha/rails'
 gem 'fancybox-rails'
+gem 'htmlentities'
 
 group :development, :test do
   gem 'pg', '0.15.1'

@@ -33,7 +33,7 @@ class AgentsController < ApplicationController
 
   def manage_ports
     @agent = Agent.find(params[:id])
-    @title = "Manage ports of #{@agent.name}"
+    @title = "Manage ports"
     @ports_r = @agent.ports.paginate(page: params[:page])
     @ports_ur = (Port.all - @ports_r).paginate(page: params[:page])
     p @ports_r.class.name

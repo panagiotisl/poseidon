@@ -1,4 +1,4 @@
 <li>
   <div class="box2"><%= link_to port.name, "http://maps.googleapis.com/maps/api/staticmap?center=#{port.lat},#{port.lng}&zoom=13&size=600x400&maptype=roadmap&&sensor=true&filename=#{port.name}.png", { :class => "grouped_elements", :rel => "#{port.id}" } %></div>
-  <div class="box2"><%= render 'operate_form', :port => port %></div>
+  <div class="box2"><%= render 'operate_form', :port_id => port.id %></div>
 </li>

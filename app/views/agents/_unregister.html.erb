@@ -1,5 +1,5 @@
-<%= form_for(agent.operations.find_by(port_id: port.id),
+<%= form_for(agent.operations.find_by(port_id: port_id),
              html: { method: :delete },
              remote: true) do |f| %>
-  <%= f.submit "Unregister", class: "btn btn-danger btn-mini" %>
+  <%= f.submit HTMLEntities.new.decode("&#x2717;"), class: "btn btn-danger btn-mini" %>
 <% end %>
