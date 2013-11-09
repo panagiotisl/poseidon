@@ -1,8 +1,9 @@
 <% provide(:title, 'Sign up') %>
-<h1>Create user for <%= ShippingCompany.find(params[:shipping_company_id]).name %></h1>
 <div class="row">
-  <div class="span6 offset3">
-    <%= form_for @user, :url => url_for(:controller => 'users', :action => 'create_sce') do |f| %>
+  <%= render "shipping_companies/nav" %>
+  <div class="span8">
+  	<h3>Create user for <%= @shipping_company.name %></h3>
+    <%= form_for @user, url: shipping_company_create_sce_path do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
       <%= f.label :name %>

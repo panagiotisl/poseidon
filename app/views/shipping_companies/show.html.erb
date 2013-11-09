@@ -1,14 +1,4 @@
 <% provide(:title, @shipping_company.name) %>
 <div class="row">
-  <aside class="span4">
-    <section>
-      <h1>
-        <%= @shipping_company.name %>, <%= @shipping_company.country.printableName %>
-      </h1>
-      Address: <%= @shipping_company.address %><br />
-      Telephone: <%= @shipping_company.telephone %><br />
-      e-mail: <%= @shipping_company.email %><br />
-      <%= link_to "Add employee", shipping_company_new_sce_path(:shipping_company_id => params[:id]), :method => "get" %>
-    </section>
-  </aside>
+  <%= render "nav" %>
 </div>

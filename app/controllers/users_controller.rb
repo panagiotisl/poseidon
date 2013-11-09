@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   end
 
   def new_sce
-    @sc = ShippingCompany.find(params[:shipping_company_id])
+    @shipping_company = ShippingCompany.find(params[:shipping_company_id])
     @user = User.new
   end
 
@@ -37,23 +37,23 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def create
-    type = params[:user][:type]
-    if(type == SCUser.name)
-      @user = SCUser.new(sc_user_params)
-    elsif(type == AUser.name)
-      @user = AUser.new(a_user_params)
-    else
-      render 'new'
-    end
-    if @user.save
-      sign_in @user
-      flash[:success] = "Welcome to POSEIDON!"
-      redirect_to @user
-    else
-      render 'new'
-    end
-  end
+#  def create
+#    type = params[:user][:type]
+#    if(type == SCUser.name)
+#      @user = SCUser.new(sc_user_params)
+#    elsif(type == AUser.name)
+#      @user = AUser.new(a_user_params)
+#    else
+#      render 'new'
+#    end
+#    if @user.save
+#      sign_in @user
+#      flash[:success] = "Welcome to POSEIDON!"
+#      redirect_to @user
+#    else
+#      render 'new'
+#    end
+#  end
 
   def create_sce
     @user = SCUser.new(sc_user_params)
