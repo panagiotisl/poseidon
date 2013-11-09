@@ -9,12 +9,6 @@ class UsersController < ApplicationController
     render :template => 'users/index'
   end
 
-
-  #def show
-  #  @user = User.find(params[:id])
-  #  @microposts = @user.microposts.paginate(page: params[:page])
-  #end
-
   def show
     #@user = eval("#{params[:controller].classify}.find(params[:id])")
     @user = User.find(params[:id])
@@ -22,17 +16,18 @@ class UsersController < ApplicationController
     render :template => 'users/show'
   end
 
-
-  def new
-    @user = User.new
-  end
+#  def new
+#    @user = User.new
+#  end
 
   def new_sce
+    @title = 'Create user'
     @shipping_company = ShippingCompany.find(params[:shipping_company_id])
     @user = User.new
   end
 
   def new_ase
+    @title = 'Create user'
     @agent = Agent.find(params[:agent_id])
     @user = User.new
   end
@@ -62,6 +57,7 @@ class UsersController < ApplicationController
       flash[:success] = "Welcome to POSEIDON!"
       redirect_to @user
     else
+      @shipping_company = ShippingCompany.find(params[:user][:shipping_company_id])
       render 'new_sce'
     end
   end
@@ -73,6 +69,7 @@ class UsersController < ApplicationController
       flash[:success] = "Welcome to POSEIDON!"
       redirect_to @user
     else
+      @agent = Agent.find(params[:user][:agent_id])
       render 'new_ase'
     end
   end

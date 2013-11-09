@@ -31,8 +31,6 @@ class ShippingCompaniesController < ApplicationController
     redirect_to shipping_companies_url
   end
 
-
-
   private
   
     def shipping_company_params

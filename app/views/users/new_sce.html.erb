@@ -1,8 +1,8 @@
-<% provide(:title, 'Sign up') %>
+<% provide(:title, @title) %>
 <div class="row">
   <%= render "shipping_companies/nav" %>
   <div class="span8">
-  	<h3>Create user for <%= @shipping_company.name %></h3>
+  	<h3><%= @title %></h3>
     <%= form_for @user, url: shipping_company_create_sce_path do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
@@ -18,7 +18,7 @@
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation %>
 
-      <%= f.hidden_field :shipping_company_id, :value => params[:shipping_company_id] %>
+      <%= f.hidden_field :shipping_company_id, :value => @shipping_company.id %>
       
       <%= f.submit "Create this account", class: "btn btn-large btn-primary" %>
     <% end %>

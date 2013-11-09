@@ -1,8 +1,8 @@
-<% provide(:title, 'Sign up') %>
+<% provide(:title, @title) %>
 <div class="row">
   <%= render "agents/nav" %>
   <div class="span8">
-  	<h3>Create user for <%= @agent.name %></h3>
+  	<h3><%= @title %></h3>
     <%= form_for(@user, url: agent_create_ase_path) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 

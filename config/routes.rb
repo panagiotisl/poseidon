@@ -8,7 +8,11 @@ SampleApp::Application.routes.draw do
   resources :microposts,    only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
   resources :operations, only: [:create, :destroy]
+  resources :ships, only: [:create, :destroy]
   resources :shipping_companies,  only: [:new, :create, :show, :index, :destroy] do
+    member do
+      match '/create_ship', :to => 'ships#new', :as => :create_ship, via: 'get'
+    end
     match '/new-employee', :to => 'users#new_sce', :as => :new_sce, via: 'get'
     match '/new-employee', :to => 'users#create_sce', :as => :create_sce, via: 'post'
   end
