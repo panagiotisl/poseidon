@@ -1,5 +1,9 @@
+require 'common_stuff'
 class OperationsController < ApplicationController
-
+  include CommonStuff
+  
+  before_action :authorized_ase,     only: [:create, :destroy]
+  
   def create
 #    @port = Port.find(params[:operation][:port_id])
     @port_id = params[:operation][:port_id]

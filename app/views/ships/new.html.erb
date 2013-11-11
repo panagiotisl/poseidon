@@ -3,7 +3,7 @@
   <%= render "shipping_companies/nav" %>
   <div class="span8">
   	<h3><%= @title %></h3>
-    <%= form_for @ship do |f| %>
+    <%= form_for @ship, url: create_ship_shipping_company_path do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
       <%= f.label :name %>

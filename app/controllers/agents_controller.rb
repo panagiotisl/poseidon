@@ -1,7 +1,9 @@
+require 'common_stuff'
 class AgentsController < ApplicationController
-
+  include CommonStuff
 #  before_action :admin_user,     only: [:index, :show, :new, :create]
   before_action :admin_user,     only: [:destroy]
+  before_action :authorized_ase,     only: [:manage_ports]
 
   def index
     @agents = Agent.reorder("name ASC").paginate(page: params[:page])
@@ -36,9 +38,6 @@ class AgentsController < ApplicationController
     @title = "Manage ports"
     @ports_r = @agent.ports.paginate(page: params[:page])
     @ports_ur = (Port.all - @ports_r).paginate(page: params[:page])
-    p @ports_r.class.name
-    p @ports_ur.class.name
-    render 'manage_ports'
   end
 
 

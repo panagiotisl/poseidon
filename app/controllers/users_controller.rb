@@ -1,8 +1,12 @@
+require 'common_stuff'
 class UsersController < ApplicationController
+  include CommonStuff
   before_action :signed_in_user,
                 only: [:index, :edit, :update, :destroy, :following, :followers]
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy
+  before_action :authorized_sce,     only: [:new_sce, :create_sce]
+  before_action :authorized_ase,     only: [:new_ase, :create_ase]
 
   def index
     @users = User.order(:name).paginate(page: params[:page])

@@ -8,6 +8,6 @@
     e-mail: <%= @shipping_company.email %><br />
     <%= link_to "Profile", @shipping_company, :method => "get" %><br />
     <%= link_to "Add employee", shipping_company_new_sce_path(:shipping_company_id => @shipping_company.id), :method => "get" %><br />
-    <%= link_to "Add ship", create_ship_shipping_company_path(:id => @shipping_company.id), :method => "get" %>
+    <%= link_to "Add ship", new_ship_shipping_company_path(:id => @shipping_company.id), :method => "get" %>
   </section>
 </aside>

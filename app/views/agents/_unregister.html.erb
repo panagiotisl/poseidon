@@ -1,5 +1,6 @@
 <%= form_for(agent.operations.find_by(port_id: port_id),
              html: { method: :delete },
              remote: true) do |f| %>
+  <%= hidden_field_tag :agent_id, @agent.id %>
   <%= f.submit HTMLEntities.new.decode("&#x2717;"), class: "btn btn-danger btn-mini" %>
 <% end %>
