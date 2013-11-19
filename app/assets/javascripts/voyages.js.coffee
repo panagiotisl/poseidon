@@ -7,6 +7,7 @@
 
 $ ->
   $(".voyages_date").datepicker(
+    dateFormat: 'yy-mm-dd',
     altField: "#date-alt",
-    altFormat: "D, dd M yy"
+    altFormat: "D, yyyy-M-dd"
   )
