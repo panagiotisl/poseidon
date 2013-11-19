@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131109100929) do
+ActiveRecord::Schema.define(version: 20131117084157) do
 
   create_table "agents", force: true do |t|
     t.string   "name"
@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(version: 20131109100929) do
 
   add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at", using: :btree
 
+  create_table "needs", force: true do |t|
+    t.integer  "voyage_id"
+    t.integer  "service_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "needs", ["service_id"], name: "index_needs_on_service_id", using: :btree
+
   create_table "operations", force: true do |t|
     t.integer  "agent_id"
     t.integer  "port_id"
@@ -73,6 +82,12 @@ ActiveRecord::Schema.define(version: 20131109100929) do
   add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id", using: :btree
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
+
+  create_table "services", force: true do |t|
+    t.string   "category"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "shipping_companies", force: true do |t|
     t.string   "name"
@@ -109,5 +124,23 @@ ActiveRecord::Schema.define(version: 20131109100929) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
+
+  create_table "vessel_types", force: true do |t|
+    t.string   "category"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "voyages", force: true do |t|
+    t.string   "name"
+    t.integer  "ship_id"
+    t.integer  "port_id"
+    t.date     "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "voyages", ["port_id"], name: "index_voyages_on_port_id", using: :btree
+  add_index "voyages", ["ship_id"], name: "index_voyages_on_ship_id", using: :btree
 
 end

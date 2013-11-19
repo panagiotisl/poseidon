@@ -16,3 +16,4 @@
 //= require bootstrap
 //= require_tree .
 //= require fancybox
+//= require jquery.ui.datepicker

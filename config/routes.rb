@@ -7,30 +7,25 @@ SampleApp::Application.routes.draw do
   resources :sessions,      only: [:new, :create, :destroy]
   resources :microposts,    only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
-  resources :operations, only: [:create, :destroy]
-#  resources :ships, only: [:destroy]
+  resources :operations,    only: [:create, :destroy]
   resources :shipping_companies,  only: [:new, :create, :show, :index, :destroy] do
-    member do
-      match '/new-ship', :to => 'ships#new', :as => :new_ship, via: 'get'
-      match '/new-ship', :to => 'ships#create', :as => :create_ship, via: 'post'
+    get '/new-employee', :to => 'users#new_sce', :as => :new_sce
+    post '/new-employee', :to => 'users#create_sce', :as => :create_sce
+    resources :ships,    only: [:show, :edit, :index, :new, :create, :destroy] do
+      resources :voyages,    only: [:new, :create, :index, :show, :edit]
     end
-    match '/new-employee', :to => 'users#new_sce', :as => :new_sce, via: 'get'
-    match '/new-employee', :to => 'users#create_sce', :as => :create_sce, via: 'post'
   end
   resources :agents,  only: [:new, :create, :show, :index, :destroy] do
     member do
       get :manage_ports
     end
-    match '/new-employee', :to => 'users#new_ase', :as => :new_ase, via: 'get'
-    match '/new-employee', :to => 'users#create_ase', :as => :create_ase, via: 'post'
+    get '/new-employee', :to => 'users#new_ase', :as => :new_ase
+    post '/new-employee', :to => 'users#create_ase', :as => :create_ase
   end
   root to: 'static_pages#home'
-#  match '/signup',  to: 'users#new',            via: 'get'
-  match '/signin',  to: 'sessions#new',         via: 'get'
-  match '/signout', to: 'sessions#destroy',     via: 'delete'
-  match '/help',    to: 'static_pages#help',    via: 'get'
-  match '/about',   to: 'static_pages#about',   via: 'get'
-  match '/contact', to: 'static_pages#contact', via: 'get'
-#  match '/new-shipping-company', :to => 'shipping_companies#new', :as => :new_shipping_company, via: 'get'
-#  match '/new-agent-supplier', :to => 'agents#new', :as => :new_agent, via: 'get'
+  get '/signin',  to: 'sessions#new'
+  delete '/signout', to: 'sessions#destroy'
+  get '/help',    to: 'static_pages#help'
+  get '/about',   to: 'static_pages#about'
+  get '/contact', to: 'static_pages#contact'
 end

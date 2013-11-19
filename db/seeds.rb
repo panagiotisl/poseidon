@@ -6,6 +6,16 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Service.create(category: 'Tugs')
+Service.create(category: 'Pilots')
+Service.create(category: 'Launch Services')
+Service.create(category: 'Fresh Water')
+Service.create(category: 'Garbage Disposal')
+Service.create(category: 'Polution Net')
+
+VesselType.create(category: 'Handymax')
+VesselType.create(category: 'Panamax')
+
 greece = Country.create(iso: 'GR', name: 'GREECE', printableName: 'Greece', iso3: 'GRC', numCode: 300)
 Country.create(iso: 'FR', name: 'FRANCE', printableName: 'France', iso3: 'FRA', numCode: 250)
 Country.create(iso: 'IT', name: 'ITALY', printableName: 'Italy', iso3: 'ITA', numCode: 380)
@@ -17,6 +27,8 @@ Port.create(name: 'Port of Piraeus', country_id: greece.id, lat:'37.933333', lng
 
 c1 = ShippingCompany.create(name: "Kampanis", country_id: greece.id, address: "Fifth Avenue 23", telephone: "+30 2105544345", email: "info@kampanis.gr")
 a1 = Agent.create(name: "BestAgents", country_id: greece.id, address: "Sporadon 23", telephone: "+30 2104543245", email: "info@bestagents.gr")
+
+Ship.create(name: "Jenny", shipping_company_id: c1.id)
 
 #Operation.create(agent_id: 1, port_id: 1)
 Operation.create(agent_id: 1, port_id: 2)

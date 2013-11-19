@@ -11,6 +11,8 @@ gem 'bootstrap-will_paginate', '0.0.9'
 gem 'recaptcha', :require => 'recaptcha/rails'
 gem 'fancybox-rails'
 gem 'htmlentities'
+#gem 'jquery_datepicker'
+#gem 'bootstrap-datepicker-rails'
 
 group :development, :test do
   gem 'pg', '0.15.1'
@@ -46,6 +48,7 @@ gem 'sass-rails', '4.0.0'
 gem 'uglifier', '2.1.1'
 gem 'coffee-rails', '4.0.0'
 gem 'jquery-rails', '3.0.4'
+gem 'jquery-ui-rails'
 gem 'turbolinks', '1.1.1'
 gem 'jbuilder', '1.0.2'
 

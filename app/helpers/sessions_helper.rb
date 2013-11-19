@@ -31,18 +31,6 @@ module SessionsHelper
     end
   end
 
-  def authorized_agent(agent)
-    if signed_in?
-      unless self.current_user.agent_id == agent.id
-        flash[:error] = "You do not have permission to view this page!"
-        redirect_to(self.current_user)
-      end
-    else
-      store_location
-      redirect_to signin_url, notice: "Please sign in."
-    end
-  end
-
   def sign_out
     self.current_user = nil
     cookies.delete(:remember_token)

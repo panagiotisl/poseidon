@@ -1,36 +1,35 @@
 require 'common_stuff'
-class ShipsController < ApplicationController
+class VoyagesController < ApplicationController
   include CommonStuff  
   before_action :authorized_sce,     only: [:index, :new, :create]
   
   def index
-    @title = "All Ships"
+    @title = "All Voayges"
     @shipping_company = ShippingCompany.find(params[:shipping_company_id])
-    @ships = @shipping_company.ships.paginate(page: params[:page])
+    @ship = Ship.find(params[:ship_id])
+    @voyages = @ships.voyages.paginate(page: params[:page])
   end
   
   def show
     @shipping_company = ShippingCompany.find(params[:shipping_company_id])
-    @ship = Ship.find(params[:id])
-    @title = @ship.name 
+    @voyage = Voyage.find(params[:id])
+    @title = @voyage.name 
   end
-
   
   def new
-    @title = "Create ship"
+    @title = "Create voyage"
     @shipping_company = ShippingCompany.find(params[:shipping_company_id])
-    @ship = Ship.new
+    @voyage = Voyage.new
   end
   
   def create
-    @ship = Ship.new(ship_params)
-    p params
-    if @ship.save
-      flash[:success] = "Ship created!"
+    @voyage = Voyage.new(voyage_params)
+    if @voyage.save
+      flash[:success] = "Voyage created!"
       @shipping_company = ShippingCompany.find(params[:shipping_company_id])
       redirect_to @shipping_company
     else
-      @title = "Create ship"
+      @title = "Create Voyage"
       @shipping_company = ShippingCompany.find(params[:shipping_company_id])
       render 'new'
     end
@@ -38,8 +37,7 @@ class ShipsController < ApplicationController
   
   private
   
-    def ship_params
-      params.require(:ship).permit(:name, :shipping_company_id)
+    def voyage_params
+      params.require(:voyage).permit(:name, :ship_id, :port_id, :date)
     end
-      
 end
