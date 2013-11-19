@@ -265,6 +265,21 @@ input {
   }
 }
 
+.voyages {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-top: 1px solid $grayLighter;
+    &:last-child {
+      border-bottom: 1px solid $grayLighter;
+    }
+  }
+  form {
+    margin: 0 0 0;
+  }
+}
 
 .box2 {
   display: inline-block;

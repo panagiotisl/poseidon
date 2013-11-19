@@ -11,9 +11,9 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery.ui.datepicker
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
 //= require_tree .
 //= require fancybox
-//= require jquery.ui.datepicker

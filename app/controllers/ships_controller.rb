@@ -13,6 +13,7 @@ class ShipsController < ApplicationController
     @shipping_company = ShippingCompany.find(params[:shipping_company_id])
     @ship = Ship.find(params[:id])
     @title = @ship.name 
+    @voyages = @ship.voyages.paginate(page: params[:page])
   end
 
   
