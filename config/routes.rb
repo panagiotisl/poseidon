@@ -11,8 +11,10 @@ SampleApp::Application.routes.draw do
   resources :shipping_companies,  only: [:new, :create, :show, :index, :destroy] do
     get '/new-employee', :to => 'users#new_sce', :as => :new_sce
     post '/new-employee', :to => 'users#create_sce', :as => :create_sce
-    resources :ships,    only: [:show, :edit, :index, :new, :create, :destroy] do
-      resources :voyages,    only: [:new, :create, :index, :show, :edit]
+    resources :fleets,    only: [:show, :edit, :update, :index, :new, :create, :destroy] do
+      resources :ships,    only: [:show, :edit, :update, :index, :new, :create, :destroy] do
+        resources :voyages,    only: [:new, :create, :index, :show, :edit, :update]
+      end
     end
   end
   resources :agents,  only: [:new, :create, :show, :index, :destroy] do

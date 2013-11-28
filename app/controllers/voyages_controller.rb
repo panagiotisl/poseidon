@@ -4,21 +4,27 @@ class VoyagesController < ApplicationController
   before_action :authorized_sce,     only: [:index, :new, :create]
   
   def index
-    @title = "All Voayges"
-    @shipping_company = ShippingCompany.find(params[:shipping_company_id])
+    @title = "All Voyages"
+    #@shipping_company = ShippingCompany.find(params[:shipping_company_id])
     @ship = Ship.find(params[:ship_id])
-    @voyages = @ships.voyages.paginate(page: params[:page])
+    @fleet = @ship.fleet
+    @shipping_company = @fleet.shipping_company
+    @voyages = @ship.voyages.paginate(page: params[:page])
   end
   
   def show
-    @shipping_company = ShippingCompany.find(params[:shipping_company_id])
     @voyage = Voyage.find(params[:id])
+    @ship = @voyage.ship
+    @fleet = @ship.fleet
+    @shipping_company = @fleet.shipping_company
     @title = @voyage.name 
   end
   
   def new
     @title = "Create voyage"
-    @shipping_company = ShippingCompany.find(params[:shipping_company_id])
+    @ship = Ship.find(params[:ship_id])
+    @fleet = @ship.fleet
+    @shipping_company = @fleet.shipping_company
     @voyage = Voyage.new
   end
   
@@ -35,6 +41,23 @@ class VoyagesController < ApplicationController
     end
   end
   
+  def edit
+    @title = "Edit voyage"
+    @voyage = Voyage.find(params[:id])
+    @ship = @voyage.ship
+    @fleet = @ship.fleet
+    @shipping_company = @fleet.shipping_company
+  end
+
+  def update
+    @voyage = Voyage.find(params[:id])
+    if @voyage.update_attributes(voyage_params)
+      flash[:success] = "Voyage updated"
+      redirect_to shipping_company_fleet_ship_voyage_path(:id => @voyage.id)
+    else
+      render 'edit'
+    end
+  end  
   private
   
     def voyage_params

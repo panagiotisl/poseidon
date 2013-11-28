@@ -1,9 +1,10 @@
-<% provide(:title, @title) %>
+<% provide(:title, @title) %> 
+
 <div class="row">
-  <%= render "shipping_companies/nav" %>
+<%= render "shipping_companies/nav" %>
   <div class="span8">
-  	<h3><%= @title %></h3>
-    <%= form_for @voyage, url: shipping_company_fleet_ship_voyages_path do |f| %>
+  	<h3><%= "Edit voyage: #{@voyage.name}" %></h3>
+    <%= form_for @voyage , url: shipping_company_fleet_ship_voyage_path do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
       <%= f.label :name %>
@@ -15,9 +16,8 @@
       <%= f.label :date %>
       <%= f.text_field :date, class: "voyages_date" %>
 
-      <%= f.hidden_field :ship_id, :value => params[:ship_id] %>
-      
-      <%= f.submit "Create this voyage", class: "btn btn-large btn-primary" %>
-    <% end %>
-  </div>
+      <%= f.hidden_field :ship_id, :value => @ship.id %>
+
+      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+    <% end %>  </div>
 </div>

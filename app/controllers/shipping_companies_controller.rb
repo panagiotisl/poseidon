@@ -9,6 +9,7 @@ class ShippingCompaniesController < ApplicationController
   
   def show
     @shipping_company = ShippingCompany.find(params[:id])
+    @fleets = @shipping_company.fleets.paginate(page: params[:page])
   end
 
   def new

@@ -13,7 +13,7 @@ Service.create(category: 'Fresh Water')
 Service.create(category: 'Garbage Disposal')
 Service.create(category: 'Polution Net')
 
-VesselType.create(category: 'Handymax')
+handymax = VesselType.create(category: 'Handymax')
 VesselType.create(category: 'Panamax')
 
 greece = Country.create(iso: 'GR', name: 'GREECE', printableName: 'Greece', iso3: 'GRC', numCode: 300)
@@ -28,7 +28,8 @@ Port.create(name: 'Port of Piraeus', country_id: greece.id, lat:'37.933333', lng
 c1 = ShippingCompany.create(name: "Kampanis", country_id: greece.id, address: "Fifth Avenue 23", telephone: "+30 2105544345", email: "info@kampanis.gr")
 a1 = Agent.create(name: "BestAgents", country_id: greece.id, address: "Sporadon 23", telephone: "+30 2104543245", email: "info@bestagents.gr")
 
-Ship.create(name: "Jenny", shipping_company_id: c1.id)
+f1 = Fleet.create(name: "MyJennys", shipping_company_id: c1.id)
+Ship.create(name: "Jenny", fleet_id: f1.id, vessel_type_id: handymax.id)
 
 #Operation.create(agent_id: 1, port_id: 1)
 Operation.create(agent_id: 1, port_id: 2)

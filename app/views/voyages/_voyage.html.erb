@@ -1,4 +1,4 @@
 <li>
-	<%= link_to voyage.name, shipping_company_ship_voyage_path(:id => voyage.id, :ship_id => params[:id], :shipping_company_id => params[:shipping_company_id]) %>,
+	<%= link_to voyage.name, shipping_company_fleet_ship_voyage_path(:id => voyage.id, :ship_id => params[:id], :shipping_company_id => params[:shipping_company_id]) %>,
 	<%= voyage.date %>
 </li>

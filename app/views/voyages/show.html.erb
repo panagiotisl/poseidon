@@ -1,7 +1,12 @@
-<% provide(:title, @voyage.name) %>
+<% provide(:title, @title) %>
 <div class="row">
   <%= render "shipping_companies/nav" %>
   <div class="span8">
+  	<%= link_to @shipping_company.name, shipping_company_path(:id => @shipping_company) %>:
+  	<%= link_to @fleet.name, shipping_company_fleet_path(:id => @fleet) %>:
+  	<%= link_to @ship.name, shipping_company_fleet_ship_path(:id => @ship) %>
   	<h3><%= @title %></h3>
+  	
+  	<%= "#{@voyage.date}, #{@voyage.port.name}" %>
   </div>
 </div>

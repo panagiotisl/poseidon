@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131117084157) do
+ActiveRecord::Schema.define(version: 20131127073005) do
 
   create_table "agents", force: true do |t|
     t.string   "name"
@@ -33,6 +33,15 @@ ActiveRecord::Schema.define(version: 20131117084157) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "fleets", force: true do |t|
+    t.string   "name"
+    t.integer  "shipping_company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "fleets", ["shipping_company_id"], name: "index_fleets_on_shipping_company_id", using: :btree
 
   create_table "microposts", force: true do |t|
     t.string   "content"
@@ -102,12 +111,13 @@ ActiveRecord::Schema.define(version: 20131117084157) do
 
   create_table "ships", force: true do |t|
     t.string   "name"
-    t.integer  "shipping_company_id"
+    t.integer  "vessel_type_id"
+    t.integer  "fleet_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "ships", ["shipping_company_id"], name: "index_ships_on_shipping_company_id", using: :btree
+  add_index "ships", ["fleet_id"], name: "index_ships_on_fleet_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"

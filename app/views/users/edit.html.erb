@@ -18,9 +18,6 @@
       <%= f.label :password_confirmation, "Confirm Password" %>
       <%= f.password_field :password_confirmation %>
 
-      <%= f.label :shipping_company_id, "Affiliation" %>
-      <%= select "user", "shipping_company_id", ShippingCompany.order(:name).all.collect {|p| [ p.name, p.id ] }, { :include_blank => false } %>
-
       <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
     <% end %>
 

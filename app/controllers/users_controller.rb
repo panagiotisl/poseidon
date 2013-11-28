@@ -1,6 +1,4 @@
-require 'common_stuff'
 class UsersController < ApplicationController
-  include CommonStuff
   before_action :signed_in_user,
                 only: [:index, :edit, :update, :destroy, :following, :followers]
   before_action :correct_user,   only: [:edit, :update]
@@ -77,6 +75,7 @@ class UsersController < ApplicationController
       render 'new_ase'
     end
   end
+  
   def edit
   end
 
