@@ -1,0 +1,29 @@
+<div class="indexOfferForm">
+<% @accepted = Offer.reorder(:value).where(:need_id => ineed.id).where(:accepted => true).first %>	
+<% if @accepted %>
+  <%= form_for @accepted, url: shipping_company_fleet_ship_voyage_need_offer_accept_path(:voyage_id => params[:id], :need_id => ineed.id, :offer_id => @accepted.id), :html => {:class => "form-inline"} do |f| %>
+    <%= label :agent, "#{@accepted.agent.name}" %>
+    <input class="input-small" id="value" readonly="readonly" value="<%= @accepted.value %>"/>
+    <%= " x #{ineed.quantity} = " %>
+    <input class="input-small" id="total" readonly="readonly" value="<%= @accepted.value*ineed.quantity %>"/>
+    <%= f.hidden_field :value, :value => @accepted.value %>
+    <%= f.hidden_field :need_id, :value => @accepted.need_id %>
+    <%= f.hidden_field :agent_id, :value => @accepted.agent_id %>
+    <%= f.submit "Withdraw Offer", class: 'btn btn-small btn-danger'  %>
+  <% end %>
+<% else %>
+  <% @needOffers = Offer.reorder(:value).where(:need_id => ineed.id)%>
+  <% @needOffers.each do |offer| %>
+    <%= form_for offer, url: shipping_company_fleet_ship_voyage_need_offer_accept_path(:voyage_id => params[:id], :need_id => ineed.id, :offer_id => offer.id), :html => {:class => "form-inline"} do |f| %>
+      <%= label :agent, "#{offer.agent.name}" %>
+      <input class="input-small" id="value" readonly="readonly" value="<%= offer.value %>"/>
+      <%= " x #{ineed.quantity} = " %>
+      <input class="input-small" id="total" readonly="readonly" value="<%= offer.value*ineed.quantity %>"/>
+      <%= f.hidden_field :value, :value => offer.value %>
+      <%= f.hidden_field :need_id, :value => offer.need_id %>
+      <%= f.hidden_field :agent_id, :value => offer.agent_id %>
+      <%= f.submit "Accept Offer", class: 'btn btn-small btn-success'  %>
+    <% end %>
+  <% end %>
+<% end %>	
+</div>

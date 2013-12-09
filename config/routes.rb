@@ -13,7 +13,13 @@ SampleApp::Application.routes.draw do
     post '/new-employee', :to => 'users#create_sce', :as => :create_sce
     resources :fleets,    only: [:show, :edit, :update, :index, :new, :create, :destroy] do
       resources :ships,    only: [:show, :edit, :update, :index, :new, :create, :destroy] do
-        resources :voyages,    only: [:new, :create, :index, :show, :edit, :update]
+        resources :voyages,    only: [:new, :create, :index, :show, :edit, :update] do
+          resources :needs,    only: [:new, :create] do
+            resources :offers, only: [:new, :create, :update] do
+              patch '/accept', :to => 'offers#accept'
+            end
+          end
+        end
       end
     end
   end

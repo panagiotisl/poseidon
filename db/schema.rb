@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131127073005) do
+ActiveRecord::Schema.define(version: 20131206143324) do
 
   create_table "agents", force: true do |t|
     t.string   "name"
@@ -55,11 +55,24 @@ ActiveRecord::Schema.define(version: 20131127073005) do
   create_table "needs", force: true do |t|
     t.integer  "voyage_id"
     t.integer  "service_id"
+    t.integer  "quantity"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "needs", ["service_id"], name: "index_needs_on_service_id", using: :btree
+
+  create_table "offers", force: true do |t|
+    t.float    "value"
+    t.boolean  "accepted"
+    t.integer  "need_id"
+    t.integer  "agent_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "offers", ["agent_id"], name: "index_offers_on_agent_id", using: :btree
+  add_index "offers", ["need_id"], name: "index_offers_on_need_id", using: :btree
 
   create_table "operations", force: true do |t|
     t.integer  "agent_id"

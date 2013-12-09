@@ -17,7 +17,10 @@ class VoyagesController < ApplicationController
     @ship = @voyage.ship
     @fleet = @ship.fleet
     @shipping_company = @fleet.shipping_company
-    @title = @voyage.name 
+    @title = @voyage.name
+    @needs = @voyage.needs
+    @need = Need.new 
+    @offer = Offer.new
   end
   
   def new
@@ -33,7 +36,7 @@ class VoyagesController < ApplicationController
     if @voyage.save
       flash[:success] = "Voyage created!"
       @shipping_company = ShippingCompany.find(params[:shipping_company_id])
-      redirect_to @shipping_company
+      redirect_to shipping_company_fleet_ship_voyage_path(:id => @voyage.id)
     else
       @title = "Create Voyage"
       @shipping_company = ShippingCompany.find(params[:shipping_company_id])
@@ -57,7 +60,8 @@ class VoyagesController < ApplicationController
     else
       render 'edit'
     end
-  end  
+  end
+  
   private
   
     def voyage_params
