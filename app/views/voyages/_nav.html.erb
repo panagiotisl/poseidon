@@ -1,0 +1,11 @@
+<ul class="nav nav-pills">
+  <li>
+    <ol class="breadcrumb">
+      <li><%= link_to @shipping_company.name, shipping_company_path(:id => params[:shipping_company_id]) %><span class="divider">/</span></li>
+      <li><%= link_to @fleet.name, shipping_company_fleet_path(:id => params[:fleet_id]) %><span class="divider">/</span></li>
+      <li><%= link_to @ship.name, shipping_company_fleet_ship_path(:id => params[:ship_id]) %><span class="divider">/</span></li>
+      <li class="active"><%= @title %></li>
+    </ol>
+  </li>
+  <li class="marginLeft"><%= link_to '<span class="icon icon-edit"></span>'.html_safe, edit_shipping_company_fleet_ship_voyage_path, :class => "btn btn-default", :title => "Edit voyage", :method => :get %></li>
+</ul>

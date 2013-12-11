@@ -18,6 +18,9 @@ html {
 
 body {
   padding-top: 60px;
+  background: url('http://ariadni.di.uoa.gr/shared/texture.png');
+/*  background-size: 1440px 800px;
+  background-repeat:no-repeat;*/
 }
 
 section {
@@ -217,6 +220,32 @@ input {
   }
 }
 
+.agents {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-top: 1px solid $grayLighter;
+    &:last-child {
+      border-bottom: 1px solid $grayLighter;
+    }
+  }
+}
+
+.shippingCompanies {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-top: 1px solid $grayLighter;
+    &:last-child {
+      border-bottom: 1px solid $grayLighter;
+    }
+  }
+}
+
 .ports_r {
   list-style: none;
   margin: 0;
@@ -295,6 +324,33 @@ input {
   form {
     margin: 0 0 0;
   }
+}
+
+.strong { font-weight: bold; }
+
+.marginTop {
+  margin-top: 30px;
+}
+
+.marginLeft {
+  margin-left: 15px;
+}
+
+.roundBox {
+  border: 10px solid white;
+  background-color: white;
+  border-radius: 10px ;
+  -moz-border-radius: 10px ;
+  -webkit-border-radius: 10px ;
+}
+
+.roundGrayBox {
+  margin-top: 15px;
+  border: 10px solid $grayLighter;
+  background-color: $grayLighter;
+  border-radius: 10px ;
+  -moz-border-radius: 10px ;
+  -webkit-border-radius: 10px ;
 }
 
 .box2 {

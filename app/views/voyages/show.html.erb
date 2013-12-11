@@ -1,19 +1,14 @@
 <% provide(:title, @title) %>
 <div class="row">
-  <%= render "shipping_companies/nav" %>
-  <div class="span8">
-  	<%= link_to @shipping_company.name, shipping_company_path(:id => @shipping_company) %>:
-  	<%= link_to @fleet.name, shipping_company_fleet_path(:id => @fleet) %>:
-  	<%= link_to @ship.name, shipping_company_fleet_ship_path(:id => @ship) %>
-  	<h3><%= @title %></h3>
-  	
+  <div class="span12">
+    <%= render "nav" %>
   	<%= "#{@voyage.date}, #{@voyage.port.name}" %>
   	
-  	<div class="needs">
-  	  <h5>Needs of voyage</h5>
+  	<div class="needs roundBox marginTop">
+  	  <h4>Needs</h4>
   	  <% @needs.each do |ineed| %>
-        <%= "#{ineed.service.category}: #{ineed.quantity}" %>
-        <% if current_user.agent_id!=nil %>
+  	  <div class="roundGrayBox">
+        <% if ase? %>
           <% if (offer=current_user.agent.offers.where(:need_id => ineed).first)!=nil %>
             <%= render 'offers/editOffer', :ineed => ineed, :offer => offer %>
           <% else %>
@@ -22,17 +17,18 @@
         <% elsif current_user.shipping_company_id.to_s==params[:shipping_company_id] %>
             <%= render 'offers/indexOffer', :ineed => ineed %>
         <% end %>
-    <% end %>	
+      </div>	
+      <% end %>
   	</div>
-  	<div class="needForm">
-    <h5>Add a need</h5>
+  	<div class="needForm roundBox marginTop">
+    <h4>Add a need</h4>
   	<%= form_for @need, url: shipping_company_fleet_ship_voyage_needs_path(:voyage_id => params[:id]), :html => {:class => "form-inline"} do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
       <%= select "need", "service_id", Service.order(:category).all.collect {|p| [ p.category, p.id ] }, { :include_blank => true }, class: "input-large"  %>
 
       <%= f.number_field :quantity, :value => 1, class: 'input-mini'  %>
 
-      <%= f.hidden_field :voyage_id, :value => @voyage.id %>
+      <%= f.hidden_field :voyage_id, :value => params[:id] %>
       
       <%= f.submit "+", class: 'btn btn-small btn-primary'  %>
     <% end %>

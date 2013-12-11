@@ -1,5 +1,13 @@
 <% provide(:title, @agent.name) %>
 <div class="row">
-  <%= render "nav" %>
-  
+    <%= render "nav" %>
+    <div class="span3 roundBox">
+    	<% @voyages = @agent.voyages.paginate(page: params[:page]) %> 
+       	  <h4>Voyages</h4>
+    	  <%= will_paginate @voyages %>
+            <ul class="voyages">
+              <%= render @voyages %>
+            </ul>
+          <%= will_paginate @voyages %>
+    </div>
 </div>

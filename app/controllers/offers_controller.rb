@@ -11,13 +11,19 @@ class OffersController < ApplicationController
   end
 
   def update
-    @offer = Offer.find(params[:id])
-    if @offer.update_attributes(offer_params)
-      flash[:success] = "Offer updated"
+    if params[:commit] == "Withdraw Offer"
+      Offer.find(params[:offer_id]).destroy
+      flash[:success] = "Offer withdrawn"
       redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id])
     else
-      flash[:fail] = "Something went wrong!"
-      redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id])
+      @offer = Offer.find(params[:offer_id])
+      if @offer.update_attributes(offer_params)
+        flash[:success] = "Offer updated"
+        redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id])
+      else
+        flash[:fail] = "Something went wrong!"
+        redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id])
+      end
     end
   end
   

@@ -5,7 +5,7 @@ SampleApp::Application.routes.draw do
     end
   end
   resources :sessions,      only: [:new, :create, :destroy]
-  resources :microposts,    only: [:create, :destroy]
+  #resources :microposts,    only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
   resources :operations,    only: [:create, :destroy]
   resources :shipping_companies,  only: [:new, :create, :show, :index, :destroy] do

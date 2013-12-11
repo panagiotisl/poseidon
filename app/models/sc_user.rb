@@ -1,5 +1,5 @@
 class SCUser < User
-  belongs_to :shippingcompany, foreign_key: "shipping_company_id"
+  belongs_to :shipping_company, foreign_key: "shipping_company_id"
   validates :shipping_company_id, presence: true
 
   def self.model_name

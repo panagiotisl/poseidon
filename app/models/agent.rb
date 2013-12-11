@@ -2,6 +2,7 @@ class Agent < ActiveRecord::Base
   belongs_to :country
   has_many :operations, foreign_key: "agent_id", dependent: :destroy
   has_many :ports, through: :operations, source: :port
+  has_many :voyages, through: :ports
   has_many :offers, foreign_key: "agent_id", dependent: :destroy
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i

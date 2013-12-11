@@ -1,0 +1,9 @@
+<ul class="nav nav-pills">
+  <li>
+    <ol class="breadcrumb">
+      <li><%= link_to @shipping_company.name, shipping_company_path(:id => params[:shipping_company_id]) %></li>
+    </ol>
+  </li>
+  <li class="pull-right"><%= link_to '<span class="icon icon-plus"></span>'.html_safe, new_shipping_company_fleet_path(:shipping_company_id => params[:shipping_company_id]), :class => "btn btn-default", :title => "Add a fleet", :method => :get %></li>
+  <li class="pull-right"><%= link_to '<span class="icon icon-user"></span>'.html_safe, shipping_company_new_sce_path(:shipping_company_id => params[:shipping_company_id]), :class => "btn btn-default", :title => "Add an employee", :method => :get %></li>
+</ul>

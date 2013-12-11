@@ -1,16 +1,8 @@
-<% provide(:title, @title) %>
+<% provide(:title, @shipping_company.name) %>
 <div class="row">
-  <%= render "nav" %>
-  <div class="span8">
-  	<h3><%= @title %></h3>
-  	
-  	  <div class="fleets_list">
-  	  	<h5><%= "Fleets of: #{@shipping_company.name}"  %></h5>
-        <%= will_paginate @fleets %>
-        <ul class="fleets">
-          <%= render @fleets %>
-        </ul>
-        <%= will_paginate @fleets %>
-      </div>
+  <div class="span12">
+  	<%= render "nav" %>
+
+    <%= render "content" %>
   </div>
 </div>

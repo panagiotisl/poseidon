@@ -9,10 +9,11 @@ class FleetsController < ApplicationController
   end
   
   def show
-    @shipping_company = ShippingCompany.find(params[:shipping_company_id])
     @fleet = Fleet.find(params[:id])
+    @shipping_company = @fleet.shipping_company
     @title = @fleet.name 
     @ships = @fleet.ships.paginate(page: params[:page])
+    @voyages = @fleet.voyages.paginate(page: params[:page])
   end
 
   

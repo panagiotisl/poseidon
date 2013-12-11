@@ -1,11 +1,18 @@
-<div class="offerForm">
-<% @offer = offer %>
-<%= form_for @offer, url: shipping_company_fleet_ship_voyage_need_offer_path(:voyage_id => @voyage.id, :need_id => ineed.id), :html => {:class => "form-inline"} do |f| %>
+<div class="span3 strong"><%= "#{ineed.service.category} (#{ineed.quantity}) :" %></div>
+<div class="span4 strong">Offer</div>
+<div class="span3 strong">Action</div>
+<div class="marginTop">
+<%= form_for offer, url: shipping_company_fleet_ship_voyage_need_offer_path(:voyage_id => @voyage.id, :need_id => ineed.id), :html => {:class => "form-inline"} do |f| %>
+  <div class="span3"></div>
+  <div class="span4">
   <%= f.number_field :value, step: 'any', min: 0, class: 'input-small offer_value'  %>
   x <%= label :quantity, ineed.quantity %>=
-  <input class="input-small " id="total" readonly="readonly" value="<%= @offer.value*ineed.quantity %>"/>
+  <input class="input-small " id="total" readonly="readonly" value="<%= offer.value*ineed.quantity %>"/>
+  </div>
   <%= f.hidden_field :need_id, :value => ineed.id %>
   <%= f.hidden_field :agent_id, :value => current_user.agent_id %>
-  <%= f.submit "Change Offer", class: 'btn btn-small btn-primary'  %>
+  <%= hidden_field_tag 'offer_id', offer.id %>
+  <%= f.submit "Change Offer", class: 'btn btn-small btn-primary' %>
+  <%= f.submit "Withdraw Offer", class: 'btn btn-small btn-danger' %>
 <% end %>
 </div>

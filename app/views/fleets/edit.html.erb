@@ -1,9 +1,9 @@
 <% provide(:title, @title) %> 
 
 <div class="row">
-<%= render "shipping_companies/nav" %>
-  <div class="span8">
-  	<h3><%= "Edit fleet: #{@fleet.name}" %></h3>
+  <div class="span12">
+  	<%= render "nav2" %>
+  	<h3><%= "Edit fleet" %></h3>
     <%= form_for @fleet , url: shipping_company_fleet_path do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 

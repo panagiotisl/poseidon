@@ -44,7 +44,15 @@ module SessionsHelper
   def store_location
     session[:return_to] = request.url if request.get?
   end
-  
+
+  def sce?
+    current_user && current_user.shipping_company_id
+  end
+
+  def ase?
+    current_user && current_user.agent_id
+  end
+    
   def authorized_sce
     @shipping_company_id = params[:shipping_company_id] || params[:id]
     unless current_user && ((current_user.shipping_company_id && current_user.shipping_company_id.to_s == @shipping_company_id) || current_user.admin)

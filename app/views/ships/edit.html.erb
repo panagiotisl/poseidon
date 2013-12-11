@@ -1,9 +1,9 @@
 <% provide(:title, @title) %> 
 
 <div class="row">
-<%= render "shipping_companies/nav" %>
-  <div class="span8">
-  	<h3><%= "Edit ship: #{@ship.name}" %></h3>
+  <div class="span12">
+  	<%= render "nav2" %>
+  	<h3><%= "Edit ship" %></h3>
     <%= form_for @ship , url: shipping_company_fleet_ship_path do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
@@ -16,5 +16,6 @@
       <%= f.hidden_field :fleet_id, :value => @fleet.id %>
 
       <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
-    <% end %>  </div>
+    <% end %>
+  </div>
 </div>

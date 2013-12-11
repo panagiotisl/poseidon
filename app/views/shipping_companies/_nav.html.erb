@@ -1,14 +1,9 @@
-<aside class="span4">
-  <section>
-    <h1>
-      <%= @shipping_company.name %>, <%= @shipping_company.country.printableName %>
-    </h1>
-    Address: <%= @shipping_company.address %><br />
-    Telephone: <%= @shipping_company.telephone %><br />
-    e-mail: <%= @shipping_company.email %><br />
-    <%= link_to "Profile", @shipping_company, :method => "get" %><br />
-    <%= link_to "Add employee", shipping_company_new_sce_path(:shipping_company_id => @shipping_company.id), :method => "get" %><br />
-    <%= link_to "Add fleet", new_shipping_company_fleet_path(:shipping_company_id => @shipping_company.id), :method => "get" %><br />
-    <%= link_to "All fleets", shipping_company_fleets_path(:shipping_company_id => @shipping_company.id), :method => "get" %>
-  </section>
-</aside>
+<ul class="nav nav-pills">
+  <li>
+    <ol class="breadcrumb">
+      <li class="active"><%= @shipping_company.name %></li>
+    </ol>
+  </li>
+  <li class="pull-right"><%= link_to '<span class="icon icon-plus"></span>'.html_safe, new_shipping_company_fleet_path(:shipping_company_id => @shipping_company.id), :class => "btn btn-default", :title => "Add a fleet", :method => :get %></li>
+  <li class="pull-right"><%= link_to '<span class="icon icon-user"></span>'.html_safe, shipping_company_new_sce_path(:shipping_company_id => @shipping_company.id), :class => "btn btn-default", :title => "Add an employee", :method => :get %></li>
+</ul>
