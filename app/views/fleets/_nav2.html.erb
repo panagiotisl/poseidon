@@ -5,6 +5,8 @@
       <li><%= link_to @fleet.name, shipping_company_fleet_path(:id => params[:id]) %></li>
     </ol>
   </li>
+  <% if authorized_sce? %>
   <li class="marginLeft"><%= link_to '<span class="icon icon-edit"></span>'.html_safe, edit_shipping_company_fleet_path(:id => params[:id]), :class => "btn btn-default", :title => "Edit fleet", :method => :get %></li>
   <li class="pull-right"><%= link_to '<span class="icon icon-plus"></span>'.html_safe, new_shipping_company_fleet_ship_path(:fleet_id => params[:id], :shipping_company_id => params[:shipping_company_id]), :class => "btn btn-default", :title => "Add a ship", :method => :get %></li>
+  <% end %>
 </ul>

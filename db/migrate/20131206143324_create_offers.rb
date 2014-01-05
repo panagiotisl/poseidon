@@ -2,6 +2,7 @@ class CreateOffers < ActiveRecord::Migration
   def change
     create_table :offers do |t|
       t.float :value
+      t.integer :quantity
       t.boolean :accepted
       t.references :need, index: true
       t.references :agent, index: true

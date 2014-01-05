@@ -11,8 +11,7 @@ gem 'bootstrap-will_paginate', '0.0.9'
 gem 'recaptcha', :require => 'recaptcha/rails'
 gem 'fancybox-rails'
 gem 'htmlentities'
-#gem 'jquery_datepicker'
-#gem 'bootstrap-datepicker-rails'
+gem "mailboxer"
 
 group :development, :test do
   gem 'pg', '0.15.1'

@@ -4,5 +4,9 @@
 
 $ ->
   $('.offer_value').change ->
-    $(this).next().next().val($(this).val()*$(this).next().text()).change();
+    $(this).next().next().val($(this).val()*$(this).next().val()).change();
     
+
+$ ->
+  $('.offer_quantity').change ->
+    $(this).next().val($(this).val()*$(this).prev().val()).change();

@@ -20,18 +20,19 @@
       </div>	
       <% end %>
   	</div>
+  	
+  	<% if ase? %>
   	<div class="needForm roundBox marginTop">
     <h4>Add a need</h4>
   	<%= form_for @need, url: shipping_company_fleet_ship_voyage_needs_path(:voyage_id => params[:id]), :html => {:class => "form-inline"} do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
       <%= select "need", "service_id", Service.order(:category).all.collect {|p| [ p.category, p.id ] }, { :include_blank => true }, class: "input-large"  %>
 
-      <%= f.number_field :quantity, :value => 1, class: 'input-mini'  %>
-
       <%= f.hidden_field :voyage_id, :value => params[:id] %>
       
       <%= f.submit "+", class: 'btn btn-small btn-primary'  %>
     <% end %>
     </div>
+    <% end %>
   </div>
 </div>

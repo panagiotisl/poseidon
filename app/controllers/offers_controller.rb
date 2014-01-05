@@ -41,6 +41,6 @@ class OffersController < ApplicationController
   private
   
     def offer_params
-      params.require(:offer).permit(:value, :need_id, :agent_id)
+      params.require(:offer).permit(:value, :quantity, :need_id, :agent_id)
     end
 end

@@ -4,6 +4,8 @@
       <li><%= link_to @agent.name, agent_path(:id => params[:agent_id]) %></li>
     </ol>
   </li>
+  <% if authorized_ase? %>
   <li class="pull-right"><%= link_to '<span class="icon icon-map-marker"></span>'.html_safe, manage_ports_agent_path(:id => params[:agent_id]), :class => "btn btn-default", :title => "Manage ports", :method => :get %></li>
   <li class="pull-right"><%= link_to '<span class="icon icon-user"></span>'.html_safe, agent_new_ase_path(:agent_id => params[:agent_id]), :class => "btn btn-default", :title => "Add an employee", :method => :get %></li>
+  <% end %>
 </ul>

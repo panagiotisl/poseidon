@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20131206143324) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "agents", force: true do |t|
     t.string   "name"
     t.string   "email"
@@ -46,7 +49,6 @@ ActiveRecord::Schema.define(version: 20131206143324) do
   create_table "needs", force: true do |t|
     t.integer  "voyage_id"
     t.integer  "service_id"
-    t.integer  "quantity"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -55,6 +57,7 @@ ActiveRecord::Schema.define(version: 20131206143324) do
 
   create_table "offers", force: true do |t|
     t.float    "value"
+    t.integer  "quantity"
     t.boolean  "accepted"
     t.integer  "need_id"
     t.integer  "agent_id"

@@ -1,7 +1,7 @@
 require 'common_stuff'
 class VoyagesController < ApplicationController
   include CommonStuff  
-  before_action :authorized_sce,     only: [:index, :new, :create]
+  before_action :authorized_sce,     only: [:index, :new, :create, :edit]
   
   def index
     @title = "All Voyages"
