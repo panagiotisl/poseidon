@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery.ui.datepicker
 //= require jquery_ujs
+//= require jquery-ui
+//= require autocomplete-rails
 //= require turbolinks
 //= require bootstrap
 //= require_tree .

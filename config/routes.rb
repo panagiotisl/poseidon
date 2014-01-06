@@ -30,6 +30,12 @@ SampleApp::Application.routes.draw do
     get '/new-employee', :to => 'users#new_ase', :as => :new_ase
     post '/new-employee', :to => 'users#create_ase', :as => :create_ase
   end
+  
+  resources :messages do
+    get :autocomplete_user_name, :on => :collection
+  end
+  resources :conversations
+
   root to: 'static_pages#home'
   get '/signin',  to: 'sessions#new'
   delete '/signout', to: 'sessions#destroy'

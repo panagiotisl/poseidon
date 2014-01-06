@@ -1,0 +1,19 @@
+<%= div_for(message, :class => (message.is_unread?(@actor) ? 'unread' : '')) do %>
+  <div class="media">
+
+    <div class="media-heading name">
+      <div class="name">
+      	<%= message.sender.name %>
+      </div>
+      <div class="date">
+        <%= time_ago_in_words(message.updated_at) + " ago" %>
+      </div>
+    </div>
+
+  <div class="media-body">        
+    <div class="word-break pre-message">
+      <%= raw(message.body) %>
+    </div>
+  </div>
+</div>
+<% end %>
