@@ -79,5 +79,18 @@ module SessionsHelper
     current_user && (current_user.agent_id && current_user.agent_id.to_s == @agent_id)
   end
 
+  def get_actor
+    if current_user.shipping_company_id
+      @actor = current_user.shipping_company
+    elsif current_user.agent_id
+      @actor = current_user.agent
+    else
+      @actor = current_user  
+    end
+  end
+  
+  def get_mailbox
+    @mailbox = get_actor.mailbox
+  end
   
 end

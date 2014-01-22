@@ -1,10 +1,48 @@
 <% provide(:title, @title) %>
 <div class="row">
-  <div class="span12">
-    <%= render "nav" %>
-  	<%= "#{@voyage.date}, #{@voyage.port.name}" %>
+	
+	<div class="span12">
+	    <%= render "nav" %>
+  
   	
-  	<div class="needs roundBox marginTop">
+	    <div class="row">
+      <div class="span10 roundBox">
+        <h3><%= @voyage.name %></h3>
+        <div class="row">
+          
+          <div class="marginTop span2 strong">Port of Call:</div>
+          <div class="marginTop span3"><%= @voyage.port.name%></div>
+
+          <div class="marginTop span2 strong">Date:</div>
+          <div class="marginTop span3"><%= @voyage.date%></div>
+		  
+		  <div class="marginTop span2 strong">Company:</div>
+          <div class="marginTop span3"><%= @voyage.ship.fleet.shipping_company.name%></div>
+
+		  <div class="marginTop span2 strong">Vessel:</div>
+          <div class="marginTop span3"><%= @voyage.ship.name%></div>
+		  
+		  <div class="marginTop span2 strong">Vessel Type:</div>
+          <div class="marginTop span3"><%= @voyage.ship.vessel_type.category%></div>
+		  
+		  <div class="marginTop span2 strong">Flag:</div>
+    	  <div class="marginTop span3"><%= image_tag "flags/#{@voyage.ship.flag.path}", size: "64", alt: "#{@ship.flag.name}" %></div>
+
+		  <div class="marginTop span10">
+		  	<h4>Remarks:</h4>
+			<%= @voyage.remarks %>
+		  </div>
+
+        </div>
+      </div>
+
+
+    </div>
+	
+	<div class="row">
+
+  	
+  	<div class="span12 needs roundBox marginTop">
   	  <h4>Needs</h4>
   	  <% @needs.each do |ineed| %>
   	  <div class="roundGrayBox">
@@ -22,7 +60,7 @@
   	</div>
   	
   	<% if ase? %>
-  	<div class="needForm roundBox marginTop">
+  	<div class="span12 needForm roundBox marginTop">
     <h4>Add a need</h4>
   	<%= form_for @need, url: shipping_company_fleet_ship_voyage_needs_path(:voyage_id => params[:id]), :html => {:class => "form-inline"} do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
@@ -34,5 +72,7 @@
     <% end %>
     </div>
     <% end %>
+  </div>
+  
   </div>
 </div>

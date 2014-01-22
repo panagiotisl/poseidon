@@ -3,6 +3,9 @@
 /* mixins, variables, etc. */
 
 $grayMediumLight: #eaeaea;
+$beige: #DEB887;
+$khaki: #f0e68c;
+
 
 @mixin box_sizing {
   -moz-box-sizing: border-box;
@@ -351,6 +354,30 @@ input {
   border-radius: 10px ;
   -moz-border-radius: 10px ;
   -webkit-border-radius: 10px ;
+}
+
+.roundBeigeBox {
+  border: 10px solid $beige;
+  background-color: $beige;
+  border-radius: 10px ;
+  -moz-border-radius: 10px ;
+  -webkit-border-radius: 10px ;
+}
+
+.roundKhakiBox {
+  border: 10px solid $khaki;
+  background-color: $khaki;
+  border-radius: 10px ;
+  -moz-border-radius: 10px ;
+  -webkit-border-radius: 10px ;
+}
+
+.conversationLine {
+  border-top:thick double $khaki;
+}
+
+.boxLine { 
+  word-spacing:18px;
 }
 
 .box2 {

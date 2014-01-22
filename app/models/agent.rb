@@ -11,6 +11,8 @@ class Agent < ActiveRecord::Base
   validates :address, presence: true
   validates :telephone, presence: true
   validates :country_id, presence: true
+  
+  acts_as_messageable
 
   def operating_on?(port_id)
     operations.find_by(port_id: port_id)
@@ -23,5 +25,9 @@ class Agent < ActiveRecord::Base
 #  def unregister!(port)
 #    operations.find_by(port_id: port.id).destroy!
 #  end
+
+  def mailboxer_email(object)
+    return :email
+  end
 
 end

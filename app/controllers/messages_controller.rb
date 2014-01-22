@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
   autocomplete :user, :name
 
   before_filter :signed_in_user
-  before_filter :get_mailbox, :get_box, :get_actor
+  before_filter :get_actor, :get_mailbox, :get_box
   def index
     redirect_to conversations_path(:box => @box)
   end
@@ -23,6 +23,13 @@ class MessagesController < ApplicationController
   # GET /messages/new
   # GET /messages/new.xml
   def new
+    if params[:type] and params[:recipient]
+      if params[:type] == 'sc'
+        @name = ShippingCompany.find(params[:recipient]).name
+      elsif params[:type] == 'a'
+        @name = Agent.find(params[:recipient]).name
+      end
+    end
     if params[:receiver].present?
       @recipient = Actor.find_by_slug(params[:receiver])
       return if @recipient.nil?
@@ -38,13 +45,31 @@ class MessagesController < ApplicationController
   # POST /messages
   # POST /messages.xml
   def create
-    @recipients = 
-      if params[:_recipients].present?
-        @recipients = params[:_recipients].split(',').map{ |r| User.where(:name => r).first }
-      else
-        []
+    if params[:type]
+      if params[:type] == 'sc'
+        @recipients = 
+          if params[:_recipients].present?
+            @recipients = params[:_recipients].split(',').map{ |r| ShippingCompany.find(r) }
+          else
+            []
+          end
+      elsif params[:type] == 'a'
+        @recipients = 
+          if params[:_recipients].present?
+            @recipients = params[:_recipients].split(',').map{ |r| Agent.find(r) }
+          else
+            []
+          end
+      elsif params[:type] == 'admin'
+        @recipients = 
+          if params[:_recipients].present?
+            @recipients = params[:_recipients].split(',').map{ |r| User.find(r) }
+          else
+            []
+          end
       end
-    print @recipients
+    end
+
     @receipt = @actor.send_message(@recipients, params[:body], params[:subject])
     if (@receipt.errors.blank?)
       @conversation = @receipt.conversation
@@ -68,14 +93,6 @@ class MessagesController < ApplicationController
   end
 
   private
-
-  def get_mailbox
-    @mailbox = current_user.mailbox
-  end
-
-  def get_actor
-    @actor = current_user
-  end
 
   def get_box
     if params[:box].blank? or !["inbox","sentbox","trash"].include?params[:box]

@@ -1,6 +1,6 @@
 class ConversationsController < ApplicationController
   before_filter :signed_in_user
-  before_filter :get_mailbox, :get_box, :get_actor
+  before_filter :get_actor, :get_mailbox, :get_box
   before_filter :check_current_subject_in_conversation, :only => [:show, :update, :destroy]
 
   def index
@@ -70,14 +70,6 @@ class ConversationsController < ApplicationController
   end
 
   private
-
-  def get_mailbox
-    @mailbox = current_user.mailbox
-  end
-
-  def get_actor
-    @actor = current_user
-  end
 
   def get_box
     if params[:box].blank? or !["inbox","sentbox","trash"].include?params[:box]

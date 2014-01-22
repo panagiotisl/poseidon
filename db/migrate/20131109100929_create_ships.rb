@@ -4,6 +4,7 @@ class CreateShips < ActiveRecord::Migration
       t.string :name
       t.references :vessel_type
       t.references :fleet, index: true
+      t.references :flag, index: true
 
       t.timestamps
     end

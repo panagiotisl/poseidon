@@ -1,6 +1,8 @@
 <% provide(:title, @agent.name) %>
 <div class="row">
-    <%= render "nav" %>
+	<div class="span12">
+    	<%= render "nav" %>
+	</div>
     <div class="span3 roundBox">
     	<% @voyages = @agent.voyages.paginate(page: params[:page]) %> 
        	  <h4>Voyages</h4>

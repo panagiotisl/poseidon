@@ -1,7 +1,6 @@
 <% if signed_in? %>
   <div class="row">
     <div class="span12">
-   	  
    	  <div class="nav nav-pills roundBox">
    	  	<%= gravatar_for current_user, size: 64 %>  		
       <h3><%= link_to "Hello #{current_user.name}!", current_user %></h3>
@@ -11,6 +10,9 @@
         <%= link_to current_user.agent.name, current_user.agent %>
       <% end %>
       </div>
+	</div>
+	<div class="row">
+	<div class="span12">
       <% if sce? %>
         <%
           @fleets = current_user.shipping_company.fleets.paginate(page: params[:page])
@@ -30,6 +32,7 @@
         </div>
       <% end %>
     </div>
+	</div>
   </div>  
 <% else %>
   <div class="center hero-unit">

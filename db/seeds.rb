@@ -21,6 +21,12 @@ Country.create(iso: 'FR', name: 'FRANCE', printableName: 'France', iso3: 'FRA', 
 Country.create(iso: 'IT', name: 'ITALY', printableName: 'Italy', iso3: 'ITA', numCode: 380)
 Country.create(iso: 'IL', name: 'ISRAEL', printableName: 'Israel', iso3: 'ISR', numCode: 376)
 
+greek = Flag.create(name: 'Greek', path: 'Flag_of_Greece.svg')
+Flag.create(name: 'French', path: 'Flag_of_France.svg')
+Flag.create(name: 'Italian', path: 'Flag_of_Italy.svg')
+Flag.create(name: 'Israeli', path: 'Flag_of_Israel.svg')
+
+
 Port.create(name: 'Port of Nisos Naxos', country_id: greece.id, lat:'37.1', lng:'25.366667')
 Port.create(name: 'Port of Nauplia', country_id: greece.id, lat:'37.566667', lng:'22.8')
 p3 = Port.create(name: 'Port of Piraeus', country_id: greece.id, lat:'37.933333', lng:'23.633333')
@@ -30,7 +36,7 @@ a1 = Agent.create(name: "BestAgents", country_id: greece.id, address: "Sporadon 
 a2 = Agent.create(name: "ShippingServices", country_id: greece.id, address: "Sporadon 13", telephone: "+30 2104543547", email: "info@sg.gr")
 
 f1 = Fleet.create(name: "MyJennys", shipping_company_id: c1.id)
-s1 = Ship.create(name: "Jenny", fleet_id: f1.id, vessel_type_id: handymax.id)
+s1 = Ship.create(name: "Jenny", fleet_id: f1.id, flag_id: greek.id, vessel_type_id: handymax.id)
 
 Voyage.create(name: "1st", ship_id: s1.id, port_id: p3.id, date: "2013-12-17")
 

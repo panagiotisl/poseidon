@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140105123145) do
+ActiveRecord::Schema.define(version: 20140118072723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,13 @@ ActiveRecord::Schema.define(version: 20140105123145) do
     t.string   "printableName"
     t.string   "iso3"
     t.integer  "numCode"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "flags", force: true do |t|
+    t.string   "name"
+    t.string   "path"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -149,10 +156,12 @@ ActiveRecord::Schema.define(version: 20140105123145) do
     t.string   "name"
     t.integer  "vessel_type_id"
     t.integer  "fleet_id"
+    t.integer  "flag_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "ships", ["flag_id"], name: "index_ships_on_flag_id", using: :btree
   add_index "ships", ["fleet_id"], name: "index_ships_on_fleet_id", using: :btree
 
   create_table "users", force: true do |t|
@@ -179,6 +188,7 @@ ActiveRecord::Schema.define(version: 20140105123145) do
 
   create_table "voyages", force: true do |t|
     t.string   "name"
+    t.string   "remarks"
     t.integer  "ship_id"
     t.integer  "port_id"
     t.date     "date"

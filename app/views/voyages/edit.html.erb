@@ -16,6 +16,9 @@
       <%= f.label :date %>
       <%= f.text_field :date, class: "voyages_date" %>
 
+      <%= f.label :remarks %>
+      <%= f.text_area(:remarks, size: '50x10') %>
+
       <%= f.hidden_field :ship_id, :value => @ship.id %>
 
       <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>

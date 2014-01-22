@@ -70,7 +70,7 @@ class ShipsController < ApplicationController
   private
   
     def ship_params
-      params.require(:ship).permit(:name, :fleet_id, :vessel_type_id)
+      params.require(:ship).permit(:name, :fleet_id, :flag_id, :vessel_type_id)
     end
       
 end

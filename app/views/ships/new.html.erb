@@ -12,6 +12,9 @@
       <%= f.label :vessel_type %>
       <%= select "ship", "vessel_type_id", VesselType.order(:category).all.collect {|p| [ p.category, p.id ] }, { :include_blank => true } %>
 
+      <%= f.label :flag %>
+      <%= select "ship", "flag_id", Flag.order(:name).all.collect {|p| [ p.name, p.id ] }, { :include_blank => true } %>
+      
       <%= f.hidden_field :fleet_id, :value => @fleet.id %>
       
       <%= f.submit "Create this ship", class: "btn btn-large btn-primary" %>

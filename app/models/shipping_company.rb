@@ -10,4 +10,11 @@ class ShippingCompany < ActiveRecord::Base
   validates :address, presence: true
   validates :telephone, presence: true
   validates :country_id, presence: true
+  
+  acts_as_messageable
+  
+  def mailboxer_email(object)
+    return :email
+  end
+  
 end

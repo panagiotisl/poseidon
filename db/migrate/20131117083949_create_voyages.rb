@@ -2,6 +2,7 @@ class CreateVoyages < ActiveRecord::Migration
   def change
     create_table :voyages do |t|
       t.string :name
+      t.string :remarks
       t.references :ship, index: true
       t.references :port, index: true
       t.date :date

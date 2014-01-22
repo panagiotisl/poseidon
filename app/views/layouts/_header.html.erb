@@ -15,9 +15,22 @@
           </li>
           <li><%= link_to "Home", root_path %></li>
           <% if signed_in? %>
+		  
+		    <% if false %>
             <li><%= link_to "Users", users_path %></li>
             <li><%= link_to "Shipping Companies", shipping_companies_path %></li>
             <li><%= link_to "Agents/Suppliers", agents_path %></li>
+			<% end %>
+			<li id="fat-menu" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <span class="icon icon-envelope"></span> <%= get_mailbox.receipts.where(is_read:false).count %> <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Inbox", conversations_path(:box=>'inbox') %></li>
+                <li><%= link_to "Sentbox", conversations_path(:box=>'sentbox') %></li>
+				<li><%= link_to "Thrash", conversations_path(:box=>'trash') %></li>
+              </ul>
+            </li>
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 Account <b class="caret"></b>

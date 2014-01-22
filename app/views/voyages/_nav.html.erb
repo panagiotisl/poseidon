@@ -7,6 +7,9 @@
       <li class="active"><%= @title %></li>
     </ol>
   </li>
+  <% if !authorized_sce? %>
+  <li class="marginLeft"><%= link_to '<span class="icon icon-envelope"></span>'.html_safe, new_message_path(:type=> 'sc', :recipient => @shipping_company, :subject => "[#{@voyage.name}]"), :class => "btn btn-default", :title => "Send a message to #{@shipping_company.name}", :method => :get %></li>
+  <% end %>
   <% if authorized_sce? %>
   <li class="marginLeft"><%= link_to '<span class="icon icon-edit"></span>'.html_safe, edit_shipping_company_fleet_ship_voyage_path, :class => "btn btn-default", :title => "Edit voyage", :method => :get %></li>
   <% end %>

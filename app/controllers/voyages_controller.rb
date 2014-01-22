@@ -65,6 +65,6 @@ class VoyagesController < ApplicationController
   private
   
     def voyage_params
-      params.require(:voyage).permit(:name, :ship_id, :port_id, :date)
+      params.require(:voyage).permit(:name, :remarks, :ship_id, :port_id, :date)
     end
 end
