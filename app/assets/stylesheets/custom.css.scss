@@ -404,6 +404,11 @@ input {
   float: left;
   margin-right: 10px;
 }
+
+nofloat {
+	float:none;
+}
+
 aside {
   textarea {
     height: 100px;
@@ -411,3 +416,7 @@ aside {
   }
 }
 
+table td {
+    padding-left: 15px;
+    padding-right: 15px;
+}

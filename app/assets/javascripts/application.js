@@ -13,9 +13,11 @@
 //= require jquery
 //= require jquery.ui.datepicker
 //= require jquery_ujs
+//= require jquery.purr
 //= require jquery-ui
 //= require autocomplete-rails
 //= require turbolinks
 //= require bootstrap
 //= require_tree .
 //= require fancybox
+//= require best_in_place

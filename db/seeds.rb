@@ -27,8 +27,8 @@ Flag.create(name: 'Italian', path: 'Flag_of_Italy.svg')
 Flag.create(name: 'Israeli', path: 'Flag_of_Israel.svg')
 
 
-Port.create(name: 'Port of Nisos Naxos', country_id: greece.id, lat:'37.1', lng:'25.366667')
-Port.create(name: 'Port of Nauplia', country_id: greece.id, lat:'37.566667', lng:'22.8')
+p1 = Port.create(name: 'Port of Nisos Naxos', country_id: greece.id, lat:'37.1', lng:'25.366667')
+p2 = Port.create(name: 'Port of Nauplia', country_id: greece.id, lat:'37.566667', lng:'22.8')
 p3 = Port.create(name: 'Port of Piraeus', country_id: greece.id, lat:'37.933333', lng:'23.633333')
 
 c1 = ShippingCompany.create(name: "Kampanis", country_id: greece.id, address: "Fifth Avenue 23", telephone: "+30 2105544345", email: "info@kampanis.gr")
@@ -38,7 +38,11 @@ a2 = Agent.create(name: "ShippingServices", country_id: greece.id, address: "Spo
 f1 = Fleet.create(name: "MyJennys", shipping_company_id: c1.id)
 s1 = Ship.create(name: "Jenny", fleet_id: f1.id, flag_id: greek.id, vessel_type_id: handymax.id)
 
-Voyage.create(name: "1st", ship_id: s1.id, port_id: p3.id, date: "2013-12-17")
+v1 = Voyage.create(name: "1st", ship_id: s1.id)  #, port_id: p3.id, date: "2013-12-17"
+
+VoyagesPort.create(voyage_id: v1.id , port_id: p3.id, date: "2013-12-17")
+VoyagesPort.create(voyage_id: v1.id , port_id: p1.id, date: "2013-12-22")
+VoyagesPort.create(voyage_id: v1.id , port_id: p2.id, date: "2013-12-24")
 
 #Operation.create(agent_id: 1, port_id: 1)
 Operation.create(agent_id: 1, port_id: 2)

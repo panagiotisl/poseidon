@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140118072723) do
+ActiveRecord::Schema.define(version: 20140212130510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20140118072723) do
   add_index "fleets", ["shipping_company_id"], name: "index_fleets_on_shipping_company_id", using: :btree
 
   create_table "needs", force: true do |t|
-    t.integer  "voyage_id"
+    t.integer  "voyages_port_id"
     t.integer  "service_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -198,6 +198,14 @@ ActiveRecord::Schema.define(version: 20140118072723) do
 
   add_index "voyages", ["port_id"], name: "index_voyages_on_port_id", using: :btree
   add_index "voyages", ["ship_id"], name: "index_voyages_on_ship_id", using: :btree
+
+  create_table "voyages_ports", force: true do |t|
+    t.integer  "voyage_id"
+    t.integer  "port_id"
+    t.date     "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   add_foreign_key "notifications", "conversations", name: "notifications_on_conversation_id"
 

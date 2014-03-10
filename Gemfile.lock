@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/bernat/best_in_place.git
+  revision: df178520bf9ba405baee9528d5dbb630d6ff760c
+  specs:
+    best_in_place (2.1.0)
+      jquery-rails
+      rails (>= 3.1)
+
+GIT
   remote: git://github.com/bmabey/database_cleaner.git
   revision: df55cf7b746e792dba1d11eea0d6e31e3abc7e8c
   specs:
@@ -236,6 +244,7 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt-ruby (= 3.0.1)
+  best_in_place!
   bootstrap-sass (= 2.3.2.0)
   bootstrap-will_paginate (= 0.0.9)
   capybara (= 2.1.0)

@@ -14,6 +14,9 @@ SampleApp::Application.routes.draw do
     resources :fleets,    only: [:show, :edit, :update, :index, :new, :create, :destroy] do
       resources :ships,    only: [:show, :edit, :update, :index, :new, :create, :destroy] do
         resources :voyages,    only: [:new, :create, :index, :show, :edit, :update] do
+          patch '/accept', :to => 'voyages#accept'
+          resources :voyages_port,    only: [:new, :create] do
+            end
           resources :needs,    only: [:new, :create] do
             resources :offers, only: [:new, :create, :update] do
               patch '/accept', :to => 'offers#accept'

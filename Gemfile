@@ -12,6 +12,7 @@ gem 'recaptcha', :require => 'recaptcha/rails'
 gem 'fancybox-rails'
 gem 'htmlentities'
 gem 'mailboxer'
+gem 'best_in_place', github: 'bernat/best_in_place'
 gem 'rails3-jquery-autocomplete'
 
 group :development, :test do

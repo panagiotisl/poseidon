@@ -3,7 +3,7 @@
 <div class="span3 strong">Action</div>
 <div class="marginTop">
 <% @offer = Offer.new %>
-<%= form_for @offer, url: shipping_company_fleet_ship_voyage_need_offers_path(:voyage_id => @voyage.id, :need_id => ineed.id), :html => {:class => "form-inline"} do |f| %>
+<%= form_for @offer, url: shipping_company_fleet_ship_voyage_need_offers_path(:voyage_id => @voyage.id, :need_id => ineed.id, :voyage_port => params[:voyage_port]), :html => {:class => "form-inline"} do |f| %>
   <div class="span3"></div>
   <div class="span4">
   <%= f.number_field :value, step: 'any', min: 0, class: 'input-small offer_value' %>

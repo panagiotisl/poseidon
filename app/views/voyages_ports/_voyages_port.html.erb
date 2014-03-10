@@ -1,0 +1,7 @@
+<li>
+	<%= link_to voyages_port.voyage.name, shipping_company_fleet_ship_voyage_path(:id => voyages_port.voyage.id, :ship_id => voyages_port.voyage.ship_id, :fleet_id => voyages_port.voyage.ship.fleet_id, :shipping_company_id => voyages_port.voyage.ship.fleet.shipping_company_id, :voyage_port => voyages_port) %>
+	</br>
+	<%= voyages_port.port.name %>
+	</br>
+	<%= voyages_port.date %>
+</li>

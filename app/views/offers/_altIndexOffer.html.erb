@@ -1,3 +1,56 @@
+
+<table>
+
+<tr>
+	<td></td>
+	<% @agents.each do |agent| %>
+ 		<td class="strong" align="center"><%= link_to agent.name, agent %></td>
+	<% end%>
+</tr>	
+<tr></tr>
+<% @needs.each do |need| %>
+<tr>
+	<td class="strong"><%= "#{need.service.category} :" %></td>
+	<% @agents.each do |agent| %>
+	    <% offer = @altNeeds[[need.id,agent.id]] %>
+		<% if offer %>
+ 		<td align="right">
+    		<%= "#{offer.value} x #{offer.quantity} = #{offer.value*offer.quantity}" %>
+ 		</td>
+		<% end %>
+	<% end%>
+</tr>
+<% end %>
+
+<tr>
+	<td></td>
+	<% @agents.each do |agent| %>
+ 		<td align="right"><%= @totals[agent] %></td>
+	<% end%>
+</tr>
+
+<tr>
+	<td></td>
+	<% @agents.each do |agent| %>
+ 		<td align="right">
+ 			<%= form_for @voyage, url: shipping_company_fleet_ship_voyage_accept_path(:agent => agent, :voyage_id => params[:id], :voyage_port => params[:voyage_port], :alt => params[:alt]), :html => {:class => "form-inline"} do |f| %>
+			<% if @accepted == agent %>
+				<%= f.submit "Withdraw Acceptance", class: 'btn btn-small btn-danger'  %>
+			<% elsif @accepted==nil %>
+      			<%= f.submit "Accept Offer", class: 'btn btn-small btn-success'  %>
+			<% else %>
+				
+			<% end%>
+   			 <% end %>
+	    </td>
+	<% end%>
+</tr>
+
+</table>
+
+
+
+<% if false%>
 <% @accepted = Offer.reorder(:value).where(:need_id => ineed.id).where(:accepted => true).first %>	
 <% if @accepted %>
   <div class="span3 strong"><%= "#{ineed.service.category} :" %></div>
@@ -41,3 +94,4 @@
   <% end %>
   </div>
 <% end %>	
+<% end %>

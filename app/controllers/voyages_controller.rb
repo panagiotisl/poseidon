@@ -5,7 +5,6 @@ class VoyagesController < ApplicationController
   
   def index
     @title = "All Voyages"
-    #@shipping_company = ShippingCompany.find(params[:shipping_company_id])
     @ship = Ship.find(params[:ship_id])
     @fleet = @ship.fleet
     @shipping_company = @fleet.shipping_company
@@ -14,13 +13,20 @@ class VoyagesController < ApplicationController
   
   def show
     @voyage = Voyage.find(params[:id])
+    if params[:voyage_port]
+      @voyages_port = VoyagesPort.find(params[:voyage_port])
+      @needs = @voyages_port.needs
+      @agents, @altNeeds, @totals, @accepted = find_needs(@needs)
+    else
+      @voyages_port = VoyagesPort.new
+    end
     @ship = @voyage.ship
     @fleet = @ship.fleet
     @shipping_company = @fleet.shipping_company
     @title = @voyage.name
-    @needs = @voyage.needs
     @need = Need.new 
     @offer = Offer.new
+    
   end
   
   def new
@@ -62,9 +68,45 @@ class VoyagesController < ApplicationController
     end
   end
   
+  def accept
+    VoyagesPort.find(params[:voyage_port]).needs.each do |need|
+      offers = need.offers
+      offers.each do |offer|
+        if offer.agent.id.to_s == params[:agent]
+          offer.toggle!(:accepted)
+        end
+      end
+    end
+    flash[:success] = "Voyage updated"
+    redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id], :voyage_port => params[:voyage_port], :alt => params[:alt])
+  end
+  
   private
   
     def voyage_params
-      params.require(:voyage).permit(:name, :remarks, :ship_id, :port_id, :date)
+      params.require(:voyage).permit(:name, :ship_id)
     end
+  
+    def find_needs(needs)
+      agents = Set.new
+      altNeeds = Hash.new
+      totals = Hash.new
+      accepted = nil
+      needs.each do |need|
+        need.offers.each do |offer|
+          agents << offer.agent
+          if offer.accepted
+             accepted = offer.agent
+          end
+          altNeeds[[need.id,offer.agent.id]] = offer
+          if totals[offer.agent]
+            totals[offer.agent] += offer.value*offer.quantity
+          else
+            totals[offer.agent] = offer.value*offer.quantity
+          end
+        end
+      end
+      return agents,altNeeds,totals, accepted
+    end
+    
 end

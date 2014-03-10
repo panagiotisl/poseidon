@@ -4,9 +4,9 @@ class OffersController < ApplicationController
     @offer = Offer.new(offer_params)
     if @offer.save
       flash[:success] = "Offer added!"
-      redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id])
+      redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id], :voyage_port => params[:voyage_port])
     else
-      redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id]), :flash => { :error => "Wrong arguments!" }
+      redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id], :voyage_port => params[:voyage_port]), :flash => { :error => "Wrong arguments!" }
     end
   end
 
@@ -14,15 +14,15 @@ class OffersController < ApplicationController
     if params[:commit] == "Withdraw Offer"
       Offer.find(params[:offer_id]).destroy
       flash[:success] = "Offer withdrawn"
-      redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id])
+      redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id],:voyage_port => params[:voyage_port])
     else
       @offer = Offer.find(params[:offer_id])
       if @offer.update_attributes(offer_params)
         flash[:success] = "Offer updated"
-        redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id])
+        redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id], :voyage_port => params[:voyage_port])
       else
         flash[:fail] = "Something went wrong!"
-        redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id])
+        redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id], :voyage_port => params[:voyage_port])
       end
     end
   end
@@ -31,10 +31,10 @@ class OffersController < ApplicationController
     @offer = Offer.find(params[:offer_id])
     if @offer.toggle!(:accepted)
       flash[:success] = "Offer updated"
-      redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id])
+      redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id], :voyage_port => params[:voyage_port])
     else
       flash[:fail] = "Something went wrong!"
-      redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id])
+      redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id], :voyage_port => params[:voyage_port])
     end
   end
 

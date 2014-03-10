@@ -21,14 +21,14 @@
         %>
       	<%= render "shipping_companies/content" %>
       <% elsif ase? %>
-        <% @voyages = current_user.agent.voyages.paginate(page: params[:page]) %>
+        <% @voyages_ports = current_user.agent.voyages_ports.paginate(page: params[:page]) %>
         <div class="span3 roundBox">
        	  <h4>Voyages</h4>
-    	  <%= will_paginate @voyages %>
+    	  <%= will_paginate @voyages_ports %>
             <ul class="voyages">
-              <%= render @voyages %>
+              <%= render @voyages_ports %>
             </ul>
-          <%= will_paginate @voyages %>
+          <%= will_paginate @voyages_ports %>
         </div>
       <% end %>
     </div>
