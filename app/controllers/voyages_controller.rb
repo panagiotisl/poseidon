@@ -77,7 +77,7 @@ class VoyagesController < ApplicationController
         end
       end
     end
-    flash[:success] = "Voyage updated"
+    flash[:success] = "Offer status updated"
     redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id], :voyage_port => params[:voyage_port], :alt => params[:alt])
   end
   
