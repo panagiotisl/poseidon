@@ -1,6 +1,8 @@
 class MessagesController < ApplicationController
 
-  autocomplete :user, :name
+  #autocomplete :user, :name
+  #autocomplete :agent, :name, :extra_data => [:email]
+  #autocomplete :recipients, {:agent => [:name], :shipping_company => [:name]}
 
   before_filter :signed_in_user
   before_filter :get_actor, :get_mailbox, :get_box
@@ -20,9 +22,17 @@ class MessagesController < ApplicationController
     redirect_to conversations_path(:box => @box)
   end
 
+
+  def recipients
+    @recipients = Agent.order(:name).where("LOWER(name) like ?", "%#{params[:term].downcase}%")
+    @recipients += ShippingCompany.order(:name).where("LOWER(name) like ?", "%#{params[:term].downcase}%")
+    render json: @recipients.map(&:name)
+  end
+
   # GET /messages/new
   # GET /messages/new.xml
   def new
+    
     if params[:type] and params[:recipient]
       if params[:type] == 'sc'
         @name = ShippingCompany.find(params[:recipient]).name
@@ -91,6 +101,7 @@ class MessagesController < ApplicationController
   def destroy
 
   end
+
 
   private
 

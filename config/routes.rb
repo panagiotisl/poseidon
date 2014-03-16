@@ -35,8 +35,9 @@ SampleApp::Application.routes.draw do
   end
   
   resources :messages do
-    get :autocomplete_user_name, :on => :collection
+    #get :autocomplete_recipients, :on => :collection
   end
+  
   resources :conversations
 
   root to: 'static_pages#home'
@@ -45,4 +46,7 @@ SampleApp::Application.routes.draw do
   get '/help',    to: 'static_pages#help'
   get '/about',   to: 'static_pages#about'
   get '/contact', to: 'static_pages#contact'
+  
+  get :autocomplete_recipients, :to => 'messages#recipients'
+  
 end

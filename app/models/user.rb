@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :password, length: { minimum: 6 }
 
-  acts_as_messageable 
+  #acts_as_messageable 
 
   TYPE = [['Shipping Company Employee', 'SCUser'], ['Agent/Supplier Employee', 'AUser']]
   
@@ -20,13 +20,13 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(token.to_s)
   end
 
-  def mailboxer_email(object)
+ # def mailboxer_email(object)
   #Check if an email should be sent for that object
   #if true
-    return :email
+ #   return :email
   #if false
   #return nil
-  end
+ # end
 
   private
 
