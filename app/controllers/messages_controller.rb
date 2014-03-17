@@ -55,6 +55,14 @@ class MessagesController < ApplicationController
   # POST /messages
   # POST /messages.xml
   def create
+    
+    @recipients = params[:message_recipient_name].split(',').map{ |r| Agent.where(name: r).first }
+    puts @recipients
+    if !@recipients.any?
+      @recipients = params[:message_recipient_name].split(',').map{ |r| ShippingCompany.where(name: r).first }
+    end
+    puts @recipients
+=begin
     if params[:type]
       if params[:type] == 'sc'
         @recipients = 
@@ -79,8 +87,12 @@ class MessagesController < ApplicationController
           end
       end
     end
-
+=end
     @receipt = @actor.send_message(@recipients, params[:body], params[:subject])
+    puts "HERE:"
+    puts @recipients
+    puts @receipt
+    puts @actor
     if (@receipt.errors.blank?)
       @conversation = @receipt.conversation
       flash[:success]= t('mailboxer.sent')

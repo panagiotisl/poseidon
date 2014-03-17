@@ -399,8 +399,11 @@ input {
   border-top:thick double $khaki;
 }
 
+
 .boxLine { 
-  word-spacing:18px;
+    a {
+    	 padding-right: 15px
+    }
 }
 
 .box2 {
