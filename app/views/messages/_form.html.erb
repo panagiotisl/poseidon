@@ -18,12 +18,10 @@
 
   <h4><%="#{t('mailboxer.form.recipients')}"%></h4>
   
-  <%= @name%>
-
   <%= text_field_tag :message_recipient_name, '', :data => {autocomplete_source: autocomplete_recipients_path}, :size => 75, :value => params[:recipient] %>
   	
-  <% if false %>
-<%= autocomplete_field_tag '_recipients', '', autocomplete_user_name_messages_path, 'data-delimiter' => ',', :multiple => true, :size => 75 %>	
+  	<% if false %>
+		<%= autocomplete_field_tag '_recipients', '', autocomplete_user_name_messages_path, 'data-delimiter' => ',', :multiple => true, :size => 75 %>	
 	<%end%>
 
   <%= hidden_field_tag :type, params[:type] %>

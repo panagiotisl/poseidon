@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140212130510) do
+ActiveRecord::Schema.define(version: 20140318120703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,6 +121,16 @@ ActiveRecord::Schema.define(version: 20140212130510) do
     t.datetime "updated_at"
   end
 
+  create_table "readers", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "notification_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "readers", ["notification_id"], name: "index_readers_on_notification_id", using: :btree
+  add_index "readers", ["user_id"], name: "index_readers_on_user_id", using: :btree
+
   create_table "receipts", force: true do |t|
     t.integer  "receiver_id"
     t.string   "receiver_type"
@@ -134,6 +144,16 @@ ActiveRecord::Schema.define(version: 20140212130510) do
   end
 
   add_index "receipts", ["notification_id"], name: "index_receipts_on_notification_id", using: :btree
+
+  create_table "senders", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "notification_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "senders", ["notification_id"], name: "index_senders_on_notification_id", using: :btree
+  add_index "senders", ["user_id"], name: "index_senders_on_user_id", using: :btree
 
   create_table "services", force: true do |t|
     t.string   "category"

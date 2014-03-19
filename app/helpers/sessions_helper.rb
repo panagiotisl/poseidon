@@ -93,4 +93,13 @@ module SessionsHelper
     @mailbox = get_actor.mailbox
   end
   
+  
+  def get_unread(receipts)
+    notifications = []
+    receipts.each do |receipt|
+      notifications << receipt.notification.id
+    end
+    notifications.count - Reader.where(:notification_id => notifications).count
+  end
+  
 end

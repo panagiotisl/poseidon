@@ -25,6 +25,11 @@ class ConversationsController < ApplicationController
     end
     render :action => :show
     @receipts.mark_as_read
+    # create a mark for every reader
+    @receipts.each do |receipt|
+      Reader.create(user_id: current_user.id, notification_id: receipt.notification.id)
+    end
+    
   end
 
   def update

@@ -5,13 +5,26 @@
                 <div class="name">
                     <%= link_to message.sender.name, message.sender %>
                 </div>
+				<div class="sender">
+                	<%= Sender.where(:notification_id => message.id).first.user.name %>
+            	</div>
                 <div class="date">
                     <%= time_ago_in_words(message.updated_at) + " ago" %>
                 </div>
             </div>
-            <div class="span8 roundKhakiBox">
-                <%= raw(message.body) %>
+            <div class="span8">
+            	<div class="roundKhakiBox">
+                	<%= raw(message.body) %>
+				</div>
+				<div class="roundGrayBox">
+					Read by:
+					<% Reader.where(:notification_id => message.id).each_with_index do |reader, i| %>
+					<% unless i==0 %>,<%end%>
+					<%= reader.user.name %>
+					<% end %>
+				</div>
             </div>
+			
         </div>
     </div>
 <% end %>

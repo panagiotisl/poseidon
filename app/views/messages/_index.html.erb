@@ -1,0 +1,10 @@
+<div class="conversations roundBox">
+
+  <div class="boxLine">
+  	<%= link_to "New Message", new_message_path %>
+    <%= link_to "Inbox", conversations_path(:box=>'inbox') %>
+    <%= link_to "Sentbox", conversations_path(:box=>'sentbox') %>
+    <%= link_to "Thrash", conversations_path(:box=>'trash') %>
+  </div>
+
+</div>

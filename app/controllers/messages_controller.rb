@@ -89,11 +89,8 @@ class MessagesController < ApplicationController
     end
 =end
     @receipt = @actor.send_message(@recipients, params[:body], params[:subject])
-    puts "HERE:"
-    puts @recipients
-    puts @receipt
-    puts @actor
     if (@receipt.errors.blank?)
+      Sender.create(notification_id: @receipt.notification.id, user_id: current_user.id)
       @conversation = @receipt.conversation
       flash[:success]= t('mailboxer.sent')
       redirect_to conversation_path(@conversation, :box => :sentbox)

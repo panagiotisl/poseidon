@@ -5,6 +5,8 @@ class Agent < ActiveRecord::Base
   has_many :voyages_ports, through: :ports
   has_many :offers, foreign_key: "agent_id", dependent: :destroy
   validates :name, presence: true, uniqueness: { case_sensitive: false }
+  validate :name_not_on_shipping_companies
+  
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
@@ -29,5 +31,15 @@ class Agent < ActiveRecord::Base
   def mailboxer_email(object)
     return :email
   end
+  
+  private
+  
+    def name_not_on_shipping_companies
+      uname=ShippingCompany.where(:name => self.name).first
+      uname.nil?
+      unless uname.nil?
+        errors.add(:name, "Name already used")
+      end
+    end
 
 end
