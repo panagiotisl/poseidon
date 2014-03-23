@@ -6,6 +6,8 @@
     <%= link_to "Sentbox", conversations_path(:box=>'sentbox') %>
     <%= link_to "Thrash", conversations_path(:box=>'trash') %>
   </div>
-  <%= render @conversations %>
+  <% if !@conversations.nil? %>
+  	<%= render @conversations.reverse %>
+  <% end %>
 
 </div>

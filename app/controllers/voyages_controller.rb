@@ -1,6 +1,5 @@
-require 'common_stuff'
 class VoyagesController < ApplicationController
-  include CommonStuff  
+  
   before_action :authorized_sce,     only: [:index, :new, :create, :edit]
   
   def index
@@ -69,14 +68,20 @@ class VoyagesController < ApplicationController
   end
   
   def accept
-    VoyagesPort.find(params[:voyage_port]).needs.each do |need|
+    @voyage_port = VoyagesPort.find(params[:voyage_port])
+    @voyage_port.needs.each do |need|
       offers = need.offers
       offers.each do |offer|
         if offer.agent.id.to_s == params[:agent]
+          @agent = offer.agent
           offer.toggle!(:accepted)
         end
       end
     end
+    @agents = @voyage_port.port.agents.map{ |r| r }
+    @actor = get_actor
+    #@actor.send_message(@agents  , "VOYAGE", "Status update")
+    Notification.notify_all(@agents  , "VOYAGE", "Status update")
     flash[:success] = "Offer status updated"
     redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id], :voyage_port => params[:voyage_port], :alt => params[:alt])
   end

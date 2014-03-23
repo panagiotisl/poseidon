@@ -1,6 +1,4 @@
-require 'common_stuff'
 class OperationsController < ApplicationController
-  include CommonStuff
   
   before_action :authorized_ase,     only: [:create, :destroy]
   

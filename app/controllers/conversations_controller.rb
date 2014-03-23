@@ -6,6 +6,9 @@ class ConversationsController < ApplicationController
   def index
     if @box.eql? "inbox"
       @conversations = @mailbox.inbox.page(params[:page])#.per(9)
+      @notifications = @mailbox.notifications.page(params[:page])#.per(9)
+      @conversations += @notifications
+      @conversations.sort! { |a,b| a.updated_at <=> b.updated_at }
     elsif @box.eql? "sentbox"
       @conversations = @mailbox.sentbox.page(params[:page])#.per(9)
     else
@@ -27,9 +30,10 @@ class ConversationsController < ApplicationController
     @receipts.mark_as_read
     # create a mark for every reader
     @receipts.each do |receipt|
-      Reader.create(user_id: current_user.id, notification_id: receipt.notification.id)
+      if (receipt.mailbox_type == "inbox") and ((receipt.receiver_type == "Agent" and current_user.agent_id == receipt.receiver_id) or (receipt.receiver_type == "ShippingCompany" and current_user.shipping_company_id == receipt.receiver_id))
+        Reader.create(user_id: current_user.id, notification_id: receipt.notification.id)
+      end
     end
-    
   end
 
   def update
@@ -40,6 +44,7 @@ class ConversationsController < ApplicationController
     if params[:reply_all].present?
       last_receipt = @mailbox.receipts_for(@conversation).last
       @receipt = @actor.reply_to_all(last_receipt, params[:body])
+      Sender.create(notification_id: @receipt.notification.id, user_id: current_user.id)
     end
 
     if @box.eql? 'trash'

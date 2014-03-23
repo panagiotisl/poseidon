@@ -1,3 +1,5 @@
+<div class="roundBox">
+<%= render :partial => 'index' %>
 <h3>
   <%= conversation.subject %>
   <% unless @box.eql?'trash' %>
@@ -22,7 +24,7 @@
 
 <hr class="soften">
 <div class="messages">
-  <% @receipts.each do |receipt| %>
+  <% @receipts.reverse.each do |receipt| %>
     <%= render receipt.message %>
   <% end %>
 
@@ -53,7 +55,7 @@
   <% end %>
   <%end %>
 </div>
-
+</div>
 <%= javascript_tag do %>
 $(document).ready(function(){  
   $(".message .body img").each(function(){

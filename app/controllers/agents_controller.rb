@@ -1,6 +1,5 @@
-require 'common_stuff'
 class AgentsController < ApplicationController
-  include CommonStuff
+
 #  before_action :admin_user,     only: [:index, :show, :new, :create]
   before_action :admin_user,     only: [:destroy]
   before_action :authorized_ase,     only: [:manage_ports]

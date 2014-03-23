@@ -97,7 +97,9 @@ module SessionsHelper
   def get_unread(receipts)
     notifications = []
     receipts.each do |receipt|
-      notifications << receipt.notification.id
+      if receipt.mailbox_type == "inbox"
+        notifications << receipt.notification.id
+      end
     end
     notifications.count - Reader.where(:notification_id => notifications).count
   end

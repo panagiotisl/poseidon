@@ -1,0 +1,35 @@
+<%= div_for(notification, :class =>"#{ 'unread ' if notification.is_unread?(@actor) }") do %>
+<div class="conversationLine marginTop">
+    <div class="row">
+    	<div class="span1">
+    		<% unless @box.eql?'trash' %>
+                <%= link_to(image_tag('cancel.png', :alt => t('mailboxer.delete'), :title => t('mailboxer.delete')),
+                conversation_path(notification, :location => @box,
+                :box => @box,
+                :page => params[:page]),
+                :confirm => t('mailboxer.delete_confirm',
+                :object => notification.subject),
+                :method => :delete,
+                :remote => true) %>
+                <% end %>
+    	</div>
+        <div class="span3 ">
+        	<div class="name">
+                System Notification
+            </div>
+            <div class="date">
+                <%= time_ago_in_words(notification.updated_at) + " ago" %>
+            </div>
+        </div>
+        <div class="span7 ">
+        	<div class="subject">
+            <%= link_to(truncate(notification.subject, :length => 55), notification_path(notification.id,:page => params[:page])) %>
+            
+			</div>
+			<div class="body">	
+                <%= raw(truncate(strip_tags(notification.body), :length => 50)) %>
+            </div>
+        </div>
+    </div>
+</div>
+<% end %>

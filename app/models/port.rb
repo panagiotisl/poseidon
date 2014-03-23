@@ -4,6 +4,8 @@ class Port < ActiveRecord::Base
   #has_and_belongs_to_many :voyages
   has_many :voyages_ports
   has_many :voyages, :through => :voyages_ports
+  has_many :operations
+  has_many :agents, :through => :operations
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   validates :country_id, presence: true
   validates :lat, presence: true

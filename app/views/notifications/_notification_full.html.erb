@@ -1,28 +1,23 @@
-<%= div_for(message, :class => (message.is_unread?(@actor) ? 'unread' : '')) do %>
+<%= div_for(@notification, :class => (@notification.is_unread?(@actor) ? 'unread' : '')) do %>
     <div class="boxWithBorder">
     	<div class="roundBox">
         <div class="row">
             <div class="span3 roundBeigeBox">
                 <div class="name">
-                    <%= link_to message.sender.name, message.sender %>
+                    System Notification
                 </div>
-				<div class="sender">
-					<% sender = Sender.where(:notification_id => message.id).first %>
-					<%if !sender.nil?%>
-                	<%= sender.user.name %>
-					<%end%>
-            	</div>
+				
                 <div class="date">
-                    <%= time_ago_in_words(message.updated_at) + " ago" %>
+                    <%= time_ago_in_words(@notification.updated_at) + " ago" %>
                 </div>
             </div>
             <div class="span8">
             	<div class="roundKhakiBox">
-                	<%= raw(message.body) %>
+                	<%= raw(@notification.body) %>
 				</div>
 				<div class="roundGrayBox xSmall">
 					Read by:
-					<% Reader.where(:notification_id => message.id).each_with_index do |reader, i| %>
+					<% Reader.where(:notification_id => @notification.id).each_with_index do |reader, i| %>
 					<% unless i==0 %>,<%end%>
 					<%= reader.user.name %>
 					<% if reader.user.agent_id %>

@@ -39,6 +39,8 @@ SampleApp::Application.routes.draw do
   end
   
   resources :conversations
+  
+  resources :notifications
 
   root to: 'static_pages#home'
   get '/signin',  to: 'sessions#new'
