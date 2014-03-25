@@ -1,6 +1,4 @@
-<%= div_for(message, :class => (message.is_unread?(@actor) ? 'unread' : '')) do %>
-    <div class="boxWithBorder">
-    	<div class="roundBox">
+    <div class="boxWithBorder roundBox">
         <div class="row">
             <div class="span3 roundBeigeBox">
                 <div class="name">
@@ -33,7 +31,5 @@
 					<% end %>
 				</div>
             </div>
-			</div>
-        </div>
+		</div>
     </div>
-<% end %>

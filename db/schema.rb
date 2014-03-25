@@ -61,11 +61,13 @@ ActiveRecord::Schema.define(version: 20140325101100) do
 
   create_table "labels", force: true do |t|
     t.integer  "notification_id"
+    t.integer  "conversation_id"
     t.integer  "voyages_port_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "labels", ["conversation_id"], name: "index_labels_on_conversation_id", using: :btree
   add_index "labels", ["notification_id"], name: "index_labels_on_notification_id", using: :btree
   add_index "labels", ["voyages_port_id"], name: "index_labels_on_voyages_port_id", using: :btree
 

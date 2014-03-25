@@ -4,7 +4,9 @@ class ConversationsController < ApplicationController
   before_filter :check_current_subject_in_conversation, :only => [:show, :update, :destroy]
 
   def index
-    if @box.eql? "inbox"
+    if params[:voyages_port]
+      @conversations = @mailbox.inbox.where("conversation_id IN (#{labeled_by_vp})", voyages_port_id: params[:voyages_port]).page(params[:page])
+    elsif @box.eql? "inbox"
       @conversations = @mailbox.inbox.page(params[:page])#.per(9)
       @notifications = @mailbox.notifications.page(params[:page])#.per(9)
       @conversations += @notifications
@@ -98,4 +100,9 @@ class ConversationsController < ApplicationController
     end
   end
 
+  private
+
+    def labeled_by_vp()
+      clause = "SELECT conversation_id FROM labels WHERE voyages_port_id = :voyages_port_id"
+    end
 end

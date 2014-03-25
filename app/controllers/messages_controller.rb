@@ -32,10 +32,10 @@ class MessagesController < ApplicationController
   # GET /messages/new
   # GET /messages/new.xml
   def new
-    
+=begin    
     if params[:type] and params[:recipient]
       if params[:type] == 'sc'
-        @name = ShippingCompany.find(params[:recipient]).name
+        @name = ShippingCompany.where(params[:recipient]).name
       elsif params[:type] == 'a'
         @name = Agent.find(params[:recipient]).name
       end
@@ -45,6 +45,8 @@ class MessagesController < ApplicationController
       return if @recipient.nil?
       @recipient = nil if Actor.normalize(@recipient)==Actor.normalize(current_subject)
     end
+=end
+    @name = params[:recipient]
   end
 
   # GET /messages/1/edit
@@ -61,37 +63,13 @@ class MessagesController < ApplicationController
     if !@recipients.any?
       @recipients = params[:message_recipient_name].split(',').map{ |r| ShippingCompany.where(name: r).first }
     end
-    puts @recipients
-=begin
-    if params[:type]
-      if params[:type] == 'sc'
-        @recipients = 
-          if params[:_recipients].present?
-            @recipients = params[:_recipients].split(',').map{ |r| ShippingCompany.find(r) }
-          else
-            []
-          end
-      elsif params[:type] == 'a'
-        @recipients = 
-          if params[:_recipients].present?
-            @recipients = params[:_recipients].split(',').map{ |r| Agent.find(r) }
-          else
-            []
-          end
-      elsif params[:type] == 'admin'
-        @recipients = 
-          if params[:_recipients].present?
-            @recipients = params[:_recipients].split(',').map{ |r| User.find(r) }
-          else
-            []
-          end
-      end
-    end
-=end
     @receipt = @actor.send_message(@recipients, params[:body], params[:subject])
     if (@receipt.errors.blank?)
       Sender.create(notification_id: @receipt.notification.id, user_id: current_user.id)
       @conversation = @receipt.conversation
+      if params[:voyages_port]
+        Label.create(conversation_id: @conversation.id, voyages_port_id: params[:voyages_port])
+      end
       flash[:success]= t('mailboxer.sent')
       redirect_to conversation_path(@conversation, :box => :sentbox)
     else

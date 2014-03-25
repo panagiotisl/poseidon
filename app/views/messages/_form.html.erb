@@ -24,7 +24,7 @@
 		<%= autocomplete_field_tag '_recipients', '', autocomplete_user_name_messages_path, 'data-delimiter' => ',', :multiple => true, :size => 75 %>	
 	<%end%>
 
-  <%= hidden_field_tag :type, params[:type] %>
+  <%= hidden_field_tag :voyages_port, params[:voyages_port] %>
   
   <h4><%= t('mailboxer.form.subject') %></h4>
 
