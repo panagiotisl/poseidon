@@ -1,6 +1,9 @@
 class Need < ActiveRecord::Base
   belongs_to :service
-  belongs_to :voyages_ports
+  belongs_to :voyages_port
+  
+  delegate :shipping_company, :to => :voyages_port
+  
   has_many :offers, foreign_key: "need_id", dependent: :destroy 
   #validates :quantity, presence: true, :inclusion => 1..100
   validates :service_id, presence: true

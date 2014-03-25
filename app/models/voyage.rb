@@ -1,5 +1,6 @@
 class Voyage < ActiveRecord::Base
   belongs_to :ship
+  delegate :shipping_company, :to => :ship
   #belongs_to :port
   #has_and_belongs_to_many :ports
   has_many :voyages_ports, foreign_key: "voyage_id"

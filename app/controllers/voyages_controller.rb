@@ -79,9 +79,7 @@ class VoyagesController < ApplicationController
       end
     end
     @agents = @voyage_port.port.agents.map{ |r| r }
-    @actor = get_actor
-    #@actor.send_message(@agents  , "VOYAGE", "Status update")
-    Notification.notify_all(@agents  , "VOYAGE", "Status update")
+    Notification.notify_all(@agents  , "#{@voyage_port.voyage.name} - #{@voyage_port.port.name} - #{@voyage_port.date}", "There was an update regarding offers for this this voyage.")
     flash[:success] = "Offer status updated"
     redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id], :voyage_port => params[:voyage_port], :alt => params[:alt])
   end

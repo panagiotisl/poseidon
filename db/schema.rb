@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140318120703) do
+ActiveRecord::Schema.define(version: 20140325101100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,16 @@ ActiveRecord::Schema.define(version: 20140318120703) do
   end
 
   add_index "fleets", ["shipping_company_id"], name: "index_fleets_on_shipping_company_id", using: :btree
+
+  create_table "labels", force: true do |t|
+    t.integer  "notification_id"
+    t.integer  "voyages_port_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "labels", ["notification_id"], name: "index_labels_on_notification_id", using: :btree
+  add_index "labels", ["voyages_port_id"], name: "index_labels_on_voyages_port_id", using: :btree
 
   create_table "needs", force: true do |t|
     t.integer  "voyages_port_id"
@@ -124,10 +134,12 @@ ActiveRecord::Schema.define(version: 20140318120703) do
   create_table "readers", force: true do |t|
     t.integer  "user_id"
     t.integer  "notification_id"
+    t.integer  "conversation_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "readers", ["conversation_id"], name: "index_readers_on_conversation_id", using: :btree
   add_index "readers", ["notification_id"], name: "index_readers_on_notification_id", using: :btree
   add_index "readers", ["user_id"], name: "index_readers_on_user_id", using: :btree
 

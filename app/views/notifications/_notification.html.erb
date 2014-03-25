@@ -1,5 +1,8 @@
-<%= div_for(notification, :class =>"#{ 'unread ' if notification.is_unread?(@actor) }") do %>
-<div class="conversationLine marginTop">
+<% if is_readN(notification) %>
+	<div class="conversationLine marginTop">
+<% else %>
+	<div class="conversationLineUnread marginTop">
+<% end %>
     <div class="row">
     	<div class="span1">
     		<% unless @box.eql?'trash' %>
@@ -32,4 +35,3 @@
         </div>
     </div>
 </div>
-<% end %>

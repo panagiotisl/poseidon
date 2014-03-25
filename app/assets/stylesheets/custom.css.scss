@@ -409,6 +409,10 @@ input {
   border-top:thick double $khaki;
 }
 
+.conversationLineUnread {
+  border-top:thick double $khaki;
+  background-color: $beige;
+}
 
 .boxLine { 
     a {

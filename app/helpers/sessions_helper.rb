@@ -97,11 +97,19 @@ module SessionsHelper
   def get_unread(receipts)
     notifications = []
     receipts.each do |receipt|
-      if receipt.mailbox_type == "inbox"
+      # nil for notifications
+      if receipt.mailbox_type == "inbox" || receipt.mailbox_type.nil?
         notifications << receipt.notification.id
       end
     end
     notifications.count - Reader.where(:notification_id => notifications).count
   end
   
+  def is_readC(conversation)
+    Reader.where(:conversation_id => conversation.id, :user_id => current_user.id).count > 0
+  end
+  
+    def is_readN(notification)
+    Reader.where(:notification_id => notification.id, :user_id => current_user.id).count > 0
+  end
 end

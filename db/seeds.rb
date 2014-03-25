@@ -38,7 +38,7 @@ a2 = Agent.create(name: "ShippingServices", country_id: greece.id, address: "Spo
 f1 = Fleet.create(name: "MyJennys", shipping_company_id: c1.id)
 s1 = Ship.create(name: "Jenny", fleet_id: f1.id, flag_id: greek.id, vessel_type_id: handymax.id)
 
-v1 = Voyage.create(name: "1st", ship_id: s1.id)  #, port_id: p3.id, date: "2013-12-17"
+v1 = Voyage.create(name: "VOYAGE_1", ship_id: s1.id)  #, port_id: p3.id, date: "2013-12-17"
 
 VoyagesPort.create(voyage_id: v1.id , port_id: p3.id, date: "2013-12-17")
 VoyagesPort.create(voyage_id: v1.id , port_id: p1.id, date: "2013-12-22")
