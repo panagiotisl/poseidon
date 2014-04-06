@@ -17,6 +17,28 @@
       
       <%= f.hidden_field :fleet_id, :value => @fleet.id %>
       
+      
+      <%= f.label :port, "Registry Port" %>
+	  <%= select "ship", "port_id", Port.order(:name).all.collect {|p| [ p.name, p.id ] }, { :include_blank => true } %>
+      
+      <%= f.label :registry_no, "Registry No" %>
+      <%= f.text_field :registry_no %>
+      
+      <%= f.label :built_date, "Built" %>
+      <%= f.text_field :built_date, class: "voyages_date" %>
+      
+      <%= f.label :yard_built, "Yard Built" %>
+      <%= f.text_field :yard_built %>
+      
+      <%= f.label :imo_no, "Imo No" %>
+      <%= f.text_field :imo_no %>
+      
+      <%= f.label :hull_no, "Hull No" %>
+      <%= f.text_field :hull_no %>
+      
+      <%= f.label :call_sign, "Call Sign" %>
+      <%= f.text_field :call_sign %>
+      
       <%= f.submit "Create this ship", class: "btn btn-large btn-primary" %>
     <% end %>
   </div>

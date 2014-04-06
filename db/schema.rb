@@ -191,6 +191,13 @@ ActiveRecord::Schema.define(version: 20140325101100) do
     t.integer  "vessel_type_id"
     t.integer  "fleet_id"
     t.integer  "flag_id"
+    t.integer  "port_id"
+    t.integer  "registry_no"
+    t.date     "built_date"
+    t.string   "yard_built"
+    t.integer  "imo_no"
+    t.integer  "hull_no"
+    t.string   "call_sign"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
