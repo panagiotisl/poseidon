@@ -71,7 +71,9 @@ class ShipsController < ApplicationController
   
     def ship_params
       params.require(:ship).permit(:name, :fleet_id, :flag_id, :vessel_type_id, :port_id, :registry_no, :built_date, :yard_built,
-                                    :imo_no, :hull_no, :call_sign)
+                                    :imo_no, :hull_no, :call_sign,
+                                    :dwt_summer, :dwt_winter, :dwt_tropical_salt, :dwt_tropical_fresh, :dwt_winter_north_altantic,
+                                    :draft_summer, :draft_winter, :draft_tropical_salt, :draft_tropical_fresh, :draft_winter_north_altantic)
     end
 
 end
