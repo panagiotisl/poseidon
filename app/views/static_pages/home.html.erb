@@ -19,7 +19,9 @@
           @ships = current_user.shipping_company.ships.paginate(page: params[:page])
           @voyages = current_user.shipping_company.voyages.paginate(page: params[:page])
         %>
-      	<%= render "shipping_companies/content" %>
+        <div class="span3"><%= render "shared/left_menu" %></div>
+        
+      	<!-- <div class="span8"><%= render "shipping_companies/content" %></div> -->
       <% elsif ase? %>
         <% @voyages_ports = current_user.agent.voyages_ports.paginate(page: params[:page]) %>
         <div class="span3 roundBox">
