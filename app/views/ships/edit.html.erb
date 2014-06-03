@@ -1,24 +1,280 @@
-<% provide(:title, @title) %> 
-
+<% provide(:title, @title) %>
 <div class="row">
-  <div class="span12">
-  	<%= render "nav2" %>
-  	<h3><%= "Edit ship" %></h3>
-    <%= form_for @ship , url: shipping_company_fleet_ship_path do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
-
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-
-      <%= f.label :vessel_type %>
-      <%= select "ship", "vessel_type_id", VesselType.order(:category).all.collect {|p| [ p.category, p.id ] }, { :include_blank => true } %>
-
-      <%= f.label :flag %>
-      <%= select "ship", "flag_id", Flag.order(:name).all.collect {|p| [ p.name, p.id ] }, { :include_blank => true } %>
-
-      <%= f.hidden_field :fleet_id, :value => @fleet.id %>
-
-      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
-    <% end %>
-  </div>
+    <div class="span12">
+        <%= render "nav2" %>
+        <div class="row">
+            <div class="span3">
+                <%= render "shared/left_menu" %>
+            </div>
+            <div class="span6">
+                <h3><%= @title %></h3>
+            </div>
+            <%= form_for @ship, url: shipping_company_fleet_ships_path do |f| %>
+            <%= render 'shared/error_messages', object: f.object %>
+            <div class="span6 roundBox marginTop">
+                <h4>Main Information</h4>
+                <div class="marginTop">
+                    <%= f.label :name %>
+                    <%= f.text_field :name %>
+                    <%= f.label :vessel_type %>
+                    <%= select "ship", "vessel_type_id", VesselType.order(:category).all.collect {|p| [ p.category, p.id ] }, { :include_blank => true } %>
+                    <%= f.label :flag %>
+                    <%= select "ship", "flag_id", Flag.order(:name).all.collect {|p| [ p.name, p.id ] }, { :include_blank => true } %>
+                    <%= f.hidden_field :fleet_id, :value => @fleet.id %>
+                    <%= f.label :port, "Registry Port" %>
+                    <%= select "ship", "port_id", Port.order(:name).all.collect {|p| [ p.name, p.id ] }, { :include_blank => true } %>
+                    <%= f.label :registry_no, "Registry No" %>
+                    <%= f.text_field :registry_no %>
+                    <%= f.label :built_date, "Built" %>
+                    <%= f.text_field :built_date, class: "voyages_date" %>
+                    <%= f.label :yard_built, "Yard Built" %>
+                    <%= f.text_field :yard_built %>
+                    <%= f.label :imo_no, "Imo No" %>
+                    <%= f.text_field :imo_no %>
+                    <%= f.label :hull_no, "Hull No" %>
+                    <%= f.text_field :hull_no %>
+                    <%= f.label :call_sign, "Call Sign" %>
+                    <%= f.text_field :call_sign %>
+                </div>
+            </div>
+            <div class="span11 roundBox marginTop">
+                <h4>Vessel Construction</h4>
+                <div class="span7 marginTop">
+                    <table>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                                <h6>DWT</h6>
+                            </td>
+                            <td>
+                                <h6>Draft</h6>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Summer
+                            </td>
+                            <td>
+                                <%= f.text_field :dwt_summer, class: "smallField" %>mnt
+                            </td>
+                            <td>
+                                <%= f.text_field :draft_summer, class: "smallField" %>m
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Winter
+                            </td>
+                            <td>
+                                <%= f.text_field :dwt_winter, class: "smallField" %>mnt
+                            </td>
+                            <td>
+                                <%= f.text_field :draft_winter, class: "smallField" %>m
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Tropical Salt
+                            </td>
+                            <td>
+                                <%= f.text_field :dwt_tropical_salt, class: "smallField" %>mnt
+                            </td>
+                            <td>
+                                <%= f.text_field :draft_tropical_salt, class: "smallField" %>m
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Tropical Fresh
+                            </td>
+                            <td>
+                                <%= f.text_field :dwt_tropical_fresh, class: "smallField" %>mnt
+                            </td>
+                            <td>
+                                <%= f.text_field :draft_tropical_fresh, class: "smallField" %>m
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Winter North Atlantic
+                            </td>
+                            <td>
+                                <%= f.text_field :dwt_winter_north_atlantic, class: "smallField" %>mnt
+                            </td>
+                            <td>
+                                <%= f.text_field :draft_winter_north_atlantic, class: "smallField" %>m
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="span3 marginTop">
+                    <table>
+                        <tr>
+                            <td>
+                                &nbsp;
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                GRT
+                            </td>
+                            <td>
+                                <%= f.text_field :grt, class: "smallField" %>mnt
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                NRT
+                            </td>
+                            <td>
+                                <%= f.text_field :nrt, class: "smallField" %>mnt
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                LOA
+                            </td>
+                            <td>
+                                <%= f.text_field :loa, class: "smallField" %>m
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="span6 marginTop">
+                    <table>
+                        <tr>
+                            <td>
+                                Beam
+                            </td>
+                            <td>
+                                <%= f.text_field :beam, class: "smallField" %>m
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Maximum Depth
+                            </td>
+                            <td>
+                                <%= f.text_field :depth, class: "smallField" %>m
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Breadth
+                            </td>
+                            <td>
+                                <%= f.text_field :breadth, class: "smallField" %>m
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Design Draught
+                            </td>
+                            <td>
+                                <%= f.text_field :design_draught, class: "smallField" %>m
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Ballast Capacity
+                            </td>
+                            <td>
+                                <%= f.text_field :ballast_capacity, class: "smallField" %>m
+                                <sup>
+                                    3
+                                </sup>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Lightship
+                            </td>
+                            <td>
+                                <%= f.text_field :lightship, class: "smallField" %>mtn
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Holds
+                            </td>
+                            <td>
+                                <%= f.text_field :holds, class: "smallField" %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Cranes
+                            </td>
+                            <td>
+                                <%= f.text_field :cranes, class: "smallField" %>mtn
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Cranes SWL
+                            </td>
+                            <td>
+                                <%= f.text_field :cranes_swl, class: "smallField" %>kw
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Crane Outreach
+                            </td>
+                            <td>
+                                <%= f.text_field :cranes_outreach, class: "smallField" %>m
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Grabs
+                            </td>
+                            <td>
+                                <%= f.text_field :grabs, class: "smallField" %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Grabs Capacity
+                            </td>
+                            <td>
+                                <%= f.text_field :grabs_capacity, class: "smallField" %>m
+                                <sup>
+                                    3
+                                </sup>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="span6 marginTop">
+                <%= f.submit "Edit this ship", class: "btn btn-large btn-primary" %>
+            </div>
+            <% end %>
+        </div>
+    </div>
 </div>

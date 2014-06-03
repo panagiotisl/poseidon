@@ -6,6 +6,7 @@ class ShipsController < ApplicationController
     #@shipping_company = ShippingCompany.find(params[:shipping_company_id])
     @fleet = Fleet.find(params[:fleet_id])
     @shipping_company = @fleet.shipping_company
+    @fleets = @shipping_company.fleets
     @ships = @fleet.ships.paginate(page: params[:page])
   end
   
@@ -26,6 +27,7 @@ class ShipsController < ApplicationController
     #@shipping_company = ShippingCompany.find(params[:shipping_company_id])
     @fleet = Fleet.find(params[:fleet_id])
     @shipping_company = @fleet.shipping_company
+    @fleets = @shipping_company.fleets
     @ship = Ship.new
   end
   
@@ -51,11 +53,10 @@ class ShipsController < ApplicationController
   
   def edit
     @title = "Edit ship"
-    #@shipping_company = ShippingCompany.find(params[:shipping_company_id])
-    #@fleet = Fleet.find(params[:fleet_id])
     @ship = Ship.find(params[:id])
     @fleet = @ship.fleet
     @shipping_company = @fleet.shipping_company
+    @fleets = @shipping_company.fleets
   end
 
   def update
