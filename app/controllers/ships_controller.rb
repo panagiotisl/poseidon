@@ -16,6 +16,7 @@ class ShipsController < ApplicationController
     @title = @ship.name
     @fleet = @ship.fleet
     @shipping_company = @fleet.shipping_company
+    @fleets = @shipping_company.fleets
     @voyages = @ship.voyages.paginate(page: params[:page])
   end
 

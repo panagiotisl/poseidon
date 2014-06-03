@@ -4,6 +4,7 @@
     <%= render "nav" %>
 
     <div class="row">
+      <div class="span3"><%= render "shared/left_menu" %></div>
       <div class="span5 roundBox">
         <h3><%= @fleet.name %></h3>
         <div class="row">
@@ -18,7 +19,7 @@
 
     </div>
 
-    <div class="marginTop row">
+<!--    <div class="marginTop row">
       <div class="span5 roundBox">
         <h4>Ships</h4>
         <%= will_paginate @ships %>
@@ -37,6 +38,6 @@
       </div>
     </div>
 
-    </div>
+    </div>-->
 
 </div>
