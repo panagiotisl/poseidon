@@ -8,18 +8,18 @@
     <div class="accordion-group">
         <div class="accordion-heading accordion-fleet">
             <a class="accordion-toggle accordion-left" data-toggle="collapse" data-parent="#leftMenu" href="#collapse<%=fleet.name%>"><i class="icon-th"></i> <%=fleet.name%></a>
-			<a class="accordion-toggle accordion-right" data-toggle="false" data-parent="#leftMenu" href="<%=shipping_company_fleet_path(:id => fleet.id, :shipping_company_id => fleet.shipping_company.id)%>"><i class="icon-circle-arrow-right"></i></a>
+			<a class="accordion-toggle accordion-right" data-toggle="" data-parent="#leftMenu" href="<%=shipping_company_fleet_path(:id => fleet.id, :shipping_company_id => fleet.shipping_company.id)%>"><i class="icon-circle-arrow-right"></i></a>
         </div>
 		<div style="clear:both;"></div>
-        <div id="collapse<%=fleet.name%>" class="accordion-toggle collapse" style="height: 0px; ">
+        <div id="collapse<%=fleet.name%>" class="accordion-toggle collapse">
 			<div class="accordion" id="leftMenu_<%=fleet.name%>">
 			<% fleet.ships.each do |ship| %>
             <div class="accordion-heading accordion-ship">
             <a class="accordion-toggle accordion-left" data-toggle="collapse" data-parent="#leftMenu_<%=fleet.name%>" href="#collapse<%=fleet.name%>_<%=ship.name%>"><i class="icon-th"></i> <%=ship.name%></a>
-			<a class="accordion-toggle accordion-right" data-toggle="false" data-parent="#leftMenu_<%=fleet.name%>" href="<%=shipping_company_fleet_ship_path(:id => ship.id, :fleet_id => fleet.id, :shipping_company_id => fleet.shipping_company.id)%>"><i class="icon-circle-arrow-right"></i></a>
+			<a class="accordion-toggle accordion-right" data-toggle="" data-parent="#leftMenu_<%=fleet.name%>" href="<%=shipping_company_fleet_ship_path(:id => ship.id, :fleet_id => fleet.id, :shipping_company_id => fleet.shipping_company.id)%>"><i class="icon-circle-arrow-right"></i></a>
         	</div>
 			<div style="clear:both;"></div>
-			<div id="collapse<%=fleet.name%>_<%=ship.name%>" class="accordion-body collapse" style="height: 0px; ">
+			<div id="collapse<%=fleet.name%>_<%=ship.name%>" class="accordion-body collapse">
 				<% ship.voyages.each do |voyage| %>
             	<div class="accordion-heading accordion-voyage">
             	<a class="accordion-toggle" data-toggle="false" data-parent="#leftMenu" href="<%=shipping_company_fleet_ship_voyage_path(:id => voyage.id, :ship_id => ship.id, :fleet_id => fleet.id, :shipping_company_id => fleet.shipping_company.id)%>"><i class="icon-file"></i> <%=voyage.name%></a>
@@ -31,87 +31,4 @@
         </div>
     </div>
 	<% end %>
-
-
-
-<!--    <div class="accordion-group">
-        <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#collapseThree"><i class="icon-th-list"></i>UI Components</a>
-        </div>
-        <div id="collapseThree" class="accordion-body collapse" style="height: 0px; ">
-            <div class="accordion-inner">
-                <ul>
-                    <li>
-                        This is one
-                    </li>
-                    <li>
-                        This is two
-                    </li>
-                    <li>
-                        This is Three
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="accordion-group">
-        <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#collapseFour"><i class="icon-list-alt"></i>Forms</a>
-        </div>
-        <div id="collapseFour" class="accordion-body collapse" style="height: 0px; ">
-            <div class="accordion-inner">
-                <ul>
-                    <li>
-                        This is one
-                    </li>
-                    <li>
-                        This is two
-                    </li>
-                    <li>
-                        This is Three
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="accordion-group">
-        <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#collapseFive"><i class="icon-cog"></i>Plugins</a>
-        </div>
-        <div id="collapseFive" class="accordion-body collapse" style="height: 0px; ">
-            <div class="accordion-inner">
-                <ul>
-                    <li>
-                        This is one
-                    </li>
-                    <li>
-                        This is two
-                    </li>
-                    <li>
-                        This is Three
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="accordion-group">
-        <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#leftMenu" href="#collapseSix"><i class="icon-file"></i>Templates</a>
-        </div>
-        <div id="collapseSix" class="accordion-body collapse" style="height: 0px; ">
-            <div class="accordion-inner">
-                <ul>
-                    <li>
-                        This is one
-                    </li>
-                    <li>
-                        This is two
-                    </li>
-                    <li>
-                        This is Three
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div> -->
 </div>
