@@ -505,12 +505,21 @@ table td {
 }
 
 #leftMenu .accordion-ship {
-    background-image: -moz-linear-gradient(90deg, #395b59 0%, #416161 100%); /* gradient overlay */
-    background-image: -o-linear-gradient(90deg, #395b59 0%, #416161 100%); /* gradient overlay */
-    background-image: -webkit-linear-gradient(90deg, #395b59 0%, #416161 100%); /* gradient overlay */
-    background-image: linear-gradient(90deg, #395b59 0%, #416161 100%); /* gradient overlay */
+    background-image: -moz-linear-gradient(90deg, #616161 0%, #837E7C 100%); /* gradient overlay */
+    background-image: -o-linear-gradient(90deg, #616161 0%, #837E7C 100%); /* gradient overlay */
+    background-image: -webkit-linear-gradient(90deg, #616161 0%, #837E7C 100%); /* gradient overlay */
+    background-image: linear-gradient(90deg, #616161 0%, #837E7C 100%); /* gradient overlay */
     list-style-type:none;
 }
+
+#leftMenu .accordion-voyage {
+    background-image: -moz-linear-gradient(90deg, #837E7C 0%, #B6B6B4 100%); /* gradient overlay */
+    background-image: -o-linear-gradient(90deg, #837E7C 0%, #B6B6B4 100%); /* gradient overlay */
+    background-image: -webkit-linear-gradient(90deg, #837E7C 0%, #B6B6B4 100%); /* gradient overlay */
+    background-image: linear-gradient(90deg, #837E7C 0%, #B6B6B4 100%); /* gradient overlay */
+    list-style-type:none;
+}
+
 
 #leftMenu .accordion-left {
 	float: left;
