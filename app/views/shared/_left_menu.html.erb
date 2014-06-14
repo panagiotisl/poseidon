@@ -4,6 +4,13 @@
             <a class="accordion-toggle" data-toggle="false" data-parent="#leftMenu" href="/"><i class="icon-home"></i> Home</a>
         </div>
     </div>
+	<% if sce? %>
+    <div class="accordion-group">
+        <div class="accordion-heading accordion-fleet">
+            <a class="accordion-toggle" data-toggle="false" data-parent="#leftMenu" href="<%=shipping_company_path(:id => current_user.shipping_company.id)%>"><i class="icon-bookmark"></i> <%=current_user.shipping_company.name%></a>
+        </div>
+    </div>
+	<% end %>		
 	<% @fleets.each do |fleet| %>
     <div class="accordion-group">
         <div class="accordion-heading accordion-fleet">
