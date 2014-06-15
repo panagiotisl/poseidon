@@ -22,6 +22,7 @@ class VoyagesController < ApplicationController
     @ship = @voyage.ship
     @fleet = @ship.fleet
     @shipping_company = @fleet.shipping_company
+    @fleets = @shipping_company.fleets
     @title = @voyage.name
     @need = Need.new 
     @offer = Offer.new
