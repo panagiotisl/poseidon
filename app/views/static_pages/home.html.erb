@@ -23,7 +23,9 @@
         
       	<!-- <div class="span8"><%= render "shipping_companies/content" %></div> -->
       <% elsif ase? %>
+	  	<% @fleets = Fleet.none %>
         <% @voyages_ports = current_user.agent.voyages_ports.paginate(page: params[:page]) %>
+		<div class="span3"><%= render "shared/left_menu" %></div>
         <div class="span3 roundBox">
        	  <h4>Voyages</h4>
     	  <%= will_paginate @voyages_ports %>

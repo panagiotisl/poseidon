@@ -10,6 +10,7 @@ class AgentsController < ApplicationController
   
   def show
     @agent = Agent.find(params[:id])
+    @fleets = Fleet.none
   end
 
   def new
