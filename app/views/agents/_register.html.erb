@@ -3,5 +3,5 @@
   <div><%= f.hidden_field :port_id %></div>
   <div><%= f.hidden_field :agent_id %></div>
   <%= hidden_field_tag :agent_id, @agent.id %>
-  <%= f.submit HTMLEntities.new.decode("&#10004;"), class: "btn btn-mini btn-primary" %>
+  <%= f.submit HTMLEntities.new.decode("&#10004;"), class: "btn btn-mini btn-primary", title: "Click to start following this port", data: {tooltip: true } %>
 <% end %>

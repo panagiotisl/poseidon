@@ -2,5 +2,6 @@
              html: { method: :delete },
              remote: true) do |f| %>
   <%= hidden_field_tag :agent_id, @agent.id %>
-  <%= f.submit HTMLEntities.new.decode("&#x2717;"), class: "btn btn-danger btn-mini" %>
+
+  <%= f.submit HTMLEntities.new.decode("&#x2717;"), class: "btn btn-danger btn-mini", title: "Click to stop following this port", data: {tooltip: true } %>  
 <% end %>

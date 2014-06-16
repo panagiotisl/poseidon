@@ -1,19 +1,26 @@
 <% provide(:title, @title) %>
 <div class="row">
-  <div class="span12">
-  	<%= render "ports/navAgent" %>
-    <h3><%= @title %></h3>
-    <% if @ports_r.any? %>
-      <ul class="ports_r">
-        <%= render @ports_r %>
-      </ul>
-      <%= will_paginate @ports_r %>
-    <% end %>
-    <% if @ports_ur.any? %>
-      <ul class="ports_ur">
-        <%= render @ports_ur %>
-      </ul>
-      <%= will_paginate @ports_ur %>
-    <% end %>
-  </div>
+    <div class="span12">
+        <%= render "nav" %>
+        <div class="row">
+            <div class="span3">
+                <%= render "shared/left_menu" %>
+            </div>
+            <div class="span8 roundBox">
+                <h3><%= @title %></h3>
+                <% if @ports_r.any? %>
+                <ul class="ports_r">
+                    <%= render @ports_r %>
+                </ul>
+                <%= will_paginate @ports_r %>
+                <% end %>
+                <% if @ports_ur.any? %>
+                <ul class="ports_ur">
+                    <%= render @ports_ur %>
+                </ul>
+                <%= will_paginate @ports_ur %>
+                <% end %>
+            </div>
+        </div>
+    </div>
 </div>
