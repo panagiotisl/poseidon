@@ -1,26 +1,27 @@
-<% provide(:title, @title) %> 
-
+<% provide(:title, @title) %>
 <div class="row">
-  <div class="span12">
-  	<%= render "nav2" %>
-  	<h3><%= "Edit voyage" %></h3>
-    <%= form_for @voyage , url: shipping_company_fleet_ship_voyage_path do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
-
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-
-      <%= f.label :port %>
-      <%= select "voyage", "port_id", Port.order(:name).all.collect {|p| [ p.name, p.id ] }, { :include_blank => true } %>
- 
-      <%= f.label :date %>
-      <%= f.text_field :date, class: "voyages_date" %>
-
-      <%= f.label :remarks %>
-      <%= f.text_area(:remarks, size: '50x10') %>
-
-      <%= f.hidden_field :ship_id, :value => @ship.id %>
-
-      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
-    <% end %>  </div>
+    <div class="span12">
+        <%= render "nav2" %>
+        <div class="row">
+            <div class="span3">
+                <%= render "shared/left_menu" %>
+            </div>
+            <div class="span8">
+                <h3><%= "Edit voyage" %></h3>
+                <%= form_for @voyage , url: shipping_company_fleet_ship_voyage_path do |f| %>
+                <%= render 'shared/error_messages', object: f.object %>
+                <%= f.label :name %>
+                <%= f.text_field :name %>
+                <%= f.label :port %>
+                <%= select "voyage", "port_id", Port.order(:name).all.collect {|p| [ p.name, p.id ] }, { :include_blank => true } %>
+                <%= f.label :date %>
+                <%= f.text_field :date, class: "voyages_date" %>
+                <%= f.label :remarks %>
+                <%= f.text_area(:remarks, size: '50x10') %>
+                <%= f.hidden_field :ship_id, :value => @ship.id %>
+                <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+                <% end %>
+            </div>
+        </div>
+    </div>
 </div>

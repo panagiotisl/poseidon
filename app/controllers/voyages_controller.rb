@@ -34,6 +34,7 @@ class VoyagesController < ApplicationController
     @ship = Ship.find(params[:ship_id])
     @fleet = @ship.fleet
     @shipping_company = @fleet.shipping_company
+    @fleets = @shipping_company.fleets
     @voyage = Voyage.new
   end
   
@@ -56,6 +57,7 @@ class VoyagesController < ApplicationController
     @ship = @voyage.ship
     @fleet = @ship.fleet
     @shipping_company = @fleet.shipping_company
+    @fleets = @shipping_company.fleets
   end
 
   def update
