@@ -39,17 +39,12 @@ ul.ui-autocomplete {
 /* universal */
 
 html {
-  overflow-y: scroll;
+/*  overflow-y: scroll;*/
+  height: 100%;
 }
 
 body {
-  padding-top: 60px;
-  /*background: url('http://ariadni.di.uoa.gr/shared/texture.png');
-  background: url('http://ariadni.di.uoa.gr/shared/texture2.jpg');
-  background-size: 100%;
-  background-size: 1440px 800px;
-  background-repeat:no-repeat;*/
-  
+  height: 100%;  
   background: url('http://ariadni.di.uoa.gr/shared/texture3.jpg') no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -57,6 +52,25 @@ body {
   background-size: cover;
   
   
+}
+
+/*Opera Fix*/
+body:before {
+	content:"";
+	height:100%;
+	float:left;
+	width:0;
+	margin-top:-32767px;
+}
+
+#wrap {
+  min-height: 100%;
+}
+
+#main {
+  overflow:auto;
+  padding-top: 60px;
+  padding-bottom: 31px;
 }
 
 section {
@@ -123,12 +137,12 @@ p {
 /* footer */
 
 footer {
-  /*position:absolute;
-  bottom:0;
-  width: 100%;
-  background-color: #efefef;*/
-  margin-top: 45px;
-  padding-top: 5px;
+  position: relative;
+  margin-top: -31px;
+  height: 30px;
+  clear:both;
+  /*margin-top: 45px;
+  padding-top: 5px;*/
   border-top: 1px solid $grayMediumLight;
   color: $grayLight;
   a {
