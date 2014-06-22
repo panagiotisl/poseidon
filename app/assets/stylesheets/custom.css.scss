@@ -70,7 +70,7 @@ body:before {
 #main {
   overflow:auto;
   padding-top: 60px;
-  padding-bottom: 31px;
+  padding-bottom: 36px;
 }
 
 section {
@@ -138,11 +138,11 @@ p {
 
 footer {
   position: relative;
-  margin-top: -31px;
+  margin-top: -36px;
   height: 30px;
   clear:both;
-  /*margin-top: 45px;
-  padding-top: 5px;*/
+  /*margin-top: 45px;*/
+  padding-top: 5px;
   border-top: 1px solid $grayMediumLight;
   color: $grayLight;
   a {
