@@ -23,6 +23,7 @@ class UsersController < ApplicationController
   def new_sce
     @title = 'Create user'
     @shipping_company = ShippingCompany.find(params[:shipping_company_id])
+    @fleets = @shipping_company.fleets
     @user = User.new
   end
 
@@ -30,6 +31,7 @@ class UsersController < ApplicationController
     @title = 'Create user'
     @agent = Agent.find(params[:agent_id])
     @user = User.new
+    @fleets = Fleet.none
   end
 
 #  def create
