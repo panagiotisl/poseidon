@@ -382,6 +382,16 @@ input {
 
 .strong { font-weight: bold; }
 
+.col1 {
+    float: left;
+}
+.col2 {
+    float: none;
+}
+.col3 {
+    float: right;
+}
+
 .marginTop {
   margin-top: 30px;
 }

@@ -1,3 +1,14 @@
+ <style>
+ 
+  .conversation {
+    cursor: pointer;
+  }
+  .conversation:hover {
+    background: yellow;
+  }
+  
+  </style>
+
 <% if signed_in? %>
   <div class="row">
     <div class="span12">
@@ -14,8 +25,13 @@
 	<div class="row">
 	<div class="span12">
       <% if sce? %>
-        <div class="span3"><%= render "shared/left_menu" %></div>
-      	<!-- <div class="span8"><%= render "shipping_companies/content" %></div> -->
+        <div class="col1 span3"><%= render "shared/left_menu" %></div>
+      	<div class="col2 span6">
+      		<div id="conversation"></div>
+      	</div>
+		<div class="col3 span3">
+			<%= render "shared/feed" %>
+		</div>
       <% elsif ase? %>
 		<div class="span3"><%= render "shared/left_menu" %></div>
         <div class="span3 roundBox">
@@ -26,6 +42,9 @@
             </ul>
           <%= will_paginate @voyages_ports %>
         </div>
+		<div class="span3">
+			<%= render "shared/feed" %>
+		</div>
       <% end %>
     </div>
 	</div>
@@ -47,3 +66,18 @@
   </div>
 
 <% end %> 
+
+
+<script>
+$(".conversation").click(function() {
+	url = '/conversations/' + $(this).attr('id');
+	console.log(url); 
+  $.ajax({
+    url: url,
+    cache: false,
+    success: function(html){
+      $("#conversation").append(html);
+    }
+  });
+});
+</script>

@@ -10,6 +10,8 @@ class StaticPagesController < ApplicationController
         @fleets = Fleet.none
         @voyages_ports = current_user.agent.voyages_ports.paginate(page: params[:page])
       end
+      @mailbox = get_actor.mailbox
+      @conversations = @mailbox.inbox.page(params[:page])
     end
   end
   

@@ -1,0 +1,12 @@
+<% if is_readC(conversation) %>
+	<div id=<%= conversation.id %> class="conversation conversationLine marginTop paddingBottom">
+<% else %>
+    <div id=<%= conversation.id %> class="conversation conversationLineUnread marginTop paddingBottom">
+        <% end %>
+        <div class="subject">
+            <%= link_to(truncate(conversation.subject, :length => 55), conversation_path(conversation.id,:box => @box,:page => params[:page])) %>
+        </div>
+        <div class="body">
+            <%= raw(truncate(strip_tags(conversation.last_message.body), :length => 50)) %>
+        </div>
+    </div>
