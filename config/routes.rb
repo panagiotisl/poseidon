@@ -42,6 +42,14 @@ SampleApp::Application.routes.draw do
   
   resources :notifications
 
+  class OnlyAjaxRequest
+    def matches?(request)
+      request.xhr?
+    end
+  end
+ 
+  get "conversations/small/:id" , :to => "conversations#show_small", :as => :show_small_conversations, :constraints => OnlyAjaxRequest.new
+
   root to: 'static_pages#home'
   get '/signin',  to: 'sessions#new'
   delete '/signout', to: 'sessions#destroy'

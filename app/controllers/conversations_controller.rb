@@ -1,7 +1,7 @@
 class ConversationsController < ApplicationController
   before_filter :signed_in_user
   before_filter :get_actor, :get_mailbox, :get_box
-  before_filter :check_current_subject_in_conversation, :only => [:show, :update, :destroy]
+  before_filter :check_current_subject_in_conversation, :only => [:show, :show_small, :update, :destroy]
 
   def index
     if params[:voyages_port]
@@ -80,6 +80,25 @@ class ConversationsController < ApplicationController
       }
     end
   end
+
+  def show_small
+    if @box.eql? 'trash'
+      @receipts = @mailbox.receipts_for(@conversation).trash
+    else
+      @receipts = @mailbox.receipts_for(@conversation).not_trash
+    end
+    render :layout => false
+    @receipts.mark_as_read
+    Reader.create(user_id: current_user.id, conversation_id: @conversation.id)
+    @receipts.each do |receipt|
+      if (receipt.mailbox_type == "inbox") and ((receipt.receiver_type == "Agent" and current_user.agent_id == receipt.receiver_id) or (receipt.receiver_type == "ShippingCompany" and current_user.shipping_company_id == receipt.receiver_id))
+        Reader.create(user_id: current_user.id, notification_id: receipt.notification.id)
+      end
+    end
+
+  end
+
+
 
   private
 

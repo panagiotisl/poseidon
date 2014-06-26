@@ -1,19 +1,18 @@
- <style>
- 
-  .conversation {
-    cursor: pointer;
-  }
-  .conversation:hover {
-    background: yellow;
-  }
-  
-  </style>
+<style>
+.conversation {
+  cursor: pointer;
+  background: #E5E4E2;	
+}
+.conversation:hover {
+  background: #B6B6B4;
+}
+</style>
 
 <% if signed_in? %>
   <div class="row">
     <div class="span12">
    	  <div class="nav nav-pills roundBox">
-   	  	<%= gravatar_for current_user, size: 64 %>  		
+   	  	<%= gravatar_for current_user, size: 64 %>
       <h3><%= link_to "Hello #{current_user.name}!", current_user %></h3>
       <% if sce? %>
         <%= link_to current_user.shipping_company.name, current_user.shipping_company %>
@@ -22,14 +21,14 @@
       <% end %>
       </div>
 	</div>
-	<div class="row">
-	<div class="span12">
-      <% if sce? %>
-        <div class="col1 span3"><%= render "shared/left_menu" %></div>
-      	<div class="col2 span6">
+	<div class="container-fluid">
+	<div class="row-fluid">
+	      <% if sce? %>
+        <div class="span3"><%= render "shared/left_menu" %></div>
+      	<div class="span6">
       		<div id="conversation"></div>
       	</div>
-		<div class="col3 span3">
+		<div class="span3">
 			<%= render "shared/feed" %>
 		</div>
       <% elsif ase? %>
@@ -70,13 +69,13 @@
 
 <script>
 $(".conversation").click(function() {
-	url = '/conversations/' + $(this).attr('id');
-	console.log(url); 
+	url = '/conversations/small/' + $(this).attr('id');
+	console.log(url);
   $.ajax({
     url: url,
     cache: false,
     success: function(html){
-      $("#conversation").append(html);
+      $("#conversation").html(html);
     }
   });
 });
