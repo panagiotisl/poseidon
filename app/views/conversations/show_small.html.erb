@@ -24,7 +24,7 @@
 <hr class="soften">
 <div class="messages">
   <% @receipts.reverse.each do |receipt| %>
-    <%= render receipt.message %>
+    <%= render :partial => '/messages/dialog', :object => receipt.message %>
   <% end %>
 
   <% unless @box.eql?'trash' %>
