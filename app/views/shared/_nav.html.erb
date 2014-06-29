@@ -68,7 +68,7 @@
    	  <% end %>
 	<% end %>
 
-  	<% if !@voyages_port.voyage_id.blank? %>
+  	<% if @voyages_port and !@voyages_port.voyage_id.blank? %>
   	  <% if params[:controller] == 'voyages' and params[:action] == 'show' %>
   		<li class="pull-right"><%= link_to '<span class="icon icon-pencil"></span>'.html_safe, new_message_path(:voyages_port=> @voyages_port, :recipient => @shipping_company.name, :subject => "[#{@voyages_port.voyage.name} - #{@voyages_port.port.name} - #{@voyages_port.date}] "), :class => "btn btn-default", :title => "Send a message to #{@shipping_company.name} regarding this voyage", :method => :get %></li>
   	  <% end %>
