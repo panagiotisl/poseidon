@@ -1,12 +1,16 @@
 <% if is_readC(conversation) %>
-	<div id=<%= conversation.id %> class="conversation conversationLine marginTop paddingBottom">
+	<div id=<%= conversation.id %> class="conversation">
 <% else %>
-    <div id=<%= conversation.id %> class="conversation conversationLineUnread marginTop paddingBottom">
-        <% end %>
-        <div class="subject">
-            <%= link_to(truncate(conversation.subject, :length => 55), conversation_path(conversation.id,:box => @box,:page => params[:page])) %>
+    <div id=<%= conversation.id %> class="conversation">
+<% end %>
+        <div class="convSubject">
+        	<div class="leftRightMargin">
+			<h6><%= raw(truncate(conversation.subject, :length => 20)) %></h6>
+			</div>
         </div>
-        <div class="body">
+        <div class="convBody">
+            <div class="leftRightMargin">
             <%= raw(truncate(strip_tags(conversation.last_message.body), :length => 50)) %>
+			</div>
         </div>
     </div>

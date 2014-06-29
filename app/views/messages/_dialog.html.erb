@@ -1,3 +1,10 @@
+<% if (sce? and dialog.sender.name == current_user.shipping_company.name) or (ase? and dialog.sender.name == current_user.agent.name)%>
+<div class="bubble2"><%= raw(dialog.body) %></div>
+<% else %>
+<div class="bubble"><%= raw(dialog.body) %></div>
+<% end %>
+    <% if false %>
+    
 	<%= gravatar_for current_user, size: 64 %>
       <h3><%= link_to "Hello #{current_user.name}!", current_user %></h3>
       <% if sce? %>
@@ -5,10 +12,10 @@
       <% elsif ase? %>
         <%= link_to current_user.agent.name, current_user.agent %>
       <% end %>
-	  <div class="bubble2"><%= raw(dialog.body) %></div>
 	
-    <% if false %>
-    <div class="row">
+	
+	
+	<div class="row">
         <div class="span3 roundBeigeBox">
             <div class="name">
                 <%= link_to dialog.sender.name, dialog.sender %>

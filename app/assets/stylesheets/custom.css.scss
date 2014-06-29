@@ -458,6 +458,45 @@ input {
   background-color: $beige;
 }
 
+.conversation {
+  cursor: pointer;
+  background: #E5E4E2;	
+  border-radius: 3px ;
+  -moz-border-radius: 3px ;
+  -webkit-border-radius: 3px;
+}
+
+.leftRightMargin {
+  margin-right: 2px;
+  margin-left: 2px;
+}
+
+.convSubject {
+  margin-top: 4px;
+  background: $khaki;	
+  border-top-right-radius: 3px;
+  -moz-border-radius-topright: 3px;
+  -webkit-border-radius-topright: 3px;
+  border-top-left-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  -webkit-border-radius-topleft: 3px;
+
+}
+
+.convBody {
+  border-bottom-right-radius: 3px;
+  -moz-border-radius-bottomright: 3px;
+  -webkit-border-radius-bottomright: 3px;
+  border-bottom-left-radius: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  -webkit-border-radius-bottomleft: 3px;
+
+}
+
+.conversation:hover {
+  background: #B6B6B4;
+}
+
 .boxLine { 
     a {
     	 padding-right: 15px
@@ -520,10 +559,12 @@ display: flex;
 justify-content: center; /* align horizontal */
 align-items: center; /* align vertical */
 padding: 0px;
+margin-bottom: 5px;
 background: #F4B4B0;
 -webkit-border-radius: 10px;
 -moz-border-radius: 10px;
 border-radius: 10px;
+left: 2%;
 }
 
 .bubble:after 
@@ -549,11 +590,12 @@ display: flex;
 justify-content: center; /* align horizontal */
 align-items: center; /* align vertical */
 padding: 0px;
+margin-bottom: 5px;
 background: #B8EEB0;
 -webkit-border-radius: 10px;
 -moz-border-radius: 10px;
 border-radius: 10px;
-right: -5%;
+right: -2%;
 }
 
 .bubble2:after 
