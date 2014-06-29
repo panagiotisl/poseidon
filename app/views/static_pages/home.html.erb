@@ -51,17 +51,3 @@
 
 <% end %> 
 
-
-<script>
-$(".conversation").click(function() {
-	url = '/conversations/small/' + $(this).attr('id');
-	console.log(url);
-  $.ajax({
-    url: url,
-    cache: false,
-    success: function(html){
-      $("#conversation").html(html);
-    }
-  });
-});
-</script>
