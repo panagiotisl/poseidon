@@ -1,7 +1,7 @@
 class ConversationsController < ApplicationController
   before_filter :signed_in_user
   before_filter :get_actor, :get_mailbox, :get_box
-  before_filter :check_current_subject_in_conversation, :only => [:show, :show_small, :update, :destroy]
+  before_filter :check_current_subject_in_conversation, :only => [:show, :show_small, :update, :update_small, :destroy]
 
   def index
     if params[:voyages_port]
@@ -95,9 +95,24 @@ class ConversationsController < ApplicationController
         Reader.create(user_id: current_user.id, notification_id: receipt.notification.id)
       end
     end
-
   end
 
+  def update_small
+    if params[:untrash].present?
+    @conversation.untrash(@actor)
+    end
+    if params[:reply_all].present?
+      last_receipt = @mailbox.receipts_for(@conversation).last
+      @receipt = @actor.reply_to_all(last_receipt, params[:body])
+      Sender.create(notification_id: @receipt.notification.id, user_id: current_user.id)
+    end
+    if @box.eql? 'trash'
+      @receipts = @mailbox.receipts_for(@conversation).trash
+    else
+      @receipts = @mailbox.receipts_for(@conversation).not_trash
+    end
+    @receipts.mark_as_read
+  end
 
 
   private

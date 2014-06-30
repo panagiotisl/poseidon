@@ -49,6 +49,7 @@ SampleApp::Application.routes.draw do
   end
  
   get "conversations/small/:id" , :to => "conversations#show_small", :as => :show_small_conversations, :constraints => OnlyAjaxRequest.new
+  post "conversations/small/:id" , :to => "conversations#update_small", :as => :update_small_conversations, :constraints => OnlyAjaxRequest.new
 
   root to: 'static_pages#home'
   get '/signin',  to: 'sessions#new'
