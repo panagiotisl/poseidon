@@ -94,6 +94,10 @@ module SessionsHelper
   end
   
   
+  def get_inbox
+      @conversations = get_actor.mailbox.inbox.reverse  
+  end
+  
   def get_unread(receipts)
     notifications = []
     receipts.each do |receipt|

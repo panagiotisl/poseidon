@@ -1,6 +1,4 @@
 <div class="roundGrayBox">
 	<h4 style="text-align:center">Messages</h4>
-  <% if !@conversations.nil? %>
-	<%= render :partial => 'conversations/small_conversation', :collection => @conversations.reverse, :as => :conversation %>
-  <% end %>
+	<%= render :partial => 'conversations/small_conversation', :collection => get_inbox, :as => :conversation %>
 </div>
