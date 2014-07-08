@@ -16,7 +16,6 @@ class ConversationsController < ApplicationController
     else
       @conversations = @mailbox.trash.page(params[:page])#.per(9)
     end
-
     respond_to do |format|
       format.html { render @conversations if request.xhr? }
     end
@@ -114,6 +113,11 @@ class ConversationsController < ApplicationController
     @receipts.mark_as_read
   end
 
+  def refresh_feed
+    respond_to do |format|
+      format.js
+    end
+  end
 
   private
 
@@ -139,4 +143,5 @@ class ConversationsController < ApplicationController
     def labeled_by_vp()
       clause = "SELECT conversation_id FROM labels WHERE voyages_port_id = :voyages_port_id"
     end
+
 end

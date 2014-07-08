@@ -448,6 +448,13 @@ input {
   -webkit-border-radius: 10px ;
 }
 
+.dialogTitle {
+	text-decoration: underline;
+	text-align: left;
+	font-weight:bold;
+	display: block;
+}
+
 .conversationLine {
   border-top:thick double $khaki;
 }

@@ -1,4 +1,4 @@
-<div class="roundGrayBox">
-	<h4 style="text-align:center">Messages</h4>
-	<%= render :partial => 'conversations/small_conversation', :collection => get_inbox, :as => :conversation %>
+<div id="messagesFeed" class="roundGrayBox">
+    <h4 style="text-align:center">Messages</h4>
+    <%= render :partial => 'conversations/small_conversation', :collection => get_inbox, :as => :conversation %>
 </div>

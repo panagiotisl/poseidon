@@ -1,8 +1,18 @@
 <% if (sce? and dialog.sender.name == current_user.shipping_company.name) or (ase? and dialog.sender.name == current_user.agent.name)%>
-<div class="bubble2"><%= raw(dialog.body) %></div>
+<div class="bubble2">
 <% else %>
-<div class="bubble"><%= raw(dialog.body) %></div>
+<div class="bubble">
 <% end %>
+	<div class="dialogTitle">
+		<%= dialog.sender.name %>:&emsp;
+		<%= dialog.subject %>
+	</div>
+	
+	&ensp;-&ensp;<%= raw(truncate(dialog.body, :length => 100)) %>
+</div>
+
+
+
     <% if false %>
     
 	<%= gravatar_for current_user, size: 64 %>

@@ -52,6 +52,16 @@ module SessionsHelper
   def ase?
     current_user && current_user.agent_id
   end
+  
+  def get_company_id
+    if sce?
+      current_user.shipping_company_id
+    elsif ase?
+      current_user.agent_id
+    else
+      nil
+    end
+  end
     
   def authorized_sce
     @shipping_company_id = params[:shipping_company_id] || params[:id]
@@ -95,8 +105,12 @@ module SessionsHelper
   
   
   def get_inbox
-      @conversations = get_actor.mailbox.inbox.reverse  
+    @conversations = get_actor.mailbox.inbox.reverse  
   end
+  
+  def get_latest_notifications
+    Notification.order('created_at DESC').where("id IN (SELECT notification_id FROM receipts where receiver_id=:receiver_id order by created_at desc limit 10)", receiver_id: get_company_id)
+  end  
   
   def get_unread(receipts)
     notifications = []

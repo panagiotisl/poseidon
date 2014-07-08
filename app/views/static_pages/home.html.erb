@@ -24,9 +24,12 @@
       <% elsif ase? %>
 		<div class="span3"><%= render "shared/left_menu" %></div>
         <div class="span7">
+          <div id="latest_doc">
+          	<%= render "shared/latest_feed" %>
+          </div>
        	  <div id="conversation"></div>
         </div>
-		<div class="span2">
+		<div id="feed_doc" class="span2">
 			<%= render "shared/feed" %>
 		</div>
       <% end %>
