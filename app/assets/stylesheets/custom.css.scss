@@ -472,6 +472,7 @@ input {
   -webkit-border-radius: 3px;
 }
 
+
 .leftRightMargin {
   margin-right: 2px;
   margin-left: 2px;
@@ -557,7 +558,16 @@ table td {
 }
 
 
-.bubble 
+.bubble {
+  cursor: pointer;
+  background: #E5E4E2;	
+  border-radius: 3px ;
+  -moz-border-radius: 3px ;
+  -webkit-border-radius: 3px;
+}
+
+
+.bubble1 
 {
 position: relative;
 width: 95%;
@@ -574,7 +584,7 @@ border-radius: 10px;
 left: 2%;
 }
 
-.bubble:after 
+.bubble1:after 
 {
 content: '';
 position: absolute;

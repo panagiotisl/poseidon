@@ -1,7 +1,7 @@
 <% if (sce? and dialog.sender.name == current_user.shipping_company.name) or (ase? and dialog.sender.name == current_user.agent.name)%>
-<div class="bubble2">
+<div id=<%= dialog.conversation.id %> class="bubble bubble2">
 <% else %>
-<div class="bubble">
+<div id=<%= dialog.conversation.id %> class="bubble bubble1">
 <% end %>
 	<div class="dialogTitle">
 		<%= dialog.sender.name %>:&emsp;

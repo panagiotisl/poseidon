@@ -1,4 +1,4 @@
-<div class="roundBox">
+<div id="latestFeed" class="roundBox">
 	<% get_latest_notifications.each do |notification| %>
     <%= render :partial => '/messages/dialog', :object => notification %>
   <% end %>

@@ -113,6 +113,13 @@ class ConversationsController < ApplicationController
     @receipts.mark_as_read
   end
 
+  def refresh_latest
+    respond_to do |format|
+      format.js
+    end
+  end
+
+
   def refresh_feed
     respond_to do |format|
       format.js

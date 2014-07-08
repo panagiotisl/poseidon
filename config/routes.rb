@@ -48,6 +48,7 @@ SampleApp::Application.routes.draw do
     end
   end
  
+  get "refresh-latest-messages" , :to => "conversations#refresh_latest", :as => :refresh_latest_conversations, :constraints => OnlyAjaxRequest.new
   get "refresh-messages-feed" , :to => "conversations#refresh_feed", :as => :refresh_feed_conversations, :constraints => OnlyAjaxRequest.new
   get "conversations/small/:id" , :to => "conversations#show_small", :as => :show_small_conversations, :constraints => OnlyAjaxRequest.new
   post "conversations/small/:id" , :to => "conversations#update_small", :as => :update_small_conversations, :constraints => OnlyAjaxRequest.new
