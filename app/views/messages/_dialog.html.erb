@@ -1,14 +1,25 @@
-<% if (sce? and dialog.sender.name == current_user.shipping_company.name) or (ase? and dialog.sender.name == current_user.agent.name)%>
-<div id=<%= dialog.conversation.id %> class="bubble bubble2">
+<% if !dialog.sender %>
+<div class="bubble bubble2" onclick="window.location='/notifications/<%=dialog.id%>';">	
+<% elsif (sce? and dialog.sender.name == current_user.shipping_company.name) or (ase? and dialog.sender.name == current_user.agent.name)%>
+<div class="bubble bubble2" onclick="window.location='/conversations/<%=dialog.conversation.id%>';">
 <% else %>
-<div id=<%= dialog.conversation.id %> class="bubble bubble1">
+<div class="bubble bubble1" onclick="window.location='/conversations/<%=dialog.conversation.id%>';">
 <% end %>
+
+	<div class="bubbleContent">
+
+<% if !dialog.sender %>
 	<div class="dialogTitle">
-		<%= dialog.sender.name %>:&emsp;
-		<%= dialog.subject %>
+		<%= raw(truncate(dialog.subject, :length => 60)) %>
 	</div>
-	
-	&ensp;-&ensp;<%= raw(truncate(dialog.body, :length => 100)) %>
+<% else %>
+	<div class="dialogTitle">
+		<%= dialog.sender.name %>:&thinsp;
+		<%= raw(truncate(dialog.subject, :length => 30)) %>
+	</div>
+<% end %>
+	<%= raw(truncate(dialog.body, :length => 100)) %>
+	</div>
 </div>
 
 

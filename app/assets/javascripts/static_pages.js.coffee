@@ -7,9 +7,4 @@ refreshLatestPartial = ->
   
 $(document).ready ->
   myElem = document.getElementById("latestFeed")
-  setInterval refreshLatestPartial, 30000  if myElem?
-  
-$(document).on "click", ".bubble", ->  
-  url = "/conversations/" + $(this).attr("id")
-  console.log url
-  window.location.replace url
+  setInterval refreshLatestPartial, 300000  if myElem?

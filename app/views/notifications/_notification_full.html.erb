@@ -1,34 +1,28 @@
-<%= div_for(@notification, :class => (@notification.is_unread?(@actor) ? 'unread' : '')) do %>
-    <div class="boxWithBorder">
-    	<div class="roundBox">
+<div class="boxWithBorder">
+    <div class="roundBox">
         <div class="row">
             <div class="span3 roundBeigeBox">
                 <div class="name">
                     System Notification
                 </div>
-				
                 <div class="date">
                     <%= time_ago_in_words(@notification.updated_at) + " ago" %>
                 </div>
             </div>
             <div class="span8">
-            	<div class="roundKhakiBox">
-                	<%= raw(@notification.body) %>
-				</div>
-				<div class="roundGrayBox xSmall">
-					Read by:
-					<% Reader.where(:notification_id => @notification.id).each_with_index do |reader, i| %>
-					<% unless i==0 %>,<%end%>
-					<%= reader.user.name %>
-					<% if reader.user.agent_id %>
-						(<%= link_to reader.user.agent.name, reader.user.agent %>)
-					<% elsif reader.user.shipping_company_id %>
-						(<%= link_to reader.user.shipping_company.name, reader.user.shipping_company %>)
-					<% end %>		
-					<% end %>
-				</div>
+                <div class="roundKhakiBox">
+                    <%= raw(@notification.body) %>
+                </div>
+                <div class="roundGrayBox xSmall">
+                    Read by:<% Reader.where(:notification_id => @notification.id).each_with_index do |reader, i| %>
+                    <% unless i==0 %>,<%end %>
+                    <%= reader.user.name %>
+                    <% if reader.user.agent_id %>
+                    (<%= link_to reader.user.agent.name, reader.user.agent %>)<% elsif reader.user.shipping_company_id %>
+                    (<%= link_to reader.user.shipping_company.name, reader.user.shipping_company %>)<% end %>
+                    <% end %>
+                </div>
             </div>
-			</div>
         </div>
     </div>
-<% end %>
+</div>

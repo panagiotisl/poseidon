@@ -55,11 +55,21 @@ module SessionsHelper
   
   def get_company_id
     if sce?
-      current_user.shipping_company_id
+      return current_user.shipping_company_id
     elsif ase?
-      current_user.agent_id
+      return current_user.agent_id
     else
-      nil
+      return nil
+    end
+  end
+  
+  def get_company_type
+    if sce?
+      return "ShippingCompany"
+    elsif ase?
+      return "Agent"
+    else
+      return nil
     end
   end
     
@@ -109,7 +119,7 @@ module SessionsHelper
   end
   
   def get_latest_notifications
-    Notification.order('created_at DESC').where("id IN (SELECT notification_id FROM receipts where receiver_id=:receiver_id order by created_at desc limit 10)", receiver_id: get_company_id)
+    Notification.order('created_at DESC').where("id IN (SELECT notification_id FROM receipts where receiver_id=:receiver_id and receiver_type=:receiver_type order by created_at desc limit 10)", receiver_id: get_company_id, receiver_type: get_company_type)
   end  
   
   def get_unread(receipts)
