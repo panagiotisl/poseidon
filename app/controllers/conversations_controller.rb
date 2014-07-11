@@ -1,6 +1,6 @@
 class ConversationsController < ApplicationController
   before_filter :signed_in_user
-  before_filter :get_actor, :get_mailbox, :get_box
+  before_filter :get_actor, :get_mailbox, :get_box, :get_fleets
   before_filter :check_current_subject_in_conversation, :only => [:show, :show_small, :update, :update_small, :destroy]
 
   def index

@@ -1,35 +1,30 @@
-    <div class="boxWithBorder roundBox">
-        <div class="row">
-            <div class="span3 roundBeigeBox">
-                <div class="name">
-                    <%= link_to message.sender.name, message.sender %>
-                </div>
-				<div class="sender">
-					<% sender = Sender.where(:notification_id => message.id).first %>
-					<%if !sender.nil?%>
-                	<%= sender.user.name %>
-					<%end%>
-            	</div>
-                <div class="date">
-                    <%= time_ago_in_words(message.updated_at) + " ago" %>
-                </div>
-            </div>
-            <div class="span8">
-            	<div class="roundKhakiBox">
-                	<%= raw(message.body) %>
-				</div>
-				<div class="roundGrayBox xSmall">
-					Read by:
-					<% Reader.where(:notification_id => message.id).each_with_index do |reader, i| %>
-					<% unless i==0 %>,<%end%>
-					<%= reader.user.name %>
-					<% if reader.user.agent_id %>
-						(<%= link_to reader.user.agent.name, reader.user.agent %>)
-					<% elsif reader.user.shipping_company_id %>
-						(<%= link_to reader.user.shipping_company.name, reader.user.shipping_company %>)
-					<% end %>		
-					<% end %>
-				</div>
-            </div>
-		</div>
+<div class="column-wrap boxWithBorder roundBox">
+    <div class="left-column roundBeigeBox">
+        <div class="name">
+            <%= link_to message.sender.name, message.sender %>
+        </div>
+        <div class="sender">
+            <% sender = Sender.where(:notification_id => message.id).first %>
+            <%if !sender.nil? %>
+            <%= sender.user.name %>
+            <%end %>
+        </div>
+        <div class="date">
+            <%= time_ago_in_words(message.updated_at) + " ago" %>
+        </div>
     </div>
+    <div class="right-column">
+        <div class="roundKhakiBox">
+            <%= raw(message.body) %>
+        </div>
+        <div class="roundGrayBox xSmall">
+            Read by:<% Reader.where(:notification_id => message.id).each_with_index do |reader, i| %>
+            <% unless i==0 %>,<%end %>
+            <%= reader.user.name %>
+            <% if reader.user.agent_id %>
+            (<%= link_to reader.user.agent.name, reader.user.agent %>)<% elsif reader.user.shipping_company_id %>
+            (<%= link_to reader.user.shipping_company.name, reader.user.shipping_company %>)<% end %>
+            <% end %>
+        </div>
+    </div>
+</div>

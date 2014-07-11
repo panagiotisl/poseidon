@@ -3,20 +3,26 @@
 <div class="row">
     <div class="roundBox">
         <h3><%= @fleet.name %></h3>
-        <div class="row">
-            <div class="marginTop span2 strong">
-                Company:
-            </div>
-            <div class="marginTop span3">
-                <%= @fleet.shipping_company.name %>
-            </div>
-            <div class="marginTop span2 strong">
-                Number of ships:
-            </div>
-            <div class="marginTop span3">
-                <%= @fleet.ships.length %>
-            </div>
-        </div>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>
+                        Company:
+                    </td>
+                    <td>
+                        <%= @fleet.shipping_company.name %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Number of ships:
+                    </td>
+                    <td>
+                        <%= @fleet.ships.length %>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 <!--    <div class="marginTop row">

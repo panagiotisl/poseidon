@@ -5,7 +5,7 @@ class MessagesController < ApplicationController
   #autocomplete :recipients, {:agent => [:name], :shipping_company => [:name]}
 
   before_filter :signed_in_user
-  before_filter :get_actor, :get_mailbox, :get_box
+  before_filter :get_actor, :get_mailbox, :get_box, :get_fleets
   def index
     redirect_to conversations_path(:box => @box)
   end

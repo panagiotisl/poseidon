@@ -1,7 +1,5 @@
-<div class="boxWithBorder">
-    <div class="roundBox">
-        <div class="row">
-            <div class="span3 roundBeigeBox">
+<div class="column-wrap boxWithBorder roundBox">
+            <div class="left-column roundBeigeBox">
                 <div class="name">
                     System Notification
                 </div>
@@ -9,7 +7,7 @@
                     <%= time_ago_in_words(@notification.updated_at) + " ago" %>
                 </div>
             </div>
-            <div class="span8">
+            <div class="right-column">
                 <div class="roundKhakiBox">
                     <%= raw(@notification.body) %>
                 </div>
@@ -23,6 +21,4 @@
                     <% end %>
                 </div>
             </div>
-        </div>
-    </div>
 </div>

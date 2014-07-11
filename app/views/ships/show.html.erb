@@ -2,28 +2,36 @@
 <%= render "/shared/nav" %>
 <div class="row">
     <div>
-        <div class="span5 roundBox">
+        <div class="roundBox">
             <h3><%= @ship.name %></h3>
-            <div class="row">
-                <div class="marginTop span2 strong">
-                    Company:
-                </div>
-                <div class="marginTop span3">
-                    <%= @ship.fleet.shipping_company.name %>
-                </div>
-                <div class="marginTop span2 strong">
-                    Vessel Type:
-                </div>
-                <div class="marginTop span3">
-                    <%= @ship.vessel_type.category %>
-                </div>
-                <div class="marginTop span2 strong">
-                    Flag:
-                </div>
-                <div class="marginTop span3">
-                    <%= image_tag "flags/#{@ship.flag.path}", size: "44", alt: "#{@ship.flag.name}" %>
-                </div>
-            </div>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>
+                            Company:
+                        </td>
+                        <td>
+                            <%= @ship.fleet.shipping_company.name %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Vessel Type:
+                        </td>
+                        <td>
+                            <%= @ship.vessel_type.category %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Flag:
+                        </td>
+                        <td>
+                            <%= image_tag "flags/#{@ship.flag.path}", size: "44", alt: "#{@ship.flag.name}" %>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <!--			<div class="span5 voyages_list roundBox marginTop">
         <h4>Voyages</h4>

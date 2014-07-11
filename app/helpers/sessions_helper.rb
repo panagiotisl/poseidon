@@ -113,14 +113,13 @@ module SessionsHelper
     @mailbox = get_actor.mailbox
   end
   
-  
   def get_inbox
     get_actor.mailbox.inbox  
   end
   
   def get_latest_notifications
     Notification.order('created_at DESC').where("id IN (SELECT notification_id FROM receipts where receiver_id=:receiver_id and receiver_type=:receiver_type order by created_at desc limit 10)", receiver_id: get_company_id, receiver_type: get_company_type)
-  end  
+  end
   
   def get_unread(receipts)
     notifications = []
@@ -140,4 +139,13 @@ module SessionsHelper
     def is_readN(notification)
     Reader.where(:notification_id => notification.id, :user_id => current_user.id).count > 0
   end
+  
+  def get_fleets
+    if(sce?)
+      @fleets = current_user.shipping_company.fleets
+    else
+      @fleets = Fleet.none
+    end
+  end
+  
 end

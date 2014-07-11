@@ -1,7 +1,7 @@
 class NotificationsController < ApplicationController
   
   before_filter :signed_in_user
-  before_filter :get_actor, :get_mailbox
+  before_filter :get_actor, :get_mailbox, :get_fleets
   
   def show
     @notification = Notification.find(params[:id])

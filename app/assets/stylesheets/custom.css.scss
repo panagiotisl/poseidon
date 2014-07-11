@@ -4,7 +4,7 @@
 /* mixins, variables, etc. */
 
 $grayMediumLight: #eaeaea;
-$beige: #DEB887;
+$beige: #deb887;
 $khaki: #f0e68c;
 
 
@@ -51,8 +51,6 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  
-  
 }
 
 /*Opera Fix*/
@@ -395,6 +393,21 @@ input {
     /*width: 100px;*/
 }
 
+.column-wrap {
+    /* overflow to handle inner floating block */
+    overflow: hidden;
+}
+
+.left-column {
+    float: left;
+    width: 26%;
+}
+
+.right-column {
+    float: right;
+    width: 70%;
+}
+
 .marginTop {
   margin-top: 30px;
 }
@@ -640,6 +653,7 @@ top: 26px;
 
 #leftMenu .accordion-group {
     margin-bottom: 0px;
+    padding-right: 30px;
     border:0px;
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
