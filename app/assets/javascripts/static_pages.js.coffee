@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 refreshLatestPartial = ->
-  $.ajax url: "refresh-latest-messages"
+  $.ajax url: "/refresh-latest-messages"
   
 $(document).ready ->
   myElem = document.getElementById("latestFeed")

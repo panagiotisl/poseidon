@@ -1,12 +1,12 @@
 <% provide(:title, @title) %>
+<%= render "/shared/nav" %>
 <div class="row">
-  <%= render "/shared/nav" %>
-  <div class="span8">
-  	<h3><%= @title %></h3>
-      <%= will_paginate %>
-      <ul class="ships">
-        <%= render @voyages %>
-      </ul>
-      <%= will_paginate %>
-  </div>
+    <div>
+        <h3><%= @title %></h3>
+        <%= will_paginate %>
+        <ul class="ships">
+            <%= render @voyages %>
+        </ul>
+        <%= will_paginate %>
+    </div>
 </div>

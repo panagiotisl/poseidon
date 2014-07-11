@@ -1,5 +1,5 @@
 refreshFeedPartial = ->
-  $.ajax url: "refresh-messages-feed"
+  $.ajax url: "/refresh-messages-feed"
   
 $(document).ready ->
   myElem = document.getElementById("messagesFeed")

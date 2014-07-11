@@ -1,44 +1,37 @@
 <% provide(:title, @ship.name) %>
+<%= render "/shared/nav" %>
 <div class="row">
-    <div class="span12">
-        <%= render "/shared/nav" %>
-        <div class="row">
-            <div class="span3">
-                <%= render "shared/left_menu" %>
-            </div>
-            <div class="span8">
-                <div class="span5 roundBox">
-                    <h3><%= @ship.name %></h3>
-                    <div class="row">
-                        <div class="marginTop span2 strong">
-                            Company:
-                        </div>
-                        <div class="marginTop span3">
-                            <%= @ship.fleet.shipping_company.name %>
-                        </div>
-                        <div class="marginTop span2 strong">
-                            Vessel Type:
-                        </div>
-                        <div class="marginTop span3">
-                            <%= @ship.vessel_type.category %>
-                        </div>
-                        <div class="marginTop span2 strong">
-                            Flag:
-                        </div>
-                        <div class="marginTop span3">
-                            <%= image_tag "flags/#{@ship.flag.path}", size: "44", alt: "#{@ship.flag.name}" %>
-                        </div>
-                    </div>
+    <div>
+        <div class="span5 roundBox">
+            <h3><%= @ship.name %></h3>
+            <div class="row">
+                <div class="marginTop span2 strong">
+                    Company:
                 </div>
-                <!--			<div class="span5 voyages_list roundBox marginTop">
-                <h4>Voyages</h4>
-                <%= will_paginate @voyages %>
-                <ul class="voyages">
-                <%= render @voyages %>
-                </ul>
-                <%= will_paginate @voyages %>
-                </div>-->
+                <div class="marginTop span3">
+                    <%= @ship.fleet.shipping_company.name %>
+                </div>
+                <div class="marginTop span2 strong">
+                    Vessel Type:
+                </div>
+                <div class="marginTop span3">
+                    <%= @ship.vessel_type.category %>
+                </div>
+                <div class="marginTop span2 strong">
+                    Flag:
+                </div>
+                <div class="marginTop span3">
+                    <%= image_tag "flags/#{@ship.flag.path}", size: "44", alt: "#{@ship.flag.name}" %>
+                </div>
             </div>
         </div>
+        <!--			<div class="span5 voyages_list roundBox marginTop">
+        <h4>Voyages</h4>
+        <%= will_paginate @voyages %>
+        <ul class="voyages">
+        <%= render @voyages %>
+        </ul>
+        <%= will_paginate @voyages %>
+        </div>-->
     </div>
 </div>

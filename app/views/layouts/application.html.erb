@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    	<meta content='width=device-width, initial-scale=1.0' name='viewport'>
+        <meta content='width=device-width, initial-scale=1.0' name='viewport'>
         <title><%= full_title(yield(:title)) %></title>
         <%= stylesheet_link_tag "application", media: "all",
         "data-turbolinks-track" => true %>
@@ -21,12 +21,39 @@
             </div>
             <div id="main">
                 <div class="container">
+                    <% if signed_in? %>
+                    <div class="row">
+                        <% if sce? or ase? %>
+                        <div class="span3">
+                            <div class="sidebar" data-spy="affix" data-offset-top="100">
+                                <%= render "shared/left_menu" %>
+                            </div>
+                        </div>
+                        <div class="span7">
+                            <% flash.each do |key, value| %>
+                            <div class="alert alert-<%= key %>">
+                                <%= value %>
+                            </div>
+                            <% end %>
+                            <%= yield %>
+                        </div>
+                        <div id="feed_doc" class="span2">
+                            <div class="sidebar" data-spy="affix" data-offset-top="100">
+                                <%= render "shared/feed" %>
+                            </div>
+                        </div>
+                        <div id="feed_doc" class="span2" style="position:fixed; right:10px">
+                        </div>
+                        <% end %>
+                    </div>
+                    <% else %>
                     <% flash.each do |key, value| %>
                     <div class="alert alert-<%= key %>">
                         <%= value %>
                     </div>
                     <% end %>
                     <%= yield %>
+                    <% end %>
                     <%= debug(params) if Rails.env.development? %>
                 </div>
             </div>
