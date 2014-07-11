@@ -7,4 +7,4 @@ refreshLatestPartial = ->
   
 $(document).ready ->
   myElem = document.getElementById("latestFeed")
-  setInterval refreshLatestPartial, 30000  if myElem?
+  setInterval refreshLatestPartial, 300000  if myElem?

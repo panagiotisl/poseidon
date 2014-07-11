@@ -115,7 +115,7 @@ module SessionsHelper
   
   
   def get_inbox
-    @conversations = get_actor.mailbox.inbox.reverse  
+    get_actor.mailbox.inbox  
   end
   
   def get_latest_notifications
