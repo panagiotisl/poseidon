@@ -1,6 +1,7 @@
 <% if signed_in? %>
   <div class="row">
-    <div class="span12">
+    
+	<div class="span12">
    	  <div class="nav nav-pills roundBox">
    	  	<%= gravatar_for current_user, size: 64 %>
       <h3><%= link_to "Hello #{current_user.name}!", current_user %></h3>
@@ -11,10 +12,15 @@
       <% end %>
       </div>
 	</div>
-	<div class="container-fluid">
-	<div class="row-fluid">
+	
+	<div class="container">
+	<div class="row">
 	      <% if sce? %>
-        <div class="span3"><%= render "shared/left_menu" %></div>
+        <div class="span3>
+			<div class="sidebar" data-spy="affix" data-offset-top="60">
+				<%= render "shared/left_menu" %>
+			</div>
+		</div>
       	<div class="span7">
       	  <div id="latest_doc">
           	<%= render "shared/latest_feed" %>
@@ -22,10 +28,16 @@
       		<div id="conversation"></div>
       	</div>
 		<div id="feed_doc" class="span2">
-			<%= render "shared/feed" %>
+			<div class="sidebar" data-spy="affix" data-offset-top="60">
+				<%= render "shared/feed" %>
+			</div>
 		</div>
       <% elsif ase? %>
-		<div class="span3"><%= render "shared/left_menu" %></div>
+		<div class="span3">
+			<div class="sidebar" data-spy="affix" data-offset-top="100">
+				<%= render "shared/left_menu" %>
+			</div>
+		</div>
         <div class="span7">
           <div id="latest_doc">
           	<%= render "shared/latest_feed" %>
@@ -33,16 +45,33 @@
        	  <div id="conversation"></div>
         </div>
 		<div id="feed_doc" class="span2">
-			<%= render "shared/feed" %>
+			<div class="sidebar" data-spy="affix" data-offset-top="100">
+				<%= render "shared/feed" %>
+			</div>
 		</div>
-		<div class="span2" style="position:fixed; right:0">  
-			
+		<div id="feed_doc" class="span2" style="position:fixed; right:10px">  
 		</div>
       <% end %>
     </div>
 	</div>
   </div>  
 <% else %>
+	<div id="myCarousel" class="carousel slide">
+	<!-- Carousel items -->
+		<div class="carousel-inner">
+			<div class="active item"><img src="http://placehold.it/1200x400&amp;text=Fade+effect"></div>
+			<div class="item"><img src="http://placehold.it/1200x400&amp;text=Fade+effect"></div>
+			<div class="item"><img src="http://placehold.it/1200x400&amp;text=Fade+effect"></div>
+		</div>
+	<!-- Carousel nav -->
+		<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+		<a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+	</div>
+	<script>
+		$('.carousel').carousel({
+			interval: 8000
+		})
+	</script>
   <div class="center hero-unit">
     <h1>Welcome to POSEIDON</h1>
 

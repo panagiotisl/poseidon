@@ -3,7 +3,7 @@ refreshFeedPartial = ->
   
 $(document).ready ->
   myElem = document.getElementById("messagesFeed")
-  setInterval refreshFeedPartial, 300000  if myElem?
+  setInterval refreshFeedPartial, 30000  if myElem?
   
 $(document).on "click", ".conversation", ->  
   url = "/conversations/small/" + $(this).attr("id")
