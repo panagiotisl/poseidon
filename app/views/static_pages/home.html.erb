@@ -15,24 +15,8 @@
 	
 	<div class="container">
 	<div class="row">
-	      <% if sce? %>
-        <div class="span3>
-			<div class="sidebar" data-spy="affix" data-offset-top="100">
-				<%= render "shared/left_menu" %>
-			</div>
-		</div>
-      	<div class="span7">
-      	  <div id="latest_doc">
-          	<%= render "shared/latest_feed" %>
-          </div>
-      		<div id="conversation"></div>
-      	</div>
-		<div id="feed_doc" class="span2">
-			<div class="sidebar" data-spy="affix" data-offset-top="100">
-				<%= render "shared/feed" %>
-			</div>
-		</div>
-      <% elsif ase? %>
+
+      <% if sce? or ase? %>
 		<div class="span3">
 			<div class="sidebar" data-spy="affix" data-offset-top="100">
 				<%= render "shared/left_menu" %>
