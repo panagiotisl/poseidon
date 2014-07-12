@@ -1,7 +1,8 @@
 class ShippingCompaniesController < ApplicationController
 
-#  before_action :admin_user,     only: [:index, :show, :new, :create]
+  before_filter :signed_in_user
   before_action :admin_user,     only: [:destroy]
+  before_action :get_fleets,     only: [:index, :show]
   
   def index
     @shipping_companies = ShippingCompany.reorder("name ASC").paginate(page: params[:page])
@@ -9,7 +10,6 @@ class ShippingCompaniesController < ApplicationController
   
   def show
     @shipping_company = ShippingCompany.find(params[:id])
-    @fleets = @shipping_company.fleets.paginate(page: params[:page])
     @ships = @shipping_company.ships.paginate(page: params[:page])
     @voyages = @shipping_company.voyages.paginate(page: params[:page])
   end

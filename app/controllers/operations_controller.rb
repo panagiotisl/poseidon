@@ -3,7 +3,6 @@ class OperationsController < ApplicationController
   before_action :authorized_ase,     only: [:create, :destroy]
   
   def create
-#    @port = Port.find(params[:operation][:port_id])
     @port_id = params[:operation][:port_id]
     @agent = Agent.find(params[:operation][:agent_id])
     @agent.register!(@port_id)

@@ -1,4 +1,6 @@
 class OffersController < ApplicationController
+
+  before_filter :signed_in_user
   
   def create
     @offer = Offer.new(offer_params)

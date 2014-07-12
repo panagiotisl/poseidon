@@ -46,7 +46,8 @@ html {
 
 body {
   height: 100%;  
-  background: url('http://ariadni.di.uoa.gr/shared/texture3.jpg') no-repeat center center fixed; 
+/*  background: url('http://ariadni.di.uoa.gr/shared/texture3.jpg') no-repeat center center fixed; */
+  background: image-url("texture3.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

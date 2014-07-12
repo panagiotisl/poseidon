@@ -1,4 +1,6 @@
 class NeedsController < ApplicationController
+
+  before_filter :signed_in_user
   
   def create
     @need = Need.new(need_params)
