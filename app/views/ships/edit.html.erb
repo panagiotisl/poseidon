@@ -1,12 +1,12 @@
 <% provide(:title, @title) %>
 <%= render "/shared/nav" %>
 <div class="row">
-    <div class="span6">
+    <div>
         <h3><%= @title %></h3>
     </div>
     <%= form_for @ship, url: shipping_company_fleet_ships_path do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
-    <div class="span6 roundBox marginTop">
+    <div class="roundBox marginTop">
         <h4>Main Information</h4>
         <div class="marginTop">
             <%= f.label :name %>
@@ -34,18 +34,20 @@
     </div>
     <div class="roundBox marginTop">
         <h4>Vessel Construction</h4>
-        <div class="span6 marginTop">
+        <div class="marginTop table">
             <table>
+            	<thead>
                 <tr>
-                    <td>
-                    </td>
-                    <td>
-                        <h6>DWT</h6>
-                    </td>
-                    <td>
-                        <h6>Draft</h6>
-                    </td>
+                    <th>
+                    </th>
+                    <th>
+                    	DWT
+                    </th>
+                    <th>
+                        Draft
+                    </th>
                 </tr>
+				</thead>
                 <tr>
                     <td>
                         Summer
@@ -103,22 +105,8 @@
                 </tr>
             </table>
         </div>
-        <div class="span3 marginTop">
+        <div class="marginTop table">
             <table>
-                <tr>
-                    <td>
-                        &nbsp;
-                    </td>
-                    <td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        &nbsp;
-                    </td>
-                    <td>
-                    </td>
-                </tr>
                 <tr>
                     <td>
                         GRT
@@ -137,13 +125,6 @@
                 </tr>
                 <tr>
                     <td>
-                        &nbsp;
-                    </td>
-                    <td>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
                         LOA
                     </td>
                     <td>
@@ -152,7 +133,7 @@
                 </tr>
             </table>
         </div>
-        <div class="span6 marginTop">
+        <div class="marginTop table">
             <table>
                 <tr>
                     <td>

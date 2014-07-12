@@ -1,22 +1,20 @@
 <% provide(:title, @title) %>
-        <%= render "/shared/nav" %>
-        <div class="row">
-            <div>
-                <h3><%= @title %></h3>
-                <%= form_for @voyage, url: shipping_company_fleet_ship_voyages_path do |f| %>
-                <%= render 'shared/error_messages', object: f.object %>
-                <%= f.label :name %>
-                <%= f.text_field :name, { :value => "VOYAGE_#{@ship.voyages.count(:id) +1}", :readonly => true } %>
-                <% if false %>
-                <%= f.label :date %>
-                <%= f.text_field :date, class: "voyages_date" %>
-                <%= f.label :remarks %>
-                <%= f.text_area(:remarks, size: '50x10') %>
-                <% end %>
-                <%= f.hidden_field :ship_id, :value => params[:ship_id] %>
-                <%= f.submit "Create this voyage", class: "btn btn-large btn-primary" %>
-                <% end %>
-            </div>
-        </div>
+<%= render "/shared/nav" %>
+<div class="row">
+    <div>
+        <h3><%= @title %></h3>
+        <%= form_for @voyage, url: shipping_company_fleet_ship_voyages_path do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+        <%= f.label :name %>
+        <%= f.text_field :name, { :value => "VOYAGE_#{@ship.voyages.count(:id) +1}", :readonly => true } %>
+        <% if false %>
+        <%= f.label :date %>
+        <%= f.text_field :date, class: "voyages_date" %>
+        <%= f.label :remarks %>
+        <%= f.text_area(:remarks, size: '50x10') %>
+        <% end %>
+        <%= f.hidden_field :ship_id, :value => params[:ship_id] %>
+        <%= f.submit "Create this voyage", class: "btn btn-large btn-primary" %>
+        <% end %>
     </div>
 </div>

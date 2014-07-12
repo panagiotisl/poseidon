@@ -1,8 +1,9 @@
 class ConversationsController < ApplicationController
   before_filter :signed_in_user
-  before_filter :get_actor, :get_mailbox, :get_box, :get_fleets
+  before_filter :get_actor, :get_mailbox, :get_box
   before_filter :check_current_subject_in_conversation, :only => [:show, :show_small, :update, :update_small, :destroy]
-
+  before_action :get_fleets,     only: [:index, :show]
+  
   def index
     if params[:voyages_port]
       @conversations = @mailbox.inbox.where("conversation_id IN (#{labeled_by_vp})", voyages_port_id: params[:voyages_port]).page(params[:page])

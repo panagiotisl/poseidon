@@ -1,17 +1,17 @@
 class FleetsController < ApplicationController
-  
+
+  before_filter :signed_in_user
   before_action :authorized_sce,     only: [:index, :new, :create, :edit]
+  before_action :get_fleets,     only: [:index, :show]
   
   def index
     @title = "All Fleets"
     @shipping_company = ShippingCompany.find(params[:shipping_company_id])
-    @fleets = @shipping_company.fleets.paginate(page: params[:page])
   end
   
   def show
     @fleet = Fleet.find(params[:id])
     @shipping_company = @fleet.shipping_company
-    @fleets = @shipping_company.fleets 
     @title = @fleet.name 
     @ships = @fleet.ships.paginate(page: params[:page])
     @voyages = @fleet.voyages.paginate(page: params[:page])

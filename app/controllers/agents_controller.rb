@@ -1,8 +1,10 @@
 class AgentsController < ApplicationController
 
 #  before_action :admin_user,     only: [:index, :show, :new, :create]
+  before_filter :signed_in_user
   before_action :admin_user,     only: [:destroy]
   before_action :authorized_ase,     only: [:manage_ports]
+  before_action :get_fleets,     only: [:index, :show, :manage_ports]
 
   def index
     @agents = Agent.reorder("name ASC").paginate(page: params[:page])
@@ -10,7 +12,6 @@ class AgentsController < ApplicationController
   
   def show
     @agent = Agent.find(params[:id])
-    @fleets = Fleet.none
   end
 
   def new
