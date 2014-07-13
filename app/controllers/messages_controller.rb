@@ -6,7 +6,7 @@ class MessagesController < ApplicationController
 
   before_filter :signed_in_user
   before_filter :get_actor, :get_mailbox, :get_box
-  before_action :get_fleets,     only: [:index, :show]
+  before_action :get_fleets,     only: [:index, :show, :new]
   
   def index
     redirect_to conversations_path(:box => @box)

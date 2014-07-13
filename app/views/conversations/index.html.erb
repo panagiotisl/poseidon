@@ -1,9 +1,9 @@
 <% content_for :title do %>
-  <%=t('message.other')%>
+<%=t('message.other') %>
 <% end %>
-
 <section id="conversations">
-
-  <%= render :partial => 'index' %>
-
+    <div class="conversations roundBox">
+        <%= render :partial => '/shared/message_bar' %>
+        <%= render :partial => 'conversations' %>
+    </div>
 </section>
