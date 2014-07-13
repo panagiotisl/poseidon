@@ -1,0 +1,30 @@
+<ul class="nav nav-pills">
+	<% if !params[:box] %>
+    <li class="active">
+    <% else %>
+	<li>
+	<% end %>
+        <%= link_to "New Message", new_message_path %>
+    </li>
+	<% if params[:box].eql? "inbox" %>
+    <li class="active">
+    <% else %>
+	<li>
+	<% end %>
+        <%= link_to "Inbox", conversations_path(:box=>'inbox') %>
+    </li>
+	<% if params[:box].eql? "sentbox" %>
+    <li class="active">
+    <% else %>
+	<li>
+	<% end %>
+        <%= link_to "Sentbox", conversations_path(:box=>'sentbox') %>
+    </li>
+	<% if params[:box].eql? "trash" %>
+    <li class="active">
+    <% else %>
+	<li>
+	<% end %>
+        <%= link_to "Thrash", conversations_path(:box=>'trash') %>
+    </li>
+</ul>
