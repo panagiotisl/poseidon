@@ -24,7 +24,7 @@ en:
 
   mailboxer:
     delete: Delete
-    delete_confirm: Do you want to move '%{object}' to trash?
+    delete_confirm: Do you want to move this to trash?
     form:
       body: Body
       recipients: Recipients

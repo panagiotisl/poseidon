@@ -11,7 +11,7 @@ class ConversationsController < ApplicationController
       @conversations = @mailbox.inbox.page(params[:page])#.per(9)
       #@notifications = @mailbox.notifications.page(params[:page])#.per(9)
       #@conversations += @notifications
-      @conversations.sort! { |a,b| a.updated_at <=> b.updated_at }
+      #@conversations.sort! { |a,b| a.updated_at <=> b.updated_at }
     elsif @box.eql? "sentbox"
       @conversations = @mailbox.sentbox.page(params[:page])#.per(9)
     else
