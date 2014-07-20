@@ -129,7 +129,12 @@ module SessionsHelper
         notifications << receipt.notification.id
       end
     end
-    notifications.count - Reader.where(:notification_id => notifications).count
+    @unread = notifications.count - Reader.where(:notification_id => notifications).count
+    if @unread > 0
+      @unread.to_s
+    else
+      ""
+    end
   end
   
   def is_readC(conversation)

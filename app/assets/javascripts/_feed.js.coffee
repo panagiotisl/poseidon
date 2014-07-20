@@ -12,4 +12,5 @@ $(document).on "click", ".conversation", ->
     url: url
     cache: false
     success: (html) ->
-      $("#conversation").html html
+      $("#modalConversation").html html
+      $("#myConversationModal").modal "show"

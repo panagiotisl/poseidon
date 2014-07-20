@@ -413,6 +413,10 @@ input {
   margin-top: 30px;
 }
 
+.bigMarginTop {
+  margin-top: 100px;
+}
+
 .marginLeft {
   margin-left: 15px;
 }
@@ -437,6 +441,15 @@ input {
   border: 1px solid $khaki;
   background-color: white;
   margin-top: 3px;
+}
+
+.transparentBox {
+  margin-top: -100px;
+  overflow:hidden;
+  position: absolute;
+  width: inherit;
+  min-height: 100%;
+  background-color:rgba(190,190,190,0.7);
 }
 
 .roundGrayBox {

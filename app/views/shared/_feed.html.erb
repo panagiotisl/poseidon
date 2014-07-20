@@ -1,4 +1,9 @@
-<div id="messagesFeed" class="roundGrayBox">
-    <h4 style="text-align:center">Messages</h4>
+<div id="messagesFeed" class="bigMarginTop">
     <%= render :partial => 'conversations/small_conversation', :collection => get_inbox, :as => :conversation %>
+</div>
+<!-- Modal -->
+<div id="myConversationModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myConversationModal" aria-hidden="true">
+	<div id="modalConversation">
+
+	</div>
 </div>
