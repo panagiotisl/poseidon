@@ -12,18 +12,7 @@
     </h3>
 </div>
 <div class="modal-body">
-    <div class="editor">
-        <%= text_area_tag :body, nil,:rows =>6, :cols=> 53, :class => "required form_tag" %>
-    </div>
-    <div class="actions" style="float:right;">
-        <%= submit_tag t('mailboxer.reply'), :name => :reply_all,:class => "btn" %>
-    </div>
-	<div style="clear: both;"></div>
-    <div class="marginTop messages">
-        <% @receipts.each do |receipt| %>
-        <%= render :partial => '/messages/dialog', :object => receipt.message %>
-        <% end %>
-        <% unless @box.eql?'trash' %>
+		<% unless @box.eql?'trash' %>
         <br>
         <%= form_tag({controller: "conversations", action: "update_small"}, id: "reply_form", remote: "true", :class => "cont_conversation", data: { type: :script }) do %>
         <% if @receipt and @receipt.errors.any? %>
@@ -38,8 +27,21 @@
             </ul>
         </div>
         <% end %>
+        <div class="editor">
+            <%= text_area_tag :body, nil,:rows =>6, :cols=> 53, :class => "required form_tag" %>
+        </div>
+        <div class="actions" style="float:right">
+            <%= submit_tag t('mailboxer.reply'), :name => :reply_all,:class => "btn" %>
+        </div>
         <% end %>
         <%end %>
+		<div style="clear: both;"></div>
+		
+    <div class="marginTop messages">
+        <% @receipts.each do |receipt| %>
+        <%= render :partial => '/messages/dialog', :object => receipt.message %>
+        <% end %>
+        
     </div>
 </div>
 <div class="modal-footer">
