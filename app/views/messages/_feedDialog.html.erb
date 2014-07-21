@@ -1,0 +1,65 @@
+<% if !dialog.sender %>
+<div class="redBorder marginTop" onclick="window.location='/notifications/<%=dialog.id%>';">
+<% elsif (sce? and dialog.sender.name == current_user.shipping_company.name) or (ase? and dialog.sender.name == current_user.agent.name) %>
+<div class="greenBorder marginTop" onclick="window.location='/conversations/<%=dialog.conversation.id%>';">
+<% else %>
+<div class="redBorder marginTop" onclick="window.location='/conversations/<%=dialog.conversation.id%>';">
+    <% end %>
+    <div class="bubbleContent column-wrap">
+        <div class="left-column">
+        	PAOK
+        </div>
+        <div class="right-column">
+            <% if !dialog.sender %>
+            <div class="dialogTitle">
+                <%= raw(truncate(dialog.subject, :length => 60)) %>
+            </div>
+            <% else %>
+            <div class="dialogTitle">
+                <%= dialog.sender.name %>:&thinsp;<%= raw(truncate(dialog.subject, :length => 30)) %>
+            </div>
+            <% end %>
+            <%= raw(truncate(dialog.body, :length => 100)) %>
+        </div>
+    </div>
+</div>
+       
+	    <% if false %>
+        <%= gravatar_for current_user, size: 64 %>
+        <h3><%= link_to "Hello #{current_user.name}!", current_user %></h3>
+        <% if sce? %>
+        <%= link_to current_user.shipping_company.name, current_user.shipping_company %>
+        <% elsif ase? %>
+        <%= link_to current_user.agent.name, current_user.agent %>
+        <% end %>
+        <div class="row">
+            <div class="span3 roundBeigeBox">
+                <div class="name">
+                    <%= link_to dialog.sender.name, dialog.sender %>
+                </div>
+                <div class="sender">
+                    <% sender = Sender.where(:notification_id => dialog.id).first %>
+                    <%if !sender.nil? %>
+                    <%= sender.user.name %>
+                    <%end %>
+                </div>
+                <div class="date">
+                    <%= time_ago_in_words(dialog.updated_at) + " ago" %>
+                </div>
+            </div>
+            <div class="span8">
+                <div class="roundKhakiBox">
+                    <%= raw(dialog.body) %>
+                </div>
+                <div class="roundGrayBox xSmall">
+                    Read by:<% Reader.where(:notification_id => dialog.id).each_with_index do |reader, i| %>
+                    <% unless i==0 %>,<%end %>
+                    <%= reader.user.name %>
+                    <% if reader.user.agent_id %>
+                    (<%= link_to reader.user.agent.name, reader.user.agent %>)<% elsif reader.user.shipping_company_id %>
+                    (<%= link_to reader.user.shipping_company.name, reader.user.shipping_company %>)<% end %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+        <% end %>

@@ -443,6 +443,25 @@ input {
   margin-top: 3px;
 }
 
+
+.greenBorder {
+  cursor: pointer;
+  border: 2px solid #B8EEB0;
+  margin-top: 3px;
+  border-radius: 10px ;
+  -moz-border-radius: 10px ;
+  -webkit-border-radius: 10px ;
+}
+
+.redBorder {
+  cursor: pointer;
+  border: 2px solid #F4B4B0;
+  margin-top: 3px;
+  border-radius: 10px ;
+  -moz-border-radius: 10px ;
+  -webkit-border-radius: 10px ;
+}
+
 .transparentBox {
   margin-top: -100px;
   overflow:hidden;
@@ -578,7 +597,6 @@ table td {
     padding-left: 15px;
     padding-right: 15px;
 }
-
 
 .bubble {
   cursor: pointer;
