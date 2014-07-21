@@ -90,6 +90,8 @@ GEM
     fancybox-rails (0.2.1)
       railties (>= 3.1.0)
     ffi (1.9.0)
+    font-awesome-rails (4.1.0.0)
+      railties (>= 3.2, < 5.0)
     foreigner (1.6.0)
       activerecord (>= 3.0.0)
     formatador (0.2.4)
@@ -258,6 +260,7 @@ DEPENDENCIES
   factory_girl_rails (= 4.2.0)
   faker (= 1.1.2)
   fancybox-rails
+  font-awesome-rails (~> 4.1.0.0)
   growl (= 1.0.3)
   guard-rspec (= 2.5.0)
   guard-spork (= 1.5.0)

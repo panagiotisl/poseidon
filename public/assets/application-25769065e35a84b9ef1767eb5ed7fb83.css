@@ -6960,7 +6960,7 @@ html {
 body {
   height: 100%;
   /*  background: url('http://ariadni.di.uoa.gr/shared/texture3.jpg') no-repeat center center fixed; */
-  background: url("/images/texture3.jpg") no-repeat center center fixed;
+  background: url(/assets/texture3.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -7242,8 +7242,19 @@ input {
   float: right;
   width: 70%; }
 
+.small-left-column {
+  float: left;
+  width: 10%; }
+
+.big-right-column {
+  float: right;
+  width: 86%; }
+
 .marginTop {
   margin-top: 30px; }
+
+.bigMarginTop {
+  margin-top: 100px; }
 
 .marginLeft {
   margin-left: 15px; }
@@ -7265,6 +7276,30 @@ input {
   border: 1px solid khaki;
   background-color: white;
   margin-top: 3px; }
+
+.greenBorder {
+  cursor: pointer;
+  border: 2px solid #B8EEB0;
+  margin-top: 3px;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px; }
+
+.redBorder {
+  cursor: pointer;
+  border: 2px solid #F4B4B0;
+  margin-top: 3px;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px; }
+
+.transparentBox {
+  margin-top: -100px;
+  overflow: hidden;
+  position: absolute;
+  width: inherit;
+  min-height: 100%;
+  background-color: rgba(190, 190, 190, 0.7); }
 
 .roundGrayBox {
   border: 10px solid #eeeeee;
@@ -7332,9 +7367,6 @@ input {
 
 .conversation:hover {
   background: #B6B6B4; }
-
-.boxLine a {
-  padding-right: 15px; }
 
 .box2 {
   display: inline-block; }

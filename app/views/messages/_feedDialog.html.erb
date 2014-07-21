@@ -1,15 +1,18 @@
 <% if !dialog.sender %>
 <div class="redBorder marginTop" onclick="window.location='/notifications/<%=dialog.id%>';">
+	<% @icon = '<i class="fa fa-exclamation fa-2x"></i>'.html_safe %>
 <% elsif (sce? and dialog.sender.name == current_user.shipping_company.name) or (ase? and dialog.sender.name == current_user.agent.name) %>
 <div class="greenBorder marginTop" onclick="window.location='/conversations/<%=dialog.conversation.id%>';">
+	<% @icon = '<i class="fa fa-weixin fa-2x"></i>'.html_safe %>	
 <% else %>
+	<% @icon = '<i class="fa fa-weixin fa-2x"></i>'.html_safe %>
 <div class="redBorder marginTop" onclick="window.location='/conversations/<%=dialog.conversation.id%>';">
     <% end %>
     <div class="bubbleContent column-wrap">
-        <div class="left-column">
-        	PAOK
+        <div class="small-left-column" align="center" valign="middle">
+			<%= @icon %>
         </div>
-        <div class="right-column">
+        <div class="big-right-column">
             <% if !dialog.sender %>
             <div class="dialogTitle">
                 <%= raw(truncate(dialog.subject, :length => 60)) %>

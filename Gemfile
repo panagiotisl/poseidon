@@ -17,6 +17,7 @@ gem 'best_in_place', github: 'bernat/best_in_place'
 #gem 'bootstrap-typeahead-rails'
 gem 'repeated_auto_complete'
 gem 'oboe-heroku'
+gem 'font-awesome-rails', '~> 4.1.0.0'
 
 group :development, :test do
   gem 'pg', '0.15.1'
