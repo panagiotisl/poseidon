@@ -1,23 +1,22 @@
 <% provide(:title, 'Add a Shipping Company') %>
 <div class="transparentBox">
     <h1>Add a Shipping Company</h1>
-    <div class="">
-        <%= form_for(@shipping_company) do |f| %>
-        <%= render 'shared/error_messages', object: f.object %>
-        <%= f.label :name %>
-        <%= f.text_field :name %>
-        <%= f.label :email %>
-        <%= f.text_field :email %>
-        <%= f.label :address %>
-        <%= f.text_field :address %>
-        <%= f.label :telephone %>
-        <%= f.text_field :telephone %>
-        <%= f.label :country_id, "Country" %>
-        <%= select "shipping_company", "country_id", Country.order(:name).all.collect {|p| [ p.printableName, p.id ] }, { :include_blank => true } %>
-        <%= f.label :wv, "Are you human?" %>
-        <%= recaptcha_tags :ssl => true, :ajax => true %>
-        <div class="marginTop">
-            <%= f.submit "Create this Shiping Company", class: "btn btn-large btn-primary" %>
-        </div>
-        <% end %>
+    <%= form_for(@shipping_company) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+    <%= f.label :address %>
+    <%= f.text_field :address %>
+    <%= f.label :telephone %>
+    <%= f.text_field :telephone %>
+    <%= f.label :country_id, "Country" %>
+    <%= select "shipping_company", "country_id", Country.order(:name).all.collect {|p| [ p.printableName, p.id ] }, { :include_blank => true } %>
+    <%= f.label :wv, "Are you human?" %>
+    <%= recaptcha_tags :ssl => true, :ajax => true %>
+    <div class="marginTop">
+        <%= f.submit "Create this Shiping Company", class: "btn btn-large btn-primary" %>
     </div>
+    <% end %>
+</div>
