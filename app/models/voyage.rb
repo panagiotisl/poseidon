@@ -3,7 +3,7 @@ class Voyage < ActiveRecord::Base
   delegate :shipping_company, :to => :ship
   #belongs_to :port
   #has_and_belongs_to_many :ports
-  has_many :voyages_ports, foreign_key: "voyage_id"
+  has_many :voyages_ports, foreign_key: "voyage_id", :order => 'date ASC'
   has_many :ports, :through => :voyages_ports
   #has_many :needs, foreign_key: "voyage_id", dependent: :destroy
   validates :name, presence: true, length: { maximum: 50 }, uniqueness: { case_sensitive: false }
