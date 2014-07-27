@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140325101100) do
+ActiveRecord::Schema.define(version: 20140727130651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -284,7 +284,6 @@ ActiveRecord::Schema.define(version: 20140325101100) do
 
   create_table "voyages", force: true do |t|
     t.string   "name"
-    t.string   "remarks"
     t.integer  "ship_id"
     t.integer  "port_id"
     t.date     "date"
@@ -301,6 +300,7 @@ ActiveRecord::Schema.define(version: 20140325101100) do
     t.date     "date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "remarks"
   end
 
   add_foreign_key "notifications", "conversations", name: "notifications_on_conversation_id"

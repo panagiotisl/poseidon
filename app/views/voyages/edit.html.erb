@@ -7,12 +7,14 @@
         <%= render 'shared/error_messages', object: f.object %>
         <%= f.label :name %>
         <%= f.text_field :name %>
+		<% if false %>
         <%= f.label :port %>
         <%= select "voyage", "port_id", Port.order(:name).all.collect {|p| [ p.name, p.id ] }, { :include_blank => true } %>
         <%= f.label :date %>
         <%= f.text_field :date, class: "voyages_date" %>
         <%= f.label :remarks %>
         <%= f.text_area(:remarks, size: '50x10') %>
+		<% end %>
         <%= f.hidden_field :ship_id, :value => @ship.id %>
         <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
         <% end %>

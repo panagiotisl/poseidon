@@ -14,8 +14,11 @@
 	</div>
 <% else %>
 	<div class="dialogTitle">
-		<%= dialog.sender.name %>:&thinsp;
-		<%= raw(truncate(dialog.subject, :length => 30)) %>
+		<%= dialog.sender.name %>
+        <% sender = Sender.where(:notification_id => dialog.id).first %>
+        <%if !sender.nil? %>
+        <%= " (#{sender.user.name})" %>
+        <%end %>
 	</div>
 <% end %>
 	<%= raw(truncate(dialog.body, :length => 100)) %>

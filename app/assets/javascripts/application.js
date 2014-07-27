@@ -19,4 +19,4 @@
 //= require bootstrap
 //= require_tree .
 //= require fancybox
-//= require best_in_place
+//= require 'rest_in_place'

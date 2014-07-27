@@ -1,6 +1,7 @@
 class VoyagesController < ApplicationController
   
-  before_action :authorized_sce,     only: [:index, :new, :create, :edit]
+  before_filter :signed_in_user,    only: [:show]           
+  before_filter :authorized_sce,    only: [:index, :new, :create, :edit, :update, :accept]
   
   def index
     @title = "All Voyages"

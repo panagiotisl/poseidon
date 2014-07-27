@@ -21,11 +21,25 @@ class VoyagesPortController < ApplicationController
       redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id]), :flash => { :error => "Please set a valid date and port of call." }
     end
   end
+
+  def update
+    @voyages_port = VoyagesPort.find params[:id]
+    if @voyages_port.update_attributes(voyages_port_params)
+      respond_to do |format|
+        format.json { render :json => @voyages_port }
+      end
+    else
+      respond_to do |format|
+        format.json { render :nothing =>  true }
+      end
+    end
+  end
   
   private
   
     def voyages_port_params
-      params.require(:voyages_port).permit(:voyage_id, :port_id, :date)
+      params[:voyages_port][:remarks] = "No remarks yet." if params[:voyages_port][:remarks].nil? || params[:voyages_port][:remarks].empty?
+      params.require(:voyages_port).permit(:voyage_id, :port_id, :date, :remarks)
     end
 end
 

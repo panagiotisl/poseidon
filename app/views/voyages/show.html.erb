@@ -3,173 +3,175 @@
 <div class="row">
     <div class="roundBox">
         <h3><%= @voyage.name %></h3>
-
-		<ul class="nav nav-tabs" role="tablist">
-			<% if params[:voyage_port] %>
-			<li>
-			<% else %>
-            <li class="active">
-            <% end %>
-                <%= link_to "Main", shipping_company_fleet_ship_voyage_path(:id => params[:id], :ship_id => params[:ship_id], :fleet_id => params[:fleet_id], :shipping_company_id => params[:shipping_company_id]) %>
-            </li>
-			<% @voyage.voyages_ports.each do |voyages_port| %>
-            <% if params[:voyage_port] and params[:voyage_port] == voyages_port.id.to_s %>
-			<li class="active">
-			<% else %>
+        <ul class="nav nav-tabs" role="tablist">
+            <% if params[:voyage_port] %>
             <li>
-            <% end %>
-            	<%= link_to "#{voyages_port.date}: #{voyages_port.port.name}", shipping_company_fleet_ship_voyage_path(:id => params[:id], :ship_id => params[:ship_id], :fleet_id => params[:fleet_id], :shipping_company_id => params[:shipping_company_id],:voyage_port => voyages_port.id) %>
-            </li>
-			<% end %>
-        </ul>
-		
-        <table class="table">
-            <tbody>
-                <% if params[:voyage_port] %>
-                <tr>
-                    <td>
-                        <div class="marginTop strong">
-                            Port of Call:
-                        </div>
-                    </td>
-                    <td>
-                        <div class="marginTop">
-                            <%= @voyages_port.port.name %>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="marginTop strong">
-                            Date:
-                        </div>
-                    </td>
-                    <td>
-                        <div class="marginTop">
-                            <%= @voyages_port.date %>
-                        </div>
-                    </td>
-                </tr>
+                <% else %>
+                <li class="active">
+                    <% end %>
+                    <%= link_to "Main", shipping_company_fleet_ship_voyage_path(:id => params[:id], :ship_id => params[:ship_id], :fleet_id => params[:fleet_id], :shipping_company_id => params[:shipping_company_id]) %>
+                </li>
+                <% @voyage.voyages_ports.each do |voyages_port| %>
+                <% if params[:voyage_port] and params[:voyage_port] == voyages_port.id.to_s %>
+                <li class="active">
+                <% else %>
+                <li>
+                    <% end %>
+                    <%= link_to "#{voyages_port.date}: #{voyages_port.port.name}", shipping_company_fleet_ship_voyage_path(:id => params[:id], :ship_id => params[:ship_id], :fleet_id => params[:fleet_id], :shipping_company_id => params[:shipping_company_id],:voyage_port => voyages_port.id) %>
+                </li>
                 <% end %>
-                <tr>
-                    <td>
-                        <div class="marginTop strong">
-                            Company:
-                        </div>
-                    </td>
-                    <td>
-                        <div class="marginTop">
-                            <%= @voyage.ship.fleet.shipping_company.name %>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="marginTop strong">
-                            Vessel:
-                        </div>
-                    </td>
-                    <td>
-                        <div class="marginTop">
-                            <%= @voyage.ship.name %>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="marginTop strong">
-                            Vessel Type:
-                        </div>
-                    </td>
-                    <td>
-                        <div class="marginTop">
-                            <%= @voyage.ship.vessel_type.category %>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="marginTop strong">
-                            Flag:
-                        </div>
-                    </td>
-                    <td>
-                        <div class="marginTop ">
-                        <%= image_tag "flags/#{@voyage.ship.flag.path}", size: "44", alt: "#{@ship.flag.name}" %>
-                        </br>
-                        <%= "#{@ship.flag.name}" %>
-                    	</div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        
-        <% if params[:voyage_port] %>
-        <div class="marginTop">
-            <h4>Remarks:</h4>
-            <%= @voyage.remarks %>
-        </div>
-        <% end %>
-    </div>
-</div>
-<div class="row">
-    <% if params[:voyage_port] %>
-    <% if current_user.shipping_company_id.to_s==params[:shipping_company_id] && (!params[:alt] || params[:alt]!="true") %>
-    <div class="needs roundBox marginTop">
-        <h4>Needs</h4>
-        <div class="roundGrayBox">
-            <%= render 'offers/altIndexOffer' %>
-        </div>
-    </div>
-    <% end %>
-    <% if ase? || ((params[:alt]=="true") && current_user.shipping_company_id.to_s==params[:shipping_company_id]) %>
-    <div class="needs roundBox marginTop">
-        <h4>Needs</h4>
-        <% @needs.each do |ineed| %>
-        <div class="roundGrayBox">
-            <% if ase? %>
-            <% if (offer=current_user.agent.offers.where(:need_id => ineed).first)!=nil %>
-            <%= render 'offers/editOffer', :ineed => ineed, :offer => offer %>
-            <% else %>
-            <%= render 'offers/newOffer', :ineed => ineed %>
-            <% end %>
-            <% elsif (params[:alt]=="true") && current_user.shipping_company_id.to_s==params[:shipping_company_id] %>
-            <%= render 'offers/indexOffer', :ineed => ineed %>
-            <% end %>
-        </div>
-        <% end %>
-    </div>
-    <% end %>
-    <% if ase? %>
-    <div class="needForm roundBox marginTop">
-        <h4>Add a need</h4>
-        <%= form_for @need, url: shipping_company_fleet_ship_voyage_needs_path(:voyage_id => params[:id], :voyage_port => params[:voyage_port]), :html => {:class => "form-inline"} do |f| %>
-        <%= render 'shared/error_messages', object: f.object %>
-        <%= select "need", "service_id", Service.order(:category).all.collect {|p| [ p.category, p.id ] }, { :include_blank => true }, class: "input-large" %>
-        <%= f.hidden_field :voyages_port_id, :value => params[:voyage_port] %>
-        <%= f.submit "+", class: 'btn btn-small btn-primary' %>
-        <% end %>
-    </div>
-    <% end %>
-    <% else %>
-    
-	<% if false %>
-	<div class="portsofcall roundBox marginTop">
-        <h4>Ports of Call</h4>
-        <% @voyage.voyages_ports.order('date ASC').each do |ivp| %>
-        <div class="roundGrayBox">
-            <%=link_to "#{ivp.port.name}, #{ivp.date}", shipping_company_fleet_ship_voyage_path(:voyage_port => ivp) %>
-        </div>
-        <% end %>
-    </div>
-	<% end %>
-    <% if sce? %>
-    <div class="portsofcallForm roundBox marginTop">
-        <h4>Add a port of call</h4>
-        <%= form_for @voyages_port, url: shipping_company_fleet_ship_voyage_voyages_port_index_path(:voyage_id => params[:id], :voyage_port => params[:voyage_port]) do |f| %>
-        <%= render 'shared/error_messages', object: f.object %>
-        <%= f.label :port_of_call %>
-        <%= select "voyages_port", "port_id", Port.order(:name).all.collect {|p| [ p.name, p.id ] }, { :include_blank => true }, class: "input-large" %>
-        <%= f.label :date %>
-        <%= f.text_field :date, class: "voyages_date" %>
-        <%= f.hidden_field :voyage_id, :value => params[:id] %>
-        <%= f.submit "Add port of call", class: 'btn btn-small btn-primary' %>
-        <% end %>
-    </div>
-    <% end %>
-    <% end %>
-</div>
+                </ul>
+                <table class="table">
+                    <tbody>
+                        <% if params[:voyage_port] %>
+                        <tr>
+                            <td>
+                                <div class="marginTop strong">
+                                    Port of Call:
+                                </div>
+                            </td>
+                            <td>
+                                <div class="marginTop">
+                                    <%= @voyages_port.port.name %>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="marginTop strong">
+                                    Date:
+                                </div>
+                            </td>
+                            <td>
+                                <div class="marginTop">
+                                    <%= @voyages_port.date %>
+                                </div>
+                            </td>
+                        </tr>
+                        <% end %>
+                        <tr>
+                            <td>
+                                <div class="marginTop strong">
+                                    Company:
+                                </div>
+                            </td>
+                            <td>
+                                <div class="marginTop">
+                                    <%= @voyage.ship.fleet.shipping_company.name %>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="marginTop strong">
+                                    Vessel:
+                                </div>
+                            </td>
+                            <td>
+                                <div class="marginTop">
+                                    <%= @voyage.ship.name %>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="marginTop strong">
+                                    Vessel Type:
+                                </div>
+                            </td>
+                            <td>
+                                <div class="marginTop">
+                                    <%= @voyage.ship.vessel_type.category %>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="marginTop strong">
+                                    Flag:
+                                </div>
+                            </td>
+                            <td>
+                                <div class="marginTop ">
+                                <%= image_tag "flags/#{@voyage.ship.flag.path}", size: "44", alt: "#{@ship.flag.name}" %>
+                                </br>
+                                <%= "#{@ship.flag.name}" %>
+                            </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <% if params[:voyage_port] %>
+                                <div class="marginTop">
+                                    
+                                    <div data-object="voyages_port" data-url="<%= shipping_company_fleet_ship_voyage_voyages_port_path(:id => @voyages_port.id, :voyage_id => params[:id], :ship_id => params[:ship_id], :fleet_id => params[:fleet_id], :shipping_company_id => params[:shipping_company_id]) %>">
+                                    <h4>Remarks:</h4><span class="rest-in-place" data-attribute="remarks"><%= @voyages_port.remarks %></span>
+                                    </div>
+                                </div>
+                                <% end %>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+            <div class="row">
+                <% if params[:voyage_port] %>
+                <% if current_user.shipping_company_id.to_s==params[:shipping_company_id] && (!params[:alt] || params[:alt]!="true") %>
+                <div class="needs roundBox marginTop">
+                    <h4>Needs</h4>
+                    <div class="roundGrayBox">
+                        <%= render 'offers/altIndexOffer' %>
+                    </div>
+                </div>
+                <% end %>
+                <% if ase? || ((params[:alt]=="true") && current_user.shipping_company_id.to_s==params[:shipping_company_id]) %>
+                <div class="needs roundBox marginTop">
+                    <h4>Needs</h4>
+                    <% @needs.each do |ineed| %>
+                    <div class="roundGrayBox">
+                        <% if ase? %>
+                        <% if (offer=current_user.agent.offers.where(:need_id => ineed).first)!=nil %>
+                        <%= render 'offers/editOffer', :ineed => ineed, :offer => offer %>
+                        <% else %>
+                        <%= render 'offers/newOffer', :ineed => ineed %>
+                        <% end %>
+                        <% elsif (params[:alt]=="true") && current_user.shipping_company_id.to_s==params[:shipping_company_id] %>
+                        <%= render 'offers/indexOffer', :ineed => ineed %>
+                        <% end %>
+                    </div>
+                    <% end %>
+                </div>
+                <% end %>
+                <% if ase? %>
+                <div class="needForm roundBox marginTop">
+                    <h4>Add a need</h4>
+                    <%= form_for @need, url: shipping_company_fleet_ship_voyage_needs_path(:voyage_id => params[:id], :voyage_port => params[:voyage_port]), :html => {:class => "form-inline"} do |f| %>
+                    <%= render 'shared/error_messages', object: f.object %>
+                    <%= select "need", "service_id", Service.order(:category).all.collect {|p| [ p.category, p.id ] }, { :include_blank => true }, class: "input-large" %>
+                    <%= f.hidden_field :voyages_port_id, :value => params[:voyage_port] %>
+                    <%= f.submit "+", class: 'btn btn-small btn-primary' %>
+                    <% end %>
+                </div>
+                <% end %>
+                <% else %>
+                <% if false %>
+                <div class="portsofcall roundBox marginTop">
+                    <h4>Ports of Call</h4>
+                    <% @voyage.voyages_ports.order('date ASC').each do |ivp| %>
+                    <div class="roundGrayBox">
+                        <%=link_to "#{ivp.port.name}, #{ivp.date}", shipping_company_fleet_ship_voyage_path(:voyage_port => ivp) %>
+                    </div>
+                    <% end %>
+                </div>
+                <% end %>
+                <% if sce? %>
+                <div class="portsofcallForm roundBox marginTop">
+                    <h4>Add a port of call</h4>
+                    <%= form_for @voyages_port, url: shipping_company_fleet_ship_voyage_voyages_port_index_path(:voyage_id => params[:id], :voyage_port => params[:voyage_port]) do |f| %>
+                    <%= render 'shared/error_messages', object: f.object %>
+                    <%= f.label :port_of_call %>
+                    <%= select "voyages_port", "port_id", Port.order(:name).all.collect {|p| [ p.name, p.id ] }, { :include_blank => true }, class: "input-large" %>
+                    <%= f.label :date %>
+                    <%= f.text_field :date, class: "voyages_date" %>
+                    <%= f.hidden_field :voyage_id, :value => params[:id] %>
+                    <%= f.submit "Add port of call", class: 'btn btn-small btn-primary' %>
+                    <% end %>
+                </div>
+                <% end %>
+                <% end %>
+            </div>
