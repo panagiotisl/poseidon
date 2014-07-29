@@ -5,8 +5,15 @@ class ConversationsController < ApplicationController
   before_action :get_fleets,     only: [:index, :show]
   
   def index
-    if params[:voyages_port]
-      @conversations = @mailbox.inbox.where("conversation_id IN (#{labeled_by_vp})", voyages_port_id: params[:voyages_port]).page(params[:page])
+    #if params[:voyages_port]
+    #  @conversations = @mailbox.inbox.where("conversation_id IN (#{labeled_by_vp})", voyages_port_id: params[:voyages_port]).page(params[:page])
+    if @box.empty?
+      if params[:conversation_id]
+        @conversation = Conversation.find(params[:conversation_id])
+        @contacts = contacts
+        @contact = @contacts.first
+        #@conversations = 
+      end
     elsif @box.eql? "inbox"
       @conversations = @mailbox.inbox.page(params[:page])#.per(9)
       #@notifications = @mailbox.notifications.page(params[:page])#.per(9)
@@ -131,19 +138,21 @@ class ConversationsController < ApplicationController
 
   def get_box
     if params[:box].blank? or !["inbox","sentbox","trash"].include?params[:box]
-      params[:box] = 'inbox'
+      params[:box] = ''
     end
-
     @box = params[:box]
   end
 
   def check_current_subject_in_conversation
     @conversation = Conversation.find_by_id(params[:id])
-
     if @conversation.nil? or !@conversation.is_participant?(@actor)
       redirect_to conversations_path(:box => @box)
     return
     end
+  end
+  
+  def contacts
+    ActiveRecord::Base.connection.execute("SELECT distinct receiver_id, receiver_type FROM receipts WHERE receiver_id != '1' and receiver_type != 'ShippingCompany' and notification_id IN (SELECT notification_id FROM receipts WHERE receiver_id = '1' and receiver_type = 'ShippingCompany')")
   end
 
   private

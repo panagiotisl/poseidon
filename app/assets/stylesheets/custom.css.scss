@@ -419,6 +419,26 @@ input {
     width: 86%;
 }
 
+#content-1 {
+    float:left;
+    width:25%;
+    background:#bfb;
+}
+#content-2 {
+    float:right;
+    width:75%;
+}
+
+#content-2-1 {
+    float:left;
+    width:33%;
+    background:#ddf;
+}
+#content-2-2 {
+    float:right;
+    width:67%;
+    background:#dff;
+}
 .marginTop {
   margin-top: 30px;
 }

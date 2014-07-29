@@ -4,6 +4,25 @@
 <section id="conversations">
     <div class="conversations roundBox">
         <%= render :partial => '/shared/message_bar' %>
+		
+		<% if false %>
         <%= render :partial => 'conversations' %>
+		<% end %>
+		
+        <div id="column-wrap">
+            <div id="content-1">
+            	<% @contacts.each do |contact| %>
+					<%= getSender(contact).name %>
+				<% end %>
+            </div>
+            <div id="content-2">
+                <div id="content-2-1">
+                	<%= @contact["receiver_id"] %>
+                </div>
+                <div id="content-2-2">
+                	PAOKARARE
+                </div>
+            </div>
+        </div>
     </div>
 </section>

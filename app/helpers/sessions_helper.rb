@@ -130,11 +130,12 @@ module SessionsHelper
       end
     end
     @unread = notifications.count - Reader.where(:notification_id => notifications).count
-    if @unread > 0
-      @unread.to_s
-    else
-      ""
-    end
+    #if @unread > 0
+    #  @unread.to_s
+    #else
+    #  ""
+    #end
+    @unread.to_s
   end
   
   def is_readC(conversation)
@@ -150,6 +151,14 @@ module SessionsHelper
       @fleets = current_user.shipping_company.fleets
     else
       @fleets = Fleet.none
+    end
+  end
+  
+  def getSender(contact)
+    if contact["receiver_type"] == "ShippingCompany"
+      ShippingCompany.find(contact["receiver_id"])
+    else
+      Agent.find(contact["receiver_id"])
     end
   end
   
