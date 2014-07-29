@@ -10,9 +10,10 @@ class ConversationsController < ApplicationController
     if @box.empty?
       if params[:conversation_id]
         @conversation = Conversation.find(params[:conversation_id])
+        @receipts = @mailbox.receipts_for(@conversation).not_trash
         @contacts = contacts
         @contact = @contacts.first
-        #@conversations = 
+        @conversations = Conversation.where("id IN (#{conversations_by_contact})") 
       end
     elsif @box.eql? "inbox"
       @conversations = @mailbox.inbox.page(params[:page])#.per(9)
@@ -151,6 +152,7 @@ class ConversationsController < ApplicationController
     end
   end
   
+  
   def contacts
     ActiveRecord::Base.connection.execute("SELECT distinct receiver_id, receiver_type FROM receipts WHERE receiver_id != '1' and receiver_type != 'ShippingCompany' and notification_id IN (SELECT notification_id FROM receipts WHERE receiver_id = '1' and receiver_type = 'ShippingCompany')")
   end
@@ -161,4 +163,7 @@ class ConversationsController < ApplicationController
       clause = "SELECT conversation_id FROM labels WHERE voyages_port_id = :voyages_port_id"
     end
 
+    def conversations_by_contact()
+      "SELECT distinct n.conversation_id FROM receipts r, notifications n WHERE r.receiver_id = '2' and r.receiver_type = 'Agent' and r.notification_id = n.id and r.notification_id IN (SELECT notification_id FROM receipts WHERE receiver_id = '1' and receiver_type = 'ShippingCompany')"
+    end
 end

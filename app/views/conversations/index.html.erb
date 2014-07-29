@@ -18,9 +18,10 @@
             <div id="content-2">
                 <div id="content-2-1">
                 	<%= @contact["receiver_id"] %>
+					<%= render :partial => 'conversations' %>			
                 </div>
                 <div id="content-2-2">
-                	PAOKARARE
+                	<%= render :partial => 'conversation_full', :locals =>{:conversation => @conversation} %>
                 </div>
             </div>
         </div>
