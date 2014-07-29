@@ -159,11 +159,11 @@ class ConversationsController < ApplicationController
 
   private
 
-    def labeled_by_vp()
+    def labeled_by_vp
       clause = "SELECT conversation_id FROM labels WHERE voyages_port_id = :voyages_port_id"
     end
 
-    def conversations_by_contact()
+    def conversations_by_contact
       "SELECT distinct n.conversation_id FROM receipts r, notifications n WHERE r.receiver_id = '2' and r.receiver_type = 'Agent' and r.notification_id = n.id and r.notification_id IN (SELECT notification_id FROM receipts WHERE receiver_id = '1' and receiver_type = 'ShippingCompany')"
     end
 end
