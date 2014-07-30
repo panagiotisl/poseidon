@@ -423,7 +423,7 @@ input {
     float:left;
     width:20%;
     overflow: scroll;
-    #background: white;
+    min-height: 400px;
 }
 #content-2 {
     float:right;
@@ -432,14 +432,20 @@ input {
 
 #content-2-1 {
     float:left;
-    width:33%;
-    background:#ddf;
+    width:27%;
+    min-height: 400px;
 }
 #content-2-2 {
     float:right;
-    width:67%;
-    background:#dff;
+    width:73%;
+    min-height: 400px;
 }
+
+.table-myhover tbody tr:hover > td,
+.table-myhover tbody tr:hover > th {
+  background-color: #87AFC7;
+}
+
 .marginTop {
   margin-top: 30px;
 }
