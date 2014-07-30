@@ -419,11 +419,20 @@ input {
     width: 86%;
 }
 
+.myborder {
+	min-height: inherit;
+	border-style: solid;
+    border-width: 2px;
+}
+
 #content-1 {
     float:left;
     width:20%;
-    overflow: scroll;
+    overflow: hidden;
     min-height: 400px;
+    :hover {
+    	overflow: visible;
+    }
 }
 #content-2 {
     float:right;
@@ -432,12 +441,16 @@ input {
 
 #content-2-1 {
     float:left;
-    width:27%;
+    width:25%;
+    overflow: hidden;
     min-height: 400px;
+    :hover {
+    	overflow: visible;
+    }
 }
 #content-2-2 {
     float:right;
-    width:73%;
+    width:75%;
     min-height: 400px;
 }
 

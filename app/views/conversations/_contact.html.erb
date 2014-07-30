@@ -2,8 +2,8 @@
     <% @sender = getSender(contact) %>
     <tr>
                 <td>
-                    <%= link_to @sender.name, @sender %><br />
-                    <%= time_ago_in_words contact["max"] %>
+                    <h5><%= @sender.name %></h5>
+                    <%= "#{time_ago_in_words contact["max"]} ago" %>
                 </td>
     </tr>
 </div>
