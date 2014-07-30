@@ -38,8 +38,7 @@ class VoyagesPortController < ApplicationController
   private
   
     def voyages_port_params
-      params[:voyages_port][:remarks] = "No remarks yet." if params[:voyages_port][:remarks].nil? || params[:voyages_port][:remarks].empty?
+      params[:voyages_port][:remarks] = "No remarks yet. Click to add." if params[:voyages_port][:remarks].nil? || params[:voyages_port][:remarks].empty?
       params.require(:voyages_port).permit(:voyage_id, :port_id, :date, :remarks)
     end
 end
-
