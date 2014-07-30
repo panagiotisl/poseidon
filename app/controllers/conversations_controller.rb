@@ -154,7 +154,7 @@ class ConversationsController < ApplicationController
   
   
   def contacts
-    ActiveRecord::Base.connection.execute("SELECT distinct receiver_id, receiver_type FROM receipts WHERE receiver_id != '1' and receiver_type != 'ShippingCompany' and notification_id IN (SELECT notification_id FROM receipts WHERE receiver_id = '1' and receiver_type = 'ShippingCompany')")
+    ActiveRecord::Base.connection.execute("SELECT receiver_id, receiver_type, max(created_at) as max FROM receipts WHERE receiver_id != '1' and receiver_type != 'ShippingCompany' and notification_id IN (SELECT notification_id FROM receipts WHERE receiver_id = '1' and receiver_type = 'ShippingCompany') group by receiver_id, receiver_type")
   end
 
   private
@@ -164,6 +164,6 @@ class ConversationsController < ApplicationController
     end
 
     def conversations_by_contact
-      "SELECT distinct n.conversation_id FROM receipts r, notifications n WHERE r.receiver_id = '2' and r.receiver_type = 'Agent' and r.notification_id = n.id and r.notification_id IN (SELECT notification_id FROM receipts WHERE receiver_id = '1' and receiver_type = 'ShippingCompany')"
+      "SELECT distinct n.conversation_id FROM receipts r, notifications n WHERE r.receiver_id = '2' and r.receiver_type = 'Agent' and r.notification_id = n.id and r.notification_id IN (SELECT notification_id FROM receipts WHERE receiver_id = '#{get_company_id}' and receiver_type = '#{get_company_type}')"
     end
 end

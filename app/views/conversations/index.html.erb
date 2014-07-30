@@ -8,12 +8,13 @@
 		<% if false %>
         <%= render :partial => 'conversations' %>
 		<% end %>
-		
-        <div id="column-wrap">
+        <div class="column-wrap roundBox">
             <div id="content-1">
+            	<table class="table table-striped">
             	<% @contacts.each do |contact| %>
-					<%= getSender(contact).name %>
+					<%= render :partial => 'contact' , :locals =>{:contact => contact} %>
 				<% end %>
+				</table>
             </div>
             <div id="content-2">
                 <div id="content-2-1">

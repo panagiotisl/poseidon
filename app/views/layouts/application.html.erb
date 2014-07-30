@@ -29,7 +29,11 @@
                                 <%= render "shared/left_menu" %>
                             </div>
                         </div>
+						<% if params[:controller] != 'conversations' %>
                         <div class="span7">
+                        <% else %>
+						<div class="span9">
+						<% end %>							
                             <% flash.each do |key, value| %>
                             <div class="alert alert-<%= key %>">
                                 <%= value %>
@@ -37,13 +41,13 @@
                             <% end %>
                             <%= yield %>
                         </div>
+						<% if params[:controller] != 'conversations' %>
                         <div id="feed_doc" class="span2">
                             <div class="sidebar transparentSidebarBox" data-spy="affix" data-offset-top="30">
                                 <%= render "shared/feed" %>
                             </div>
                         </div>
-                        <div id="feed_doc" class="span2" style="position:fixed; right:10px">
-                        </div>
+						<% end %>
                         <% end %>
                     </div>
                     <% else %>

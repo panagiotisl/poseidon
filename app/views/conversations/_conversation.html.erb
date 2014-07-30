@@ -1,40 +1,40 @@
-	<% if is_readC(conversation) %>
-	<div class="column-wrap conversationLine marginTop paddingBottom">
-    <% else %>
-    <div class="column-wrap conversationLineUnread marginTop paddingBottom">
-    <% end %>
-        <div class="left-column">
-            <table>
-                <tr>
-                    <td>
-                        <% unless @box.eql?'trash' %>
-                        <%= link_to(raw("<i class=\"icon-remove-sign\"></i>"),
-                        conversation_path(conversation, :location => @box,
-                        :box => @box,
-                        :page => params[:page]),
-                        :confirm => t('mailboxer.delete_confirm',
-                        :object => conversation.subject),
-                        :method => :delete,
-                        :remote => true) %>
-                        <% end %>
-                    </td>
-                    <td>
-                        <div class="name">
-                            <%= link_to conversation.last_sender.name, conversation.last_sender %>
-                        </div>
-                        <div class="date">
-                            <%= time_ago_in_words(conversation.updated_at) + " ago" %>
-                        </div>
-                    </td>
-                </tr>
-            </table>
+<% if is_readC(conversation) %>
+<div class="column-wrap conversationLine marginTop paddingBottom">
+<% else %>
+<div class="column-wrap conversationLineUnread marginTop paddingBottom">
+<% end %>
+    <div class="left-column">
+        <table>
+            <tr>
+                <td>
+                    <% unless @box.eql?'trash' %>
+                    <%= link_to(raw("<i class=\"icon-remove-sign\"></i>"),
+                    conversation_path(conversation, :location => @box,
+                    :box => @box,
+                    :page => params[:page]),
+                    :confirm => t('mailboxer.delete_confirm',
+                    :object => conversation.subject),
+                    :method => :delete,
+                    :remote => true) %>
+                    <% end %>
+                </td>
+                <td>
+                    <div class="name">
+                        <%= link_to conversation.last_sender.name, conversation.last_sender %>
+                    </div>
+                    <div class="date">
+                        <%= time_ago_in_words(conversation.updated_at) + " ago" %>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="right-column">
+        <div class="subject">
+            <%= link_to(truncate(conversation.subject, :length => 55), conversation_path(conversation.id,:box => @box,:page => params[:page])) %>
         </div>
-        <div class="right-column">
-            <div class="subject">
-                <%= link_to(truncate(conversation.subject, :length => 55), conversation_path(conversation.id,:box => @box,:page => params[:page])) %>
-            </div>
-            <div class="body">
-                <%= raw(truncate(strip_tags(conversation.last_message.body), :length => 50)) %>
-            </div>
+        <div class="body">
+            <%= raw(truncate(strip_tags(conversation.last_message.body), :length => 50)) %>
         </div>
     </div>
+</div>

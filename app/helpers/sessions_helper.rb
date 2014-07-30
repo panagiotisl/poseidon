@@ -46,30 +46,30 @@ module SessionsHelper
   end
 
   def sce?
-    current_user && current_user.shipping_company_id
+    @sce ||= current_user && current_user.shipping_company_id
   end
 
   def ase?
-    current_user && current_user.agent_id
+    @ase ||= current_user && current_user.agent_id
   end
   
   def get_company_id
     if sce?
-      return current_user.shipping_company_id
+      @company_id ||= current_user.shipping_company_id
     elsif ase?
-      return current_user.agent_id
+      @company_id ||= current_user.agent_id
     else
-      return nil
+      @company_id ||= nil
     end
   end
   
   def get_company_type
     if sce?
-      return "ShippingCompany"
+      @company_type ||= "ShippingCompany"
     elsif ase?
-      return "Agent"
+      @company_type ||= "Agent"
     else
-      return nil
+      @company_type ||= nil
     end
   end
     

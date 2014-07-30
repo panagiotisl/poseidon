@@ -421,12 +421,13 @@ input {
 
 #content-1 {
     float:left;
-    width:25%;
-    background:#bfb;
+    width:20%;
+    overflow: scroll;
+    #background: white;
 }
 #content-2 {
     float:right;
-    width:75%;
+    width:80%;
 }
 
 #content-2-1 {
