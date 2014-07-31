@@ -1,8 +1,12 @@
 <div>
-    <tr>
-                <td>
-                    <h5><%= conversation.subject %></h5>
-                    <%= "#{time_ago_in_words conversation.receipts.last.created_at} ago" %>
-                </td>
+	<% if conversation.id.to_s == params[:conversation_id] %>
+    <tr class="success">
+    <% else %>
+	<tr>
+	<% end %>
+        <td>
+            <h5><%= conversation.subject %></h5>
+            <%= "#{time_ago_in_words conversation.receipts.last.created_at} ago" %>
+        </td>
     </tr>
 </div>

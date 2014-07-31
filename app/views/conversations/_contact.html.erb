@@ -1,9 +1,13 @@
 <div>
     <% @sender = getSender(contact) %>
+	<% if contact == @contact %>
+    <tr class="success">
+    <% else %>
     <tr>
-                <td>
-                    <h5><%= @sender.name %></h5>
-                    <%= "#{time_ago_in_words contact["max"]} ago" %>
-                </td>
+        <% end %>
+        <td>
+            <h5><%= @sender.name %></h5>
+            <%= "#{time_ago_in_words contact["max"]} ago" %>
+        </td>
     </tr>
 </div>
