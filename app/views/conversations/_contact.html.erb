@@ -1,6 +1,6 @@
 <div>
     <% @sender = getSender(contact) %>
-	<% if contact == @contact %>
+	<% if contact["receiver_id"] == @contact["receiver_id"] and contact["receiver_type"] == @contact["receiver_type"] %>
     <tr class="success">
     <% else %>
     <tr>

@@ -11,12 +11,13 @@ class ConversationsController < ApplicationController
       if params[:conversation_id]
         @conversation = Conversation.find params[:conversation_id]
         @contact = contact_by_conversation params[:conversation_id]
-        
+      elsif params[:receiver_id] and params[:receiver_type]
+        @contact = contact_by_receiver params[:receiver_id], params[:receiver_type]
+      end
         @receipts = @mailbox.receipts_for(@conversation).not_trash
         @contacts = contacts
         #@contact = @contacts.first
         @conversations = Conversation.where("id IN (#{conversations_by_contact @contact})").order(created_at: :desc)
-      end
     elsif @box.eql? "inbox"
       @conversations = @mailbox.inbox.page(params[:page])#.per(9)
       #@notifications = @mailbox.notifications.page(params[:page])#.per(9)
@@ -66,7 +67,6 @@ class ConversationsController < ApplicationController
     end
     redirect_to :action => :show
     @receipts.mark_as_read
-
   end
 
   def destroy
@@ -154,7 +154,6 @@ class ConversationsController < ApplicationController
     end
   end
   
-  
   private
 
     def labeled_by_vp
@@ -168,8 +167,13 @@ class ConversationsController < ApplicationController
     def contact_by_conversation(conversation_id)
       ActiveRecord::Base.connection.execute("SELECT receiver_id, receiver_type, max(r.created_at) as max FROM receipts r, notifications n WHERE (receiver_id != '#{get_company_id}' or receiver_type != '#{get_company_type}') and r.notification_id = n.id and conversation_id = '#{conversation_id}' group by receiver_id, receiver_type").first
     end
+    
+    def contact_by_receiver(receiver_id, receiver_type)
+      ActiveRecord::Base.connection.execute("SELECT receiver_id, receiver_type, max(r.created_at) as max FROM receipts r, notifications n WHERE (receiver_id != '#{get_company_id}' or receiver_type != '#{get_company_type}') and r.notification_id = n.id and conversation_id = '#{conversation_id}' group by receiver_id, receiver_type").first
+    end
 
     def conversations_by_contact(contact)
       "SELECT distinct n.conversation_id FROM receipts r, notifications n WHERE r.receiver_id = '#{contact["receiver_id"]}' and r.receiver_type = '#{contact["receiver_type"]}' and r.notification_id = n.id and r.notification_id IN (SELECT notification_id FROM receipts WHERE receiver_id = '#{get_company_id}' and receiver_type = '#{get_company_type}')"
     end
+
 end

@@ -427,9 +427,10 @@ input {
 
 #content-1 {
     float:left;
-    width:20%;
+    width:calc(20% - 4px);
     overflow: hidden;
     min-height: 500px;
+    max-height: 500px;
     :hover {
     	overflow: visible;
     }
@@ -441,17 +442,20 @@ input {
 
 #content-2-1 {
     float:left;
-    width:25%;
+    width:calc(25% - 2px);
     overflow: hidden;
     min-height: 500px;
+    max-height: 500px;
     :hover {
     	overflow: visible;
     }
 }
 #content-2-2 {
     float:right;
-    width:75%;
+    width:calc(75% - 2px);
     min-height: 500px;
+    max-height: 500px;
+    overflow: scroll;
 }
 
 .table-myhover tbody tr:hover > td,
