@@ -8,21 +8,23 @@ class ConversationsController < ApplicationController
     #if params[:voyages_port]
     #  @conversations = @mailbox.inbox.where("conversation_id IN (#{labeled_by_vp})", voyages_port_id: params[:voyages_port]).page(params[:page])
     if @box.empty?
+      @contacts = contacts
       if params[:conversation_id]
         @conversation = Conversation.find params[:conversation_id]
         @contact = contact_by_conversation params[:conversation_id]
+        @conversations = Conversation.where("id IN (#{conversations_by_contact @contact})").order(created_at: :desc)
       elsif params[:receiver_id] and params[:receiver_type]
         @contact = contact_by_receiver params[:receiver_id], params[:receiver_type]
-      end
-        @receipts = @mailbox.receipts_for(@conversation).not_trash
-        @contacts = contacts
-        #@contact = @contacts.first
         @conversations = Conversation.where("id IN (#{conversations_by_contact @contact})").order(created_at: :desc)
+        @conversation = @conversations.first
+      else
+        @contact = @contacts.first
+        @conversations = Conversation.where("id IN (#{conversations_by_contact @contact})").order(created_at: :desc)
+        @conversation = @conversations.first
+      end
+        @receipts = @mailbox.receipts_for(@conversation).not_trash.reverse
     elsif @box.eql? "inbox"
       @conversations = @mailbox.inbox.page(params[:page])#.per(9)
-      #@notifications = @mailbox.notifications.page(params[:page])#.per(9)
-      #@conversations += @notifications
-      #@conversations.sort! { |a,b| a.updated_at <=> b.updated_at }
     elsif @box.eql? "sentbox"
       @conversations = @mailbox.sentbox.page(params[:page])#.per(9)
     else
@@ -161,7 +163,7 @@ class ConversationsController < ApplicationController
     end
     
     def contacts
-      ActiveRecord::Base.connection.execute("SELECT receiver_id, receiver_type, max(created_at) as max FROM receipts WHERE (receiver_id != '#{get_company_id}' or receiver_type != '#{get_company_type}') and notification_id IN (SELECT notification_id FROM receipts WHERE receiver_id = '#{get_company_id}' and receiver_type = '#{get_company_type}') group by receiver_id, receiver_type")
+      ActiveRecord::Base.connection.execute("SELECT receiver_id, receiver_type, max(created_at) as max FROM receipts WHERE (receiver_id != '#{get_company_id}' or receiver_type != '#{get_company_type}') and notification_id IN (SELECT notification_id FROM receipts WHERE receiver_id = '#{get_company_id}' and receiver_type = '#{get_company_type}') group by receiver_id, receiver_type order by max(created_at) desc")
     end
     
     def contact_by_conversation(conversation_id)
@@ -169,7 +171,7 @@ class ConversationsController < ApplicationController
     end
     
     def contact_by_receiver(receiver_id, receiver_type)
-      ActiveRecord::Base.connection.execute("SELECT receiver_id, receiver_type, max(r.created_at) as max FROM receipts r, notifications n WHERE (receiver_id != '#{get_company_id}' or receiver_type != '#{get_company_type}') and r.notification_id = n.id and conversation_id = '#{conversation_id}' group by receiver_id, receiver_type").first
+      ActiveRecord::Base.connection.execute("SELECT r1.receiver_id, r1.receiver_type, max(r1.created_at) as max FROM receipts r1, receipts r2 WHERE r1.notification_id = r2.notification_id and r1.receiver_id = '#{receiver_id}' and r1.receiver_type = '#{receiver_type}' and r2.receiver_id = '#{get_company_id}' and r2.receiver_type = '#{get_company_type}' group by r1.receiver_id, r1.receiver_type").first
     end
 
     def conversations_by_contact(contact)

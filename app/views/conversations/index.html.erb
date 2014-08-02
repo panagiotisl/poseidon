@@ -1,7 +1,7 @@
 <% content_for :title do %>
 <%=t('message.other') %>
 <% end %>
-<div class="conversations roundBox">
+<div id="conversationbox" class="conversations roundBox">
     <%= render :partial => '/shared/message_bar' %>
     <div class="column-wrap roundBox">
         <div id="content-1" class="myborder">
@@ -27,3 +27,9 @@
         </div>
     </div>
 </div>
+<script>
+	var target = document.getElementById("editorscroll");
+	target.scrollIntoView();
+	document.getElementById("conversationbox");
+	target.scrollIntoView();
+</script>

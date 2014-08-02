@@ -1,8 +1,8 @@
 <div>
-	<% if conversation.id.to_s == params[:conversation_id] %>
-    <tr class="success">
+	<% if conversation.id == @conversation.id %>
+    <tr class="success" onclick="window.location='/conversations/?conversation_id=<%=conversation.id.to_s%>'";>
     <% else %>
-	<tr>
+	<tr onclick="window.location='/conversations/?conversation_id=<%=conversation.id.to_s%>'";>
 	<% end %>
         <td>
             <h5><%= conversation.subject %></h5>

@@ -1,3 +1,10 @@
+<div class="marginTop messages">
+    <% @receipts.each do |receipt| %>
+    <%= render :partial => '/messages/dialog', :object => receipt.message %>
+    <% end %>
+</div>
+<div style="clear: both;">
+</div>
 <% unless @box.eql?'trash' %>
 <br>
 <%= form_tag conversation_path(conversation), :method => :put, :class => "cont_conversation" do %>
@@ -13,7 +20,8 @@
     </ul>
 </div>
 <% end %>
-<div class="editor">
+<div id="editorscroll" class="editor">
+	<a name="anchor"></a>
     <%= text_area_tag :body, nil,:rows =>6, :cols=> 53, :class => "required form_tag" %>
 </div>
 <div class="actions" style="float:right">
@@ -21,10 +29,3 @@
 </div>
 <% end %>
 <%end %>
-<div style="clear: both;">
-</div>
-<div class="marginTop messages">
-    <% @receipts.each do |receipt| %>
-    <%= render :partial => '/messages/dialog', :object => receipt.message %>
-    <% end %>
-</div>
