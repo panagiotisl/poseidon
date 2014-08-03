@@ -1,18 +1,19 @@
 <ul class="nav nav-pills">
-	<% if !params[:box] %>
+	<% if params[:controller]=="messages" and params[:action]=="new" %>
     <li class="active">
     <% else %>
 	<li>
 	<% end %>
         <%= link_to "New Message", new_message_path %>
     </li>
-	<% if params[:box].eql? "inbox" %>
+	<% if params[:controller]=="conversations" and params[:action]=="index" %>
     <li class="active">
     <% else %>
 	<li>
 	<% end %>
-        <%= link_to "Inbox", conversations_path(:box=>'inbox') %>
+        <%= link_to "Messages", conversations_path %>
     </li>
+	<% if false %>
 	<% if params[:box].eql? "sentbox" %>
     <li class="active">
     <% else %>
@@ -27,4 +28,5 @@
 	<% end %>
         <%= link_to "Thrash", conversations_path(:box=>'trash') %>
     </li>
+	<% end %>
 </ul>
