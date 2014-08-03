@@ -458,6 +458,23 @@ input {
     overflow: scroll;
 }
 
+.padding {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.paddingRight {
+  padding-right: 30px;
+}
+
+.paddingLeft {
+  padding-left: 30px;
+}
+
+.paddingBottom {
+  padding-bottom:10px;
+}
+
 .table-myhover tbody tr:hover > td,
 .table-myhover tbody tr:hover > th {
   background-color: #B6B6B4;
@@ -477,9 +494,6 @@ input {
   margin-left: 15px;
 }
 
-.paddingBottom {
-  padding-bottom:10px;
-}
 
 .xSmall {
   font-size: x-small;
@@ -579,6 +593,11 @@ input {
   background-color: $beige;
 }
 
+.leftRightMargin {
+  margin-right: 2px;
+  margin-left: 2px;
+}
+
 .conversation {
   cursor: pointer;
   background: #E5E4E2;	
@@ -587,10 +606,11 @@ input {
   -webkit-border-radius: 3px;
 }
 
-
-.leftRightMargin {
-  margin-right: 2px;
-  margin-left: 2px;
+.fullConversation {
+  background: #E5E4E2;	
+  border-radius: 15px ;
+  -moz-border-radius: 15px ;
+  -webkit-border-radius: 15px;
 }
 
 .convSubject {
@@ -605,6 +625,25 @@ input {
 
 }
 
+.fullConvSubject {
+  margin-top: 4px;
+  border-top-right-radius: 15px;
+  -moz-border-radius-topright: 15px;
+  -webkit-border-radius-topright: 15px;
+  border-top-left-radius: 15px;
+  -moz-border-radius-topleft: 15px;
+  -webkit-border-radius-topleft: 15px;
+
+}
+
+.fullConvSubjectIn {
+  background-color: #F4B4B0;	
+}
+
+.fullConvSubjectOut {
+  background-color: #B8EEB0;	
+}
+
 .convBody {
   font-size: 75%;
   border-bottom-right-radius: 3px;
@@ -613,6 +652,26 @@ input {
   border-bottom-left-radius: 3px;
   -moz-border-radius-bottomleft: 3px;
   -webkit-border-radius-bottomleft: 3px;
+
+}
+
+.fullConvBody {
+	border-style: solid;
+	border-top-width: 2px;
+	border-bottom-width: 2px;
+	border-right-width: 0px;
+	border-left-width: 0px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.fullConvFooter {
+  border-bottom-right-radius: 15px;
+  -moz-border-radius-bottomright: 15px;
+  -webkit-border-radius-bottomright: 15px;
+  border-bottom-left-radius: 15px;
+  -moz-border-radius-bottomleft: 15px;
+  -webkit-border-radius-bottomleft: 15px;
 
 }
 

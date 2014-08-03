@@ -22,7 +22,9 @@
                     </table>
             </div>
             <div id="content-2-2" class="myborder" style="border-left-width:0px;">
-                <%= render :partial => 'contact_conversation_receipts' , :locals =>{:conversation => @conversation}  %>
+                <div class="padding">
+                    <%= render :partial => 'contact_conversation_receipts' , :locals =>{:conversation => @conversation} %>
+                </div>
             </div>
         </div>
     </div>

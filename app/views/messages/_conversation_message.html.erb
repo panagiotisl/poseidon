@@ -1,16 +1,38 @@
-<% if is_readC(message) %>
-<div id=<%= message.id %> class="conversation">
+<% @outgoing = (sce? and message.sender.name == current_user.shipping_company.name) or (ase? and message.sender.name == current_user.agent.name) %>
+<% if @outgoing %>
+<div class="paddingRight">
 <% else %>
-<div id=<%= message.id %> class="conversation">
-    <% end %>
-    <div class="convSubject">
-        <div class="leftRightMargin">
-            <h6><%= raw(truncate(message.subject, :length => 20)) %></h6>
+<div class="paddingLeft">
+<% end %>
+<div class="fullConversation">
+    <% if @outgoing %>
+	<div class="fullConvSubject fullConvSubjectOut">
+	<% else %>
+	<div class="fullConvSubject fullConvSubjectIn">
+	<% end %>
+        <div class="leftRightMargin padding">
+        	<% sender = Sender.where(:notification_id => message.id).first %>
+        	<div style="float:left;"><b>From:</b> <%= link_to message.sender.name, message.sender %> <%=" (#{sender.user.name})"%></div>
+			<div style="float:right;"><%= message.updated_at.strftime('%c') %></div>
+			 <br />
+            <b>Subject:</b> <%= message.subject %>
         </div>
     </div>
-    <div class="convBody">
-        <div class="leftRightMargin">
-            <%= raw(truncate(strip_tags(message.body), :length => 100)) %>
+    <div class="fullConvBody">
+        <div class="leftRightMargin padding">
+            <%= strip_tags(message.body) %>
         </div>
     </div>
+	<div class="fullConvFooter">
+        <div class="leftRightMargin padding xSmall">
+            Read by:<% Reader.where(:notification_id => message.id).each_with_index do |reader, i| %>
+            <% unless i==0 %>,<%end %>
+            <%= reader.user.name %>
+            <% if reader.user.agent_id %>
+            (<%= link_to reader.user.agent.name, reader.user.agent %>)<% elsif reader.user.shipping_company_id %>
+            (<%= link_to reader.user.shipping_company.name, reader.user.shipping_company %>)<% end %>
+            <% end %>
+        </div>
+    </div>
+</div>
 </div>
