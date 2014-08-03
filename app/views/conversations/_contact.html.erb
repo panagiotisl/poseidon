@@ -1,7 +1,7 @@
 <div>
     <% @sender = getSender(contact) %>
 	<% if contact["receiver_id"] == @contact["receiver_id"] and contact["receiver_type"] == @contact["receiver_type"] %>
-    <tr class="success" onclick="window.location='/conversations/?receiver_id=<%=contact["receiver_id"]%>&receiver_type=<%=contact["receiver_type"]%>'";>
+    <tr class="info" onclick="window.location='/conversations/?receiver_id=<%=contact["receiver_id"]%>&receiver_type=<%=contact["receiver_type"]%>'";>
     <% else %>
     <tr onclick="window.location='/conversations/?receiver_id=<%=contact["receiver_id"]%>&receiver_type=<%=contact["receiver_type"]%>'";>
         <% end %>

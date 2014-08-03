@@ -460,7 +460,9 @@ input {
 
 .table-myhover tbody tr:hover > td,
 .table-myhover tbody tr:hover > th {
-  background-color: #87AFC7;
+  background-color: #B6B6B4;
+   cursor: pointer;
+   cursor: hand;
 }
 
 .marginTop {
@@ -615,7 +617,7 @@ input {
 }
 
 .conversation:hover {
-  background: #B6B6B4;
+  background-color: #B6B6B4;
 }
 
 .box2 {

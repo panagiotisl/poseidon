@@ -1,6 +1,6 @@
-<div class="marginTop messages">
+<div class="messages">
     <% @receipts.each do |receipt| %>
-    <%= render :partial => '/messages/dialog', :object => receipt.message %>
+	<%= render :partial => '/messages/conversation_message' , :locals => {:message => receipt.message} %>
     <% end %>
 </div>
 <div style="clear: both;">

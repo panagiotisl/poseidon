@@ -1,6 +1,6 @@
 <div>
 	<% if conversation.id == @conversation.id %>
-    <tr class="success" onclick="window.location='/conversations/?conversation_id=<%=conversation.id.to_s%>'";>
+    <tr class="info" onclick="window.location='/conversations/?conversation_id=<%=conversation.id.to_s%>'";>
     <% else %>
 	<tr onclick="window.location='/conversations/?conversation_id=<%=conversation.id.to_s%>'";>
 	<% end %>
