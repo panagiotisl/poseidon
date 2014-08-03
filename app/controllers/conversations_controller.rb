@@ -36,19 +36,20 @@ class ConversationsController < ApplicationController
   end
 
   def show
-    if @box.eql? 'trash'
-      @receipts = @mailbox.receipts_for(@conversation).trash
-    else
-      @receipts = @mailbox.receipts_for(@conversation).not_trash
-    end
-    render :action => :show
-    @receipts.mark_as_read
-    Reader.create(user_id: current_user.id, conversation_id: @conversation.id)
-    @receipts.each do |receipt|
-      if (receipt.mailbox_type == "inbox") and ((receipt.receiver_type == "Agent" and current_user.agent_id == receipt.receiver_id) or (receipt.receiver_type == "ShippingCompany" and current_user.shipping_company_id == receipt.receiver_id))
-        Reader.create(user_id: current_user.id, notification_id: receipt.notification.id)
-      end
-    end
+    redirect_to :action => 'index', :conversation_id => params[:id]
+    #if @box.eql? 'trash'
+    #  @receipts = @mailbox.receipts_for(@conversation).trash
+    #else
+    #  @receipts = @mailbox.receipts_for(@conversation).not_trash
+    #end
+    #render :action => :show
+    #@receipts.mark_as_read
+    #Reader.create(user_id: current_user.id, conversation_id: @conversation.id)
+    #@receipts.each do |receipt|
+    #  if (receipt.mailbox_type == "inbox") and ((receipt.receiver_type == "Agent" and current_user.agent_id == receipt.receiver_id) or (receipt.receiver_type == "ShippingCompany" and current_user.shipping_company_id == receipt.receiver_id))
+    #    Reader.create(user_id: current_user.id, notification_id: receipt.notification.id)
+    #  end
+    #end
   end
 
   def update
