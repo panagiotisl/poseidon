@@ -15,6 +15,7 @@ class Agent < ActiveRecord::Base
   validates :country_id, presence: true
   
   acts_as_messageable
+  searchkick
 
   def operating_on?(port_id)
     operations.find_by(port_id: port_id)

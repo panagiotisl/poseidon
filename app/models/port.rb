@@ -10,4 +10,7 @@ class Port < ActiveRecord::Base
   validates :country_id, presence: true
   validates :lat, presence: true
   validates :lng, presence: true
+  
+  searchkick
+  
 end

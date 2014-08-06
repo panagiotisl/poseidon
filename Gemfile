@@ -19,6 +19,8 @@ gem 'repeated_auto_complete'
 gem 'oboe-heroku'
 gem 'font-awesome-rails', '~> 4.1.0.0'
 gem 'rest_in_place'
+gem 'searchkick'
+gem 'kaminari'
 
 group :development, :test do
   gem 'pg', '0.15.1'
