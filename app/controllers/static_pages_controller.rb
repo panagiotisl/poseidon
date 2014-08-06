@@ -33,9 +33,9 @@ class StaticPagesController < ApplicationController
         @fleets = Fleet.none
         @voyages_ports = current_user.agent.voyages_ports
       end
-      @es_agents = Agent.search @term, page: params[:page], per_page: 20
-      @es_shippingCompanies = ShippingCompany.search @term, page: params[:page], per_page: 20
-      @es_ports = Port.search @term, page: params[:page], per_page: 20
+      @es_agents = Agent.search @term, page: params[:agents_page], per_page: 5
+      @es_shippingCompanies = ShippingCompany.search @term, page: params[:sc_page], per_page: 5
+      @es_ports = Port.search @term, page: params[:ports_page], per_page: 5
       #@es_ports = Port.all.paginate(page: params[:page])
   end
 
