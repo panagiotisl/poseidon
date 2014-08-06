@@ -11,6 +11,6 @@ class Port < ActiveRecord::Base
   validates :lat, presence: true
   validates :lng, presence: true
   
-  searchkick
+  searchkick word_start: [:name]
   
 end

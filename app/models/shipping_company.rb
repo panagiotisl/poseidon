@@ -14,7 +14,7 @@ class ShippingCompany < ActiveRecord::Base
   validates :country_id, presence: true
   
   acts_as_messageable
-  searchkick
+  searchkick word_start: [:name]
   
   def mailboxer_email(object)
     return :email
