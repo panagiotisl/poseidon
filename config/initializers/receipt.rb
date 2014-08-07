@@ -4,8 +4,9 @@ Receipt.class_eval do
   
   def search_data
     {
-      body: getNotification.body,
+      id: id,
       subject: getNotification.subject,
+      body: getNotification.body,
       mailbox_type: mailbox_type,
       receiver: getReceiverName(receiver_id, receiver_type),
       receiver_id: receiver_id,
