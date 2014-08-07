@@ -60,6 +60,7 @@ SampleApp::Application.routes.draw do
   get '/about',   to: 'static_pages#about'
   get '/contact', to: 'static_pages#contact'
   get "/search" , :to => "static_pages#search", :as => :search
+  get "/search_mailbox" , :to => "conversations#search", :as => :search_mailbox
   
   get :autocomplete_recipients, :to => 'messages#recipients'
   

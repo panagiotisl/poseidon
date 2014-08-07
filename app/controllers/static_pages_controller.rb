@@ -35,7 +35,6 @@ class StaticPagesController < ApplicationController
       @es_agents = Agent.search @term, page: params[:agents_page], per_page: 5, fields: [{name: :word_start}]
       @es_shippingCompanies = ShippingCompany.search @term, page: params[:sc_page], per_page: 5, fields: [{name: :word_start}]
       @es_ports = Port.search @term, page: params[:ports_page], per_page: 5, fields: [{name: :word_start}]
-      #@es_ports = Port.all.paginate(page: params[:page])
   end
 
 end

@@ -1,9 +1,5 @@
 class MessagesController < ApplicationController
 
-  #autocomplete :user, :name
-  #autocomplete :agent, :name, :extra_data => [:email]
-  #autocomplete :recipients, {:agent => [:name], :shipping_company => [:name]}
-
   before_filter :signed_in_user
   before_filter :get_actor, :get_mailbox, :get_box
   before_action :get_fleets,     only: [:index, :show, :new]
@@ -12,8 +8,6 @@ class MessagesController < ApplicationController
     redirect_to conversations_path(:box => @box)
   end
 
-  # GET /messages/1
-  # GET /messages/1.xml
   def show
     if @message = Message.find_by_id(params[:id]) and @conversation = @message.conversation
       if @conversation.is_participant?(@actor)
@@ -51,15 +45,11 @@ class MessagesController < ApplicationController
     @name = params[:recipient]
   end
 
-  # GET /messages/1/edit
   def edit
 
   end
 
-  # POST /messages
-  # POST /messages.xml
   def create
-    
     @recipients = params[:message_recipient_name].split(',').map{ |r| Agent.where(name: r).first }
     puts @recipients
     if !@recipients.any?
@@ -79,14 +69,10 @@ class MessagesController < ApplicationController
     end
   end
 
-  # PUT /messages/1
-  # PUT /messages/1.xml
   def update
 
   end
 
-  # DELETE /messages/1
-  # DELETE /messages/1.xml
   def destroy
 
   end

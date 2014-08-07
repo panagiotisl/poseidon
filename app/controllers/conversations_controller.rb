@@ -139,6 +139,20 @@ class ConversationsController < ApplicationController
       format.js
     end
   end
+  
+  
+  def search
+    @term = params[:term]
+    if sce?
+        @fleets = current_user.shipping_company.fleets
+        @ships = current_user.shipping_company.ships
+        @voyages = current_user.shipping_company.voyages
+      elsif ase?
+        @fleets = Fleet.none
+        @voyages_ports = current_user.agent.voyages_ports
+      end
+      @results = Receipt.search @term, page: params[:inbox_page], per_page: 10, load: false, where: { mailbox_type: "inbox", receiver_id: get_company_id, receiver_type: get_company_type }
+  end
 
   private
 
