@@ -1,0 +1,36 @@
+<% if (sce? and result.receiver == current_user.shipping_company.name) or (ase? and message.receiver == current_user.agent.name) %>
+<div class="paddingRight hover" onclick="window.location='/conversations/<%=result.conversation_id%>';">
+<% else %>
+<div class="paddingLeft hover" onclick="window.location='/conversations/<%=result.conversation_id%>';">
+<% end %>
+<div class="fullConversation">
+    <% if (sce? and result.receiver == current_user.shipping_company.name) or (ase? and result.receiver == current_user.agent.name) %>
+	<div class="fullConvSubject fullConvSubjectOut">
+	<% else %>
+	<div class="fullConvSubject fullConvSubjectIn">
+	<% end %>
+        <div class="leftRightMargin padding">
+        	<div style="float:left;"><b>From:</b> <%= result.receiver %></div>
+			<div style="float:right;"><%= result.created_at %></div>
+			 <br />
+            <b>Subject:</b> <%= result.subject %>
+        </div>
+    </div>
+    <div class="fullConvBody">
+        <div class="leftRightMargin padding">
+            <%= strip_tags(result.body) %>
+        </div>
+    </div>
+	<div class="fullConvFooter">
+        <div class="leftRightMargin padding xSmall">
+            Read by:<% Reader.where(:notification_id => result.id).each_with_index do |reader, i| %>
+            <% unless i==0 %>,<%end %>
+            <%= reader.user.name %>
+            <% if reader.user.agent_id %>
+            (<%= link_to reader.user.agent.name, reader.user.agent %>)<% elsif reader.user.shipping_company_id %>
+            (<%= link_to reader.user.shipping_company.name, reader.user.shipping_company %>)<% end %>
+            <% end %>
+        </div>
+    </div>
+</div>
+</div>
