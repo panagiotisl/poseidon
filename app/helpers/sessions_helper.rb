@@ -154,11 +154,11 @@ module SessionsHelper
     end
   end
   
-  def getSender(contact)
-    if contact["receiver_type"] == "ShippingCompany"
-      ShippingCompany.find(contact["receiver_id"])
+  def getSender(receiver_id, receiver_type)
+    if receiver_type == "ShippingCompany"
+      ShippingCompany.find(receiver_id)
     else
-      Agent.find(contact["receiver_id"])
+      Agent.find(receiver_id)
     end
   end
   

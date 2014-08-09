@@ -1,16 +1,17 @@
-<% if (sce? and result.receiver == current_user.shipping_company.name) or (ase? and message.receiver == current_user.agent.name) %>
+<% if (result.mailbox_type != "inbox") %>
 <div class="paddingRight hover" onclick="window.location='/conversations/<%=result.conversation_id%>';">
 <% else %>
 <div class="paddingLeft hover" onclick="window.location='/conversations/<%=result.conversation_id%>';">
 <% end %>
 <div class="fullConversation">
-    <% if (sce? and result.receiver == current_user.shipping_company.name) or (ase? and result.receiver == current_user.agent.name) %>
+    <% if (result.mailbox_type != "inbox") %>
 	<div class="fullConvSubject fullConvSubjectOut">
 	<% else %>
 	<div class="fullConvSubject fullConvSubjectIn">
 	<% end %>
         <div class="leftRightMargin padding">
-        	<div style="float:left;"><b>From:</b> <%= result.receiver %></div>
+        	<% sender = getSender result.sender_id, result.sender_type %>
+        	<div style="float:left;"><b>From:</b> <%= link_to sender.name, sender %></div>
 			<div style="float:right;"><%= result.created_at %></div>
 			 <br />
             <b>Subject:</b> <%= result.subject %>

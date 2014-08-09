@@ -1,5 +1,5 @@
 <div>
-    <% @sender = getSender(contact) %>
+    <% @sender = getSender(contact["receiver_id"], contact["receiver_type"]) %>
 	<% if contact["receiver_id"] == @contact["receiver_id"] and contact["receiver_type"] == @contact["receiver_type"] %>
     <tr class="info" onclick="window.location='/conversations/?receiver_id=<%=contact["receiver_id"]%>&receiver_type=<%=contact["receiver_type"]%>'";>
     <% else %>
