@@ -13,6 +13,7 @@ Receipt.class_eval do
       receiver_type: receiver_type,
       sender_id: getNotification.sender_id,
       sender_type: getNotification.sender_type,
+      notification_id: getNotification.id,
       conversation_id: getNotification.conversation_id,
       created_at: created_at
     }

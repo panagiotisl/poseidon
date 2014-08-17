@@ -151,7 +151,21 @@ class ConversationsController < ApplicationController
         @fleets = Fleet.none
         @voyages_ports = current_user.agent.voyages_ports
       end
-      @results = Receipt.search @term, page: params[:inbox_page], per_page: 10, load: false, where: { mailbox_type: "inbox", receiver_id: get_company_id, receiver_type: get_company_type }
+      @mailbox_type = []
+      if params[:inbox]=='1'
+        @mailbox_type.push "inbox"
+      end
+      if params[:sentbox]=='1'
+        @mailbox_type.push "sentbox"
+      end
+      if params[:notifications]=='1'
+        @mailbox_type.push ""
+      end
+      unless @mailbox_type.empty?
+        @results = Receipt.search @term, page: params[:inbox_page], per_page: 10, load: false, fields: ["subject^10", "body^5"], partial: true, where: { mailbox_type: @mailbox_type , receiver_id: get_company_id, receiver_type: get_company_type }
+      else
+        @results = Receipt.none
+      end
   end
 
   private

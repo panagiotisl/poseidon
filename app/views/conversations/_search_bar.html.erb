@@ -1,6 +1,19 @@
 <form class="form-search navbar-form navbar-left" role="search" accept-charset="UTF-8" action="/search_mailbox" method="get">
     <div class="input-append">
-        <input id="term" name="term" type="text" class="span7 search-query">
-        <button type="submit" class="btn"><span class="icon icon-search"></span></button>
+        <input id="term" name="term" type="text" class="span8 search-query">
+        <button type="submit" class="btn">
+            <span class="icon icon-search"></span>
+        </button>
+        <div class="smallMarginTop">
+            <span class="paddingLeft paddingRight"><%= label_tag :inbox do %>
+                <%= check_box_tag :inbox, '1', params[:action]=="search" ? params[:inbox]==nil ? false : params[:inbox]=='1' ? true : false : true %>
+                Inbox<% end %></span>
+            <span class="paddingRight"><%= label_tag :sentbox do %>
+                <%= check_box_tag :sentbox, '1', params[:action]=="search" ? params[:sentbox]==nil ? false : params[:sentbox]=='1' ? true : false : true %>
+                Sentbox<% end %></span>
+            <span class="paddingRight"><%= label_tag :notifications do %>
+                <%= check_box_tag :notifications, '1', params[:action]=="search" ? params[:notifications]==nil ? false : params[:notifications]=='1' ? true : false : false %>
+                Notifications<% end %></span>
+        </div>
     </div>
 </form>

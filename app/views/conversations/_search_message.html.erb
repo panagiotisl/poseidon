@@ -11,7 +11,8 @@
 	<% end %>
         <div class="leftRightMargin padding">
         	<% sender = getSender result.sender_id, result.sender_type %>
-        	<div style="float:left;"><b>From:</b> <%= link_to sender.name, sender %></div>
+			<% user = Sender.where(:notification_id => result.notification_id).first.user %>
+        	<div style="float:left;"><b>From:</b> <%= link_to sender.name, sender %> <%=" (#{user.name})"%></div>
 			<div style="float:right;"><%= result.created_at %></div>
 			 <br />
             <b>Subject:</b> <%= result.subject %>

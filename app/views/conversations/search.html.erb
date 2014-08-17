@@ -2,7 +2,7 @@
     <%= render :partial => '/shared/message_bar' %>
     <%= render :partial => 'search_bar' %>
 	<div class="paddingBottom"></div>
-	
+
     <% @results.each do |result| %>
     <%= render :partial => 'search_message' , :locals =>{:result => result} %>
     <% end %>
