@@ -2,5 +2,27 @@
 <%= render "/shared/nav" %>
 <div class="row">
     <div>
+        <div id="header">
+            <h1><span id="page_name" data-mercury="full"><%= raw @page.name %></span></h1>
+            <ul id="navigation">
+                <% @shipping_company.pages.each do |page| %>
+                <% unless page.id == @page.id %>
+                <li>
+                    <%= link_to page.name, @shipping_company %>
+                </li>
+                <% end %>
+                <% end %>
+            </ul>
+        </div>
+        <div id="page_content" data-mercury="full">
+            <p>
+                <%= raw @page.content %>
+            </p>
+        </div>
+        <div>
+            <p>
+                <%= link_to "Edit Page", "/editor" + request.path, id: "edit_link", data: { save_url: mercury_update_shipping_company_path(:page_id=> @page.id) } %>
+            </p>
+        </div>
     </div>
 </div>

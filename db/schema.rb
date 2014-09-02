@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140727130651) do
+ActiveRecord::Schema.define(version: 20140901114225) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,15 @@ ActiveRecord::Schema.define(version: 20140727130651) do
   add_index "labels", ["notification_id"], name: "index_labels_on_notification_id", using: :btree
   add_index "labels", ["voyages_port_id"], name: "index_labels_on_voyages_port_id", using: :btree
 
+  create_table "mercury_images", force: true do |t|
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "needs", force: true do |t|
     t.integer  "voyages_port_id"
     t.integer  "service_id"
@@ -123,6 +132,16 @@ ActiveRecord::Schema.define(version: 20140727130651) do
   add_index "operations", ["agent_id", "port_id"], name: "index_operations_on_agent_id_and_port_id", unique: true, using: :btree
   add_index "operations", ["agent_id"], name: "index_operations_on_agent_id", using: :btree
   add_index "operations", ["port_id"], name: "index_operations_on_port_id", using: :btree
+
+  create_table "pages", force: true do |t|
+    t.string   "name"
+    t.text     "content"
+    t.integer  "shipping_company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "pages", ["shipping_company_id"], name: "index_pages_on_shipping_company_id", using: :btree
 
   create_table "ports", force: true do |t|
     t.string   "name"
