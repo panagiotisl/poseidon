@@ -2,6 +2,7 @@ class ShippingCompaniesController < ApplicationController
   
   before_filter :signed_in_user,     only: [:index, :show]
   before_filter :admin_user,     only: [:destroy]
+  before_filter :authorized_sce, only: [:mercury_update]
   before_action :get_fleets,     only: [:index, :show]
   
   def index

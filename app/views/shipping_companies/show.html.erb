@@ -2,17 +2,21 @@
 <%= render "/shared/nav" %>
 <div class="row">
     <div>
-        <div id="header">
-            <h1><span id="page_name" data-mercury="full"><%= raw @page.name %></span></h1>
-            <ul id="navigation">
+        <div id="navigation">
+            <ul class="nav nav-tabs" role="tablist">
                 <% @shipping_company.pages.each do |page| %>
-                <% unless page.id == @page.id %>
+				<% if page.id == @page.id %>
+				<li class="active">
+				<% else %>
                 <li>
-                    <%= link_to page.name, @shipping_company %>
+                <% end %>
+                    <%= link_to page.name, params.merge(:page_id => page.id) %>
                 </li>
                 <% end %>
-                <% end %>
             </ul>
+        </div>
+        <div id="header">
+            <h1><span id="page_name" data-mercury="full"><%= raw @page.name %></span></h1>
         </div>
         <div id="page_content" data-mercury="full">
             <p>

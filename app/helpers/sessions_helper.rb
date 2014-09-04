@@ -79,6 +79,8 @@ module SessionsHelper
       flash[:error] = "You do not have permission to view this page!"
       redirect_to :back
     end
+    rescue ActionController::RedirectBackError
+      redirect_to root_path
   end
 
   def authorized_sce?
@@ -92,6 +94,8 @@ module SessionsHelper
       flash[:error] = "You do not have permission to view this page!"
       redirect_to :back
     end
+    rescue ActionController::RedirectBackError
+      redirect_to root_path
   end
   
   def authorized_ase?
