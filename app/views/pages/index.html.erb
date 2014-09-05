@@ -1,0 +1,12 @@
+<div class="container-fluid">
+    <div class="row-fluid sortme roundBox">
+    	<% @pages.each do |page| %>
+		<div class="span7 element"<h2><%= page.name.html_safe %></h2></div>
+    	<% end %>
+    </div>
+</div>
+
+
+<p>
+    <%= link_to "New Page", new_shipping_company_page_path %>
+</p>

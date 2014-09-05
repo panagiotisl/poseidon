@@ -14,6 +14,7 @@ SampleApp::Application.routes.draw do
     get '/new-employee', :to => 'users#new_sce', :as => :new_sce
     post '/new-employee', :to => 'users#create_sce', :as => :create_sce
     member { put :mercury_update }
+    resources :pages, only: [:index, :new, :create, :sort]
     resources :fleets,    only: [:show, :edit, :update, :index, :new, :create, :destroy] do
       resources :ships,    only: [:show, :edit, :update, :index, :new, :create, :destroy] do
         resources :voyages,    only: [:new, :create, :index, :show, :edit, :update] do

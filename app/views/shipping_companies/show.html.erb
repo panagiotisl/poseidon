@@ -1,7 +1,7 @@
 <% provide(:title, @shipping_company.name) %>
 <%= render "/shared/nav" %>
 <div class="row">
-    <div>
+    <div class ="roundBox">
         <div id="navigation">
             <ul class="nav nav-tabs" role="tablist">
                 <% @shipping_company.pages.each do |page| %>
@@ -10,7 +10,7 @@
 				<% else %>
                 <li>
                 <% end %>
-                    <%= link_to page.name, params.merge(:page_id => page.id) %>
+                    <%= link_to page.name.html_safe, params.merge(:page_id => page.id) %>
                 </li>
                 <% end %>
             </ul>

@@ -22,6 +22,7 @@ gem 'rest_in_place'
 gem 'searchkick'
 gem 'elasticsearch'
 gem 'mercury-rails', :git => 'git://github.com/jejacks0n/mercury.git'
+gem 'acts_as_list'
 
 group :development, :test do
   gem 'pg', '0.15.1'

@@ -3,7 +3,7 @@ class ShippingCompany < ActiveRecord::Base
   has_many :fleets, foreign_key: "shipping_company_id", dependent: :destroy
   has_many :ships, :through => :fleets
   has_many :voyages, :through => :ships
-  has_many :pages
+  has_many :pages, -> { order("position ASC") }
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   validate :name_not_on_agents
   
