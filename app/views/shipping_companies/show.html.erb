@@ -13,7 +13,9 @@
                     <%= link_to page.name.html_safe, params.merge(:page_id => page.id) %>
                 </li>
                 <% end %>
+				<% if authorized_sce? %>
 				<li><%= link_to '<span class="icon icon-plus"></span>'.html_safe, new_shipping_company_page_path(:shipping_company_id => @shipping_company.id), :class => "btn btn-default", :title => "Add a page", :method => :get %></li>
+				<% end %>
             </ul>
         </div>
         <div id="header">
