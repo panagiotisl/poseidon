@@ -11,12 +11,24 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require jquery.ui.datepicker
 //= require jquery_ujs
+//= require jquery.ui.all
 //= require jquery.purr
-//= require jquery-ui
 //= require turbolinks
 //= require bootstrap
 //= require_tree .
 //= require fancybox
 //= require 'rest_in_place'
+//= require ./pages
+
+
+jQuery(window).on('mercury:ready', function() {
+   var link = $('#edit_link');
+   Mercury.saveUrl =link.attr('data-save-url');
+   console.log(Mercury.saveUrl);
+});
+
+$(window).bind('mercury:saved', function() {
+	console.log("saved!");	
+    window.location.href = window.location.href.replace(/\/editor\//i, '/');
+});

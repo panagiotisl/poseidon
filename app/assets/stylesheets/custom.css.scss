@@ -891,3 +891,9 @@ top: 26px;
   width:inherit;
   position:fixed;
 }
+
+#sortable {
+  tr.item {
+    cursor: row-resize;
+  }
+}

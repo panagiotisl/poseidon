@@ -19,8 +19,8 @@
 
     <% if params[:controller] == 'shipping_companies'%>
 	  <% if params[:action] == 'show' %>
-	  
-	  	  <li class="pull-right"><%= link_to '<span class="icon icon-pencil"></span>'.html_safe, "/editor" + request.path, id: "edit_link", :class => "btn btn-default", :title => "Add a fleet", data: { save_url: mercury_update_shipping_company_path(:page_id=> @page.id) } %></li>
+	  	  <li class="pull-right"><a href="#sortOrderModal" title="Edit page order" role="button" class="btn btn-default" data-toggle="modal"><span class="icon icon-list-alt"></span></a></li>
+	  	  <li class="pull-right"><%= link_to '<span class="icon icon-pencil"></span>'.html_safe, "/editor" + shipping_company_path(:page_id => @page.id), id: "edit_link", :class => "btn btn-default", :title => "Edit Page", data: { save_url: mercury_update_shipping_company_path(:page_id=> @page.id) } %></li>
 		  <li class="pull-right"><%= link_to '<span class="icon icon-plus"></span>'.html_safe, new_shipping_company_fleet_path(:shipping_company_id => @shipping_company.id), :class => "btn btn-default", :title => "Add a fleet", :method => :get %></li>
   		  <li class="pull-right"><%= link_to '<span class="icon icon-user"></span>'.html_safe, shipping_company_new_sce_path(:shipping_company_id => @shipping_company.id), :class => "btn btn-default", :title => "Add an employee", :method => :get %></li>
    	  <% end %>
@@ -118,3 +118,47 @@
 
     
 </ul>
+
+<% if authorized_sce? and if params[:controller] == 'shipping_companies' and params[:action] == 'show' %>
+	
+
+<!-- Modal -->
+<div id="sortOrderModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Change the order</h3>
+  </div>
+  <div class="modal-body">
+  
+  <%= tag("table", :id => "sortable", :class => "table table-bordered table-striped", :data => {:update_url => sort_shipping_company_pages_path(:shipping_company_id => @shipping_company.id)}) %>
+      <thead>
+          <tr>
+              <th>
+                  Page Name
+              </th>
+          </tr>
+      </thead>
+      <tbody>
+          <% @shipping_company.pages.rank(:position).each do |page| %>
+		  <%= tag("tr", :class => "item", :data => {:item_id => page.id}) %>
+              <td>
+              	<%= page.name.html_safe %>
+              </td>
+          <% end %>
+          <% end %>
+      </tbody>
+  </table>
+  
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+
+<% end %>
+
+<script>
+    $('#sortOrderModal').on('hidden.bs.modal', function(){
+        location.reload();
+    })
+</script>

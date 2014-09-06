@@ -11,10 +11,16 @@ gem 'bootstrap-will_paginate', '0.0.9'
 gem 'recaptcha', :require => 'recaptcha/rails'
 gem 'fancybox-rails'
 gem 'htmlentities'
-gem 'mailboxer'
+gem 'mailboxer', '0.11.0'
+gem 'sprockets', '2.10.0'
+gem 'sass-rails', '4.0.0'
+gem 'uglifier', '2.1.1'
+gem 'coffee-rails', '4.0.0'
+gem 'jquery-rails', '3.1.0'
+gem 'jquery-ui-rails', '4.1.0'
+gem 'turbolinks', '1.1.1'
+gem 'jbuilder', '1.0.2'
 gem 'best_in_place', github: 'bernat/best_in_place'
-#gem 'rails3-jquery-autocomplete'
-#gem 'bootstrap-typeahead-rails'
 gem 'repeated_auto_complete'
 gem 'oboe-heroku'
 gem 'font-awesome-rails', '~> 4.1.0.0'
@@ -22,7 +28,7 @@ gem 'rest_in_place'
 gem 'searchkick'
 gem 'elasticsearch'
 gem 'mercury-rails', :git => 'git://github.com/jejacks0n/mercury.git'
-gem 'acts_as_list'
+gem 'ranked-model'
 
 group :development, :test do
   gem 'pg', '0.15.1'
@@ -53,15 +59,6 @@ group :test do
   # gem 'win32console', '1.3.2'
   # gem 'wdm', '0.1.0'
 end
-
-gem 'sass-rails', '4.0.0'
-gem 'uglifier', '2.1.1'
-gem 'coffee-rails', '4.0.0'
-#gem 'jquery-rails', '3.0.4'
-gem "jquery-rails", "< 3.0.0"
-gem 'jquery-ui-rails'
-gem 'turbolinks', '1.1.1'
-gem 'jbuilder', '1.0.2'
 
 group :doc do
   gem 'sdoc', '0.3.20', require: false

@@ -1,0 +1,14 @@
+<% provide(:title, @title) %>
+<%= render "/shared/nav" %>
+<div class="row">
+    <div>
+        <h3><%= @title %></h3>
+        <%= form_for @page, url: shipping_company_pages_path do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+        <%= f.hidden_field :shipping_company_id, :value => params[:shipping_company_id] %>
+        <%= f.submit "Create this page", class: "btn btn-large btn-primary" %>
+        <% end %>
+    </div>
+</div>

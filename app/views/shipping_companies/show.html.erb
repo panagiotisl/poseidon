@@ -4,7 +4,7 @@
     <div class ="roundBox">
         <div id="navigation">
             <ul class="nav nav-tabs" role="tablist">
-                <% @shipping_company.pages.each do |page| %>
+                <% @shipping_company.pages.rank(:position).each do |page| %>
 				<% if page.id == @page.id %>
 				<li class="active">
 				<% else %>
@@ -13,6 +13,7 @@
                     <%= link_to page.name.html_safe, params.merge(:page_id => page.id) %>
                 </li>
                 <% end %>
+				<li><%= link_to '<span class="icon icon-plus"></span>'.html_safe, new_shipping_company_page_path(:shipping_company_id => @shipping_company.id), :class => "btn btn-default", :title => "Add a page", :method => :get %></li>
             </ul>
         </div>
         <div id="header">
@@ -21,11 +22,6 @@
         <div id="page_content" data-mercury="full">
             <p>
                 <%= raw @page.content %>
-            </p>
-        </div>
-        <div>
-            <p>
-                <%= link_to "Edit Page", "/editor" + request.path, id: "edit_link", data: { save_url: mercury_update_shipping_company_path(:page_id=> @page.id) } %>
             </p>
         </div>
     </div>
