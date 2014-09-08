@@ -122,7 +122,8 @@ module SessionsHelper
   end
   
   def get_latest_notifications
-    Notification.order('created_at DESC').where("id IN (SELECT notification_id FROM receipts where receiver_id=:receiver_id and receiver_type=:receiver_type order by created_at desc limit 10)", receiver_id: get_company_id, receiver_type: get_company_type)
+    #Notification.order('created_at DESC').where("id IN (SELECT notification_id FROM receipts where receiver_id=:receiver_id and receiver_type=:receiver_type order by created_at desc limit 10)", receiver_id: get_company_id, receiver_type: get_company_type)
+    Notification.order('created_at DESC').where("id IN (SELECT notification_id FROM receipts where mailbox_type is null and receiver_id=:receiver_id and receiver_type=:receiver_type order by created_at desc limit 10)", receiver_id: get_company_id, receiver_type: get_company_type)
   end
   
   def get_unread(receipts)

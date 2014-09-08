@@ -24,15 +24,17 @@
                     <% if signed_in? %>
                     <div class="row">
                         <% if sce? or ase? %>
+						<% if params[:controller] != 'conversations' %>
                         <div class="span3">
                             <div class="sidebar" data-spy="affix" data-offset-top="30">
                                 <%= render "shared/left_menu" %>
                             </div>
                         </div>
+						<% end %>
 						<% if params[:controller] != 'conversations' %>
                         <div class="span7">
                         <% else %>
-						<div class="span9">
+						<div class="span10">
 						<% end %>							
                             <% flash.each do |key, value| %>
                             <div class="alert alert-<%= key %>">
@@ -41,14 +43,14 @@
                             <% end %>
                             <%= yield %>
                         </div>
-						<% if params[:controller] != 'conversations' %>
                         <div id="feed_doc" class="span2">
                             <div class="sidebar transparentSidebarBox" data-spy="affix" data-offset-top="30">
+                            	<% if params[:controller] != 'static_pages'%>
                                 <%= render "shared/feed" %>
+								<% end %>
                             </div>
                         </div>
 						<% end %>
-                        <% end %>
                     </div>
                     <% else %>
                     <% flash.each do |key, value| %>

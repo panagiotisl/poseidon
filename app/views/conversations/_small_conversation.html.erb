@@ -1,16 +1,16 @@
-<% if is_readC(conversation) %>
-	<div id=<%= conversation.id %> class="conversation">
+<% if is_readC(notification) %>
+	<div id=<%= notification.id %> class="conversation">
 <% else %>
-    <div id=<%= conversation.id %> class="conversation">
+    <div id=<%= notification.id %> class="conversation">
 <% end %>
         <div class="convSubject">
         	<div class="leftRightMargin">
-			<h6><%= raw(truncate(conversation.subject, :length => 20)) %></h6>
+			<h6><%= raw(truncate(notification.subject, :length => 20)) %></h6>
 			</div>
         </div>
         <div class="convBody">
             <div class="leftRightMargin">
-            <%= raw(truncate(strip_tags(conversation.last_message.body), :length => 100)) %>
+            <%= raw(truncate(strip_tags(notification.body), :length => 100)) %>
 			</div>
         </div>
     </div>
