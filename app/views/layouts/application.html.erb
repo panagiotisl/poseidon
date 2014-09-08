@@ -64,9 +64,11 @@
                 </div>
             </div>
         </div>
+		<% unless signed_in? %>
         <div class="container">
             <%= render 'layouts/footer' %>
         </div>
+		<% end %>
     </body>
 	
     <script>

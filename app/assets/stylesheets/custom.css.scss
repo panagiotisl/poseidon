@@ -830,11 +830,19 @@ top: 26px;
     list-style-type:none;
 }
 
-#leftMenu .accordion-fleet {
+#leftMenu .accordion-main {
     background-image: -moz-linear-gradient(90deg, #595b59 0%, #616161 100%); /* gradient overlay */
     background-image: -o-linear-gradient(90deg, #595b59 0%, #616161 100%); /* gradient overlay */
     background-image: -webkit-linear-gradient(90deg, #595b59 0%, #616161 100%); /* gradient overlay */
     background-image: linear-gradient(90deg, #595b59 0%, #616161 100%); /* gradient overlay */
+    list-style-type:none;
+}
+
+#leftMenu .accordion-fleet {
+    background-image: -moz-linear-gradient(90deg, #616161 0%, #837E7C 100%); /* gradient overlay */
+    background-image: -o-linear-gradient(90deg, #616161 0%, #837E7C 100%); /* gradient overlay */
+    background-image: -webkit-linear-gradient(90deg, #616161 0%, #837E7C 100%); /* gradient overlay */
+    background-image: linear-gradient(90deg, #616161 0%, #837E7C 100%); /* gradient overlay */
     list-style-type:none;
 }
 
