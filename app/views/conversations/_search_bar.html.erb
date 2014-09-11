@@ -4,16 +4,38 @@
         <button type="submit" class="btn">
             <span class="icon icon-search"></span>
         </button>
-        <div class="smallMarginTop">
+	</div>
+	<div>		
+        <div class="smallMarginTop input-append input-prepend">
             <span class="paddingLeft paddingRight"><%= label_tag :inbox do %>
                 <%= check_box_tag :inbox, '1', params[:action]=="search" ? params[:inbox]==nil ? false : params[:inbox]=='1' ? true : false : true %>
                 Inbox<% end %></span>
             <span class="paddingRight"><%= label_tag :sentbox do %>
                 <%= check_box_tag :sentbox, '1', params[:action]=="search" ? params[:sentbox]==nil ? false : params[:sentbox]=='1' ? true : false : true %>
                 Sentbox<% end %></span>
+            <% if false %>
             <span class="paddingRight"><%= label_tag :notifications do %>
                 <%= check_box_tag :notifications, '1', params[:action]=="search" ? params[:notifications]==nil ? false : params[:notifications]=='1' ? true : false : false %>
                 Notifications<% end %></span>
+            <% end %>
+            <span class="paddingRight"><%= label_tag :subject do %>
+                <%= check_box_tag :subject, '1', params[:action]=="search" ? params[:subject]==nil ? false : params[:subject]=='1' ? true : false : false %>
+                Subject only<% end %></span>
+			
+			<span class="add-on">From:</span>				
+            <span class="paddingRight"><%= label_tag "From", "From:" do %>
+                <%= text_field_tag :from, params[:from], size: 8, class: "datepicker" %>
+                <% end %></span>
+			<span class="add-on">To:</span>
+			<span class="paddingRight"><%= label_tag :to do %>
+                <%= text_field_tag :to, params[:to], size: 8, class: "datepicker" %>
+                <% end %></span>
         </div>
     </div>
+	
 </form>
+<script>
+	$('.datepicker').each(function(){
+		$(this).datepicker({ dateFormat: 'yy-mm-dd' });
+	});
+</script>

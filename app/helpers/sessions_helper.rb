@@ -160,10 +160,14 @@ module SessionsHelper
   end
   
   def getSender(receiver_id, receiver_type)
+    puts "Sender"
+    puts receiver_type
     if receiver_type == "ShippingCompany"
       ShippingCompany.find(receiver_id)
-    else
+    elsif receiver_type == "Agent"
       Agent.find(receiver_id)
+    else
+      "System"
     end
   end
   

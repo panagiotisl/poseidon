@@ -158,11 +158,20 @@ class ConversationsController < ApplicationController
       if params[:sentbox]=='1'
         @mailbox_type.push "sentbox"
       end
-      if params[:notifications]=='1'
-        @mailbox_type.push ""
-      end
+      #if params[:notifications]=='1'
+      #  @mailbox_type.push ""
+      #end
+      if params[:end]
+        endtime = params[:end]
+      else
+        endtime = Time.now
+      end 
       unless @mailbox_type.empty?
-        @results = Receipt.search @term, page: params[:inbox_page], per_page: 10, load: false, fields: ["subject^10", "body^5"], partial: true, where: { mailbox_type: @mailbox_type , receiver_id: get_company_id, receiver_type: get_company_type }
+        if params[:start]
+          @results = Receipt.search @term, page: params[:inbox_page], per_page: 10, load: false, fields: ["subject^10", "body^5"], partial: true, where: { mailbox_type: @mailbox_type , receiver_id: get_company_id, receiver_type: get_company_type, :created_at=>{:lte=> endtime}, :created_at=>{:gte=>params[:start]} }
+        else
+          @results = Receipt.search @term, page: params[:inbox_page], per_page: 10, load: false, fields: ["subject^10", "body^5"], partial: true, where: { mailbox_type: @mailbox_type , receiver_id: get_company_id, receiver_type: get_company_type, :created_at=>{:lte=> endtime} }
+        end
       else
         @results = Receipt.none
       end
