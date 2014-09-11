@@ -14,8 +14,8 @@ jQuery ->
     items: '.item'
 
     # highlight the row on drop to indicate an update
-    #stop: (e, ui) ->
-    #  ui.item.children('td').effect('highlight', {}, 1000)
+    stop: (e, ui) ->
+      ui.item.children('td').effect('highlight', {}, 1000)
     #update: ->
     #  console.log('PAOK')
     #  console.log($(this).sortable('serialize'))
