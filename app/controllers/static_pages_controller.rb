@@ -10,6 +10,7 @@ class StaticPagesController < ApplicationController
         @fleets = Fleet.none
         @voyages_ports = current_user.agent.voyages_ports
       end
+      @notifications = Notification.order('created_at DESC').where("id IN (SELECT notification_id FROM receipts where mailbox_type is null and receiver_id=:receiver_id and receiver_type=:receiver_type order by created_at desc)", receiver_id: get_company_id, receiver_type: get_company_type).paginate(page: params[:page], per_page: 5)
     end
   end
   

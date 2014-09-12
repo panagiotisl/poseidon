@@ -1,40 +1,68 @@
-	<% if is_readN(notification) %>
-	<div class="column-wrap conversationLine marginTop paddingBottom">
-    <% else %>
-    <div class="column-wrap conversationLineUnread marginTop paddingBottom">
-        <% end %>
-        <div class="left-column">
-            <table>
-                <tr>
-                    <td>
-                        <% unless @box.eql?'trash' %>
-                        <%= link_to(raw("<i class=\"icon-remove-sign\"></i>"),
-                        conversation_path(notification, :location => @box,
-                        :box => @box,
-                        :page => params[:page]),
-                        :confirm => t('mailboxer.delete_confirm',
-                        :object => notification.subject),
-                        :method => :delete,
-                        :remote => true) %>
-                        <% end %>
-                    </td>
-                    <td>
-                        <div class="name">
-                            System Notification
-                        </div>
-                        <div class="date">
-                            <%= time_ago_in_words(notification.updated_at) + " ago" %>
-                        </div>
-                    </td>
-                </tr>
-            </table>
+<% if !notification.sender %>
+<div class="redBorder marginTop" onclick="window.location='/notifications/<%=notification.id%>';">
+	<% @icon = '<i class="fa fa-exclamation fa-2x"></i>'.html_safe %>
+<% elsif (sce? and notification.sender.name == current_user.shipping_company.name) or (ase? and notification.sender.name == current_user.agent.name) %>
+<div class="greenBorder marginTop" onclick="window.location='/conversations/<%=notification.conversation.id%>';">
+	<% @icon = '<i class="fa fa-weixin fa-2x"></i>'.html_safe %>	
+<% else %>
+	<% @icon = '<i class="fa fa-weixin fa-2x"></i>'.html_safe %>
+<div class="redBorder marginTop" onclick="window.location='/conversations/<%=notification.conversation.id%>';">
+    <% end %>
+    <div class="bubbleContent column-wrap">
+        <div class="small-left-column" align="center" valign="middle">
+			<%= @icon %>
         </div>
-        <div class="right-column">
-            <div class="subject">
-                <%= link_to(truncate(notification.subject, :length => 55), notification_path(notification.id,:page => params[:page])) %>
+        <div class="big-right-column">
+            <% if !notification.sender %>
+            <div class="notificationTitle">
+                <%= raw(truncate(notification.subject, :length => 60)) %>
             </div>
-            <div class="body">
-                <%= raw(truncate(strip_tags(notification.body), :length => 50)) %>
+            <% else %>
+            <div class="notificationTitle">
+                <%= notification.sender.name %>:&thinsp;<%= raw(truncate(notification.subject, :length => 30)) %>
             </div>
+            <% end %>
+            <%= raw(truncate(notification.body, :length => 100)) %>
         </div>
     </div>
+</div>
+       
+	    <% if false %>
+        <%= gravatar_for current_user, size: 64 %>
+        <h3><%= link_to "Hello #{current_user.name}!", current_user %></h3>
+        <% if sce? %>
+        <%= link_to current_user.shipping_company.name, current_user.shipping_company %>
+        <% elsif ase? %>
+        <%= link_to current_user.agent.name, current_user.agent %>
+        <% end %>
+        <div class="row">
+            <div class="span3 roundBeigeBox">
+                <div class="name">
+                    <%= link_to notification.sender.name, notification.sender %>
+                </div>
+                <div class="sender">
+                    <% sender = Sender.where(:notification_id => notification.id).first %>
+                    <%if !sender.nil? %>
+                    <%= sender.user.name %>
+                    <%end %>
+                </div>
+                <div class="date">
+                    <%= time_ago_in_words(notification.updated_at) + " ago" %>
+                </div>
+            </div>
+            <div class="span8">
+                <div class="roundKhakiBox">
+                    <%= raw(notification.body) %>
+                </div>
+                <div class="roundGrayBox xSmall">
+                    Read by:<% Reader.where(:notification_id => notification.id).each_with_index do |reader, i| %>
+                    <% unless i==0 %>,<%end %>
+                    <%= reader.user.name %>
+                    <% if reader.user.agent_id %>
+                    (<%= link_to reader.user.agent.name, reader.user.agent %>)<% elsif reader.user.shipping_company_id %>
+                    (<%= link_to reader.user.shipping_company.name, reader.user.shipping_company %>)<% end %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+        <% end %>

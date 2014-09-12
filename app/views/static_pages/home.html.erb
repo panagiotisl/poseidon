@@ -1,6 +1,12 @@
 <% if signed_in? %>
 <div id="latest_doc">
-    <%= render "shared/latest_feed" %>
+	<div id="latestFeed" class="roundBox">
+	<% @notifications.each do |notification| %>
+    <%= render :partial => '/messages/feedDialog', :object => notification, :as => :dialog %>
+  <% end %>
+	</div>
+<%= will_paginate @notifications %>
+	
 </div>
 <div id="conversation">
 </div>
@@ -15,3 +21,17 @@
     class: "btn btn-large btn-primary" %>
 </div>
 <% end %>
+
+<script>
+  if ($('.pagination').length) {	
+$(window).scroll(function() {
+  var url;
+  url = $('.pagination .next_page a').attr('href');
+  if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 30) {
+    $('.pagination').text("Fetching more notifications...");
+    $.getScript(url);
+  }
+});
+$(window).scroll();
+  }
+</script>

@@ -16,11 +16,6 @@ jQuery ->
     # highlight the row on drop to indicate an update
     stop: (e, ui) ->
       ui.item.children('td').effect('highlight', {}, 1000)
-    #update: ->
-    #  console.log('PAOK')
-    #  console.log($(this).sortable('serialize'))
-    #  $.post($(this).data('update-url'), $(this).sortable('serialize'))
-    
     update: (e, ui) ->
       item_id = ui.item.data('item-id')
       position = ui.item.index()
