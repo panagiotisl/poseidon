@@ -29,9 +29,22 @@
                 </li>
               </ul>
             </li>
-			<li id="fat-menu" class="dropdown span2">
+			<li>
+				<% hn = get_unread_notifications(get_mailbox.receipts) %>
+				<% unless hn == '0' %>
+				<a href="#"><span class="red icon icon-info-sign"></span> <%= hn %></a>
+				<% else %>
+				<a href="#"><span class="icon icon-info-sign"></span> <%= hn %></a>
+				<% end %>
+			</li>
+			<li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-				<span class="icon icon-envelope"></span> <%= get_unread(get_mailbox.receipts) %> Mailbox<b class="caret"></b>
+              	<% hm = get_unread(get_mailbox.receipts) %>
+				<% unless hm == '0' %>
+				<span class="red icon icon-envelope"></span> <%= hm %> <b class="caret"></b>
+				<% else %>
+				<span class="icon icon-envelope"></span> <%= hm %> <b class="caret"></b>
+				<% end %>
 		      	<% if false %>
 				
 				<table border="0" cellpadding="0" cellspacing="0">
