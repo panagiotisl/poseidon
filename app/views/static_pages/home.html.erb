@@ -1,9 +1,7 @@
 <% if signed_in? %>
 <div id="latest_doc">
 	<div id="latestFeed" class="roundBox">
-	<% @notifications.each do |notification| %>
-    <%= render :partial => '/messages/feedDialog', :object => notification, :as => :dialog %>
-  <% end %>
+	<%= render @notifications %>
 	</div>
 <%= will_paginate @notifications %>
 	

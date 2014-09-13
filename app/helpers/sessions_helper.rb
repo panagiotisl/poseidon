@@ -154,7 +154,7 @@ module SessionsHelper
     Reader.where(:conversation_id => conversation.id, :user_id => current_user.id).count > 0
   end
   
-    def is_readN(notification)
+  def is_readN(notification)
     Reader.where(:notification_id => notification.id, :user_id => current_user.id).count > 0
   end
   

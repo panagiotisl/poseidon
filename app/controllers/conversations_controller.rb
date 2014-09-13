@@ -22,7 +22,7 @@ class ConversationsController < ApplicationController
         @conversations = Conversation.where("id IN (#{conversations_by_contact @contact})").order(created_at: :desc)
         @conversation = @conversations.first
       end
-        @receipts = @mailbox.receipts_for(@conversation).not_trash.reverse
+        @receipts = @mailbox.receipts_for(@conversation).not_trash
     elsif @box.eql? "inbox"
       @conversations = @mailbox.inbox.page(params[:page])#.per(9)
     elsif @box.eql? "sentbox"
@@ -30,6 +30,14 @@ class ConversationsController < ApplicationController
     else
       @conversations = @mailbox.trash.page(params[:page])#.per(9)
     end
+    @receipts.mark_as_read
+    Reader.create(user_id: current_user.id, conversation_id: @conversation.id)
+    @receipts.each do |receipt|
+      if (receipt.mailbox_type == "inbox") and ((receipt.receiver_type == "Agent" and current_user.agent_id == receipt.receiver_id) or (receipt.receiver_type == "ShippingCompany" and current_user.shipping_company_id == receipt.receiver_id))
+        Reader.create(user_id: current_user.id, notification_id: receipt.notification.id)
+      end
+    end
+    @receipts = @receipts.reverse
     respond_to do |format|
       format.html { render @conversations if request.xhr? }
     end

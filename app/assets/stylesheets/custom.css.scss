@@ -382,8 +382,9 @@ input {
 
 .strong { font-weight: bold; }
 
-.red {
-    color: red;
+.red
+{
+    color:red !important;
 }
 
 .col1 {
