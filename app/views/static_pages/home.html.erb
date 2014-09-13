@@ -25,8 +25,8 @@ if ($('.pagination').length) {
   $(window).scroll(function() {
     var url;
     url = $('.pagination .next_page a').attr('href');
-    if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 50) {
-      $('.pagination').text("Fetching more notifications...");
+    if (url && $(window).scrollTop() > $(document).height() - $(window).height() - 10) {
+      $('.pagination').html("<i class=\"center fa fa-spin fa-refresh fa-4x\"></i>");
       $.getScript(url);
     }
   });
