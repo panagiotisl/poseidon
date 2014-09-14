@@ -31,7 +31,9 @@
                             </div>
                         </div>
 						<% end %>
-						<% if params[:controller] != 'conversations' %>
+						<%if params[:action] == 'home' %>
+						<div class="span9">
+						<% elsif params[:controller] != 'conversations' %>
                         <div class="span7">
                         <% else %>
 						<div class="span10">
@@ -43,13 +45,13 @@
                             <% end %>
                             <%= yield %>
                         </div>
+						<% if params[:action] != 'home'%>
                         <div id="feed_doc" class="span2">
                             <div class="sidebar transparentSidebarBox" data-spy="affix" data-offset-top="30">
-                            	<% if params[:controller] != 'static_pages'%>
-                                <%= render "shared/feed" %>
-								<% end %>
+                            	<%= render "shared/feed" %>
                             </div>
                         </div>
+						<% end %>
 						<% end %>
                     </div>
                     <% else %>
