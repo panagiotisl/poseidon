@@ -81,9 +81,7 @@ class ConversationsController < ApplicationController
   end
 
   def destroy
-
     @conversation.move_to_trash(@actor)
-
     respond_to do |format|
       format.html {
         if params[:location].present? and params[:location] == 'conversation'
@@ -135,19 +133,37 @@ class ConversationsController < ApplicationController
     @receipts.mark_as_read
   end
 
-  def refresh_latest
+  def refresh_navbar
+    hm = get_unread(get_mailbox.receipts)
+    unless hm == '0'
+      @hm = '<a id="hm" href="#" class="red dropdown-toggle" data-toggle="dropdown">'.html_safe
+    else
+      @hm = '<a id="hm" href="#" class="inherit-color dropdown-toggle" data-toggle="dropdown">'.html_safe
+    end
+    @hm += "<i class=\"fa fa-envelope\"></i> #{hm} <b class=\"caret\"></b></a>".html_safe
+    hn = get_unread_notifications(get_mailbox.receipts)
+    unless hn == '0'
+      @hn = "<a id=\"hn\" class=\"red\" href=\"#\"><i class=\"fa fa-exclamation\"></i> #{hn}</a>".html_safe
+    else
+      @hn = "<a is=\"hn\" class=\"inherit-color\" href=\"#\"><i class=\"fa fa-exclamation\"></i> 0</a>".html_safe
+    end
     respond_to do |format|
       format.js
     end
   end
 
+  def refresh_latest
+    @new = Notification.order('created_at DESC').where("id IN (SELECT notification_id FROM receipts where mailbox_type is null and receiver_id=:receiver_id and receiver_type=:receiver_type and created_at >= :time order by created_at desc)", receiver_id: get_company_id, receiver_type: get_company_type, time: Time.at(params[:time].to_f/1000))
+    respond_to do |format|
+      format.js
+    end
+  end
 
   def refresh_feed
     respond_to do |format|
       format.js
     end
   end
-  
   
   def search
     @term = params[:term]

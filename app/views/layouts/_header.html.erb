@@ -32,37 +32,19 @@
 			<li>
 				<% hn = get_unread_notifications(get_mailbox.receipts) %>
 				<% unless hn == '0' %>
-				<a class="red" href="#"><i class="fa fa-exclamation"></i> <%= hn %></a>
+				<a id="hn" class="red" href="#"><i class="fa fa-exclamation"></i> <%= hn %></a>
 				<% else %>
-				<a href="#"><i class="fa fa-exclamation"></i> <%= hn %></a>
+				<a is="hn" href="#"><i class="fa fa-exclamation"></i> <%= hn %></a>
 				<% end %>
 			</li>
 			<li id="fat-menu" class="dropdown">
 			  <% hm = get_unread(get_mailbox.receipts) %>
 			  <% unless hm == '0' %>
-              <a href="#" class="red dropdown-toggle" data-toggle="dropdown">
+              <a id="hm" href="#" class="red dropdown-toggle" data-toggle="dropdown">
               <% else %>
-			  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+			  <a id="hm" href="#" class="dropdown-toggle" data-toggle="dropdown">
 			  <% end %>
 				<i class="fa fa-envelope"></i> <%= hm %> <b class="caret"></b>
-		      	<% if false %>
-				
-				<table border="0" cellpadding="0" cellspacing="0">
-					<tr>
-						<td width="10" height="20" align="center" valign="top" background="<%= image_path("messages2.png")%>" style="background-repeat:no-repeat;">
-							<font size="+2.4" color="red" style="text-shadow: -2px 0 gray, 0 2px gray, 1px 0 gray, 0 -1px gray;"><%= get_unread(get_mailbox.receipts) %></font>
-						</td>
-						<td>Mailbox <b class="caret"></b></td>
-					</tr>
-				</table>
-				
-				
-				<div class="image">
-			    	<img src="<%= image_path("messages.png")%>" alt="" height="20" width="26"/><h2>2</h2>
-				</div>
-        
-                <span class="icon icon-envelope"></span> <%= get_unread(get_mailbox.receipts) %> Messages<b class="caret"></b>
-				<% end %>
               </a>
               <ul class="dropdown-menu">
 				<li><%= link_to "New Message", new_message_path %></li>
