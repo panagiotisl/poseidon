@@ -4,6 +4,7 @@ class Agent < ActiveRecord::Base
   has_many :ports, through: :operations, source: :port
   has_many :voyages_ports, through: :ports
   has_many :offers, foreign_key: "agent_id", dependent: :destroy
+  has_many :agent_pages
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   validate :name_not_on_shipping_companies
   

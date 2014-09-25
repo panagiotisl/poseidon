@@ -17,8 +17,10 @@
             <a class="accordion-toggle" data-toggle="false" data-parent="#leftMenu" href="<%=agent_path(:id => current_user.agent.id)%>"><i class="icon-bookmark"></i> <%=current_user.agent.name%></a>
         </div>
     </div>
-	<% end %>		
+	<% end %>
 	
+	
+	<% if sce? %>
 	<div class="accordion-group">
         <div class="accordion-heading accordion-main">
             <a class="accordion-toggle accordion-left" data-toggle="collapse" data-parent="#leftMenu" href="#collapse_fleets"><i class="icon-th"> </i> Fleets</a>
@@ -70,5 +72,5 @@
 	
 	</div>
 	</div>
-	
+	<% end %>
 </div>

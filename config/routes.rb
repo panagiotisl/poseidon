@@ -33,6 +33,10 @@ SampleApp::Application.routes.draw do
     end
   end
   resources :agents,  only: [:new, :create, :show, :index, :destroy] do
+    member { put :mercury_update }
+    resources :agent_pages, only: [:new, :create] do
+      post :sort, on: :collection
+    end
     member do
       get :manage_ports
     end

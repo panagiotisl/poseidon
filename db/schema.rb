@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140905065922) do
+ActiveRecord::Schema.define(version: 20140925093844) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "agent_pages", force: true do |t|
+    t.string   "name"
+    t.text     "content"
+    t.integer  "position"
+    t.integer  "agent_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "agent_pages", ["agent_id"], name: "index_agent_pages_on_agent_id", using: :btree
 
   create_table "agents", force: true do |t|
     t.string   "name"

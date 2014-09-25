@@ -12,6 +12,11 @@ class AgentsController < ApplicationController
   
   def show
     @agent = Agent.find(params[:id])
+    if params[:page_id]
+      @page = @agent.agent_pages.find(params[:page_id])
+    else
+      @page = @agent.agent_pages.first
+    end
   end
 
   def new
@@ -42,6 +47,13 @@ class AgentsController < ApplicationController
     @ports_ur = (Port.all - @ports_r).paginate(page: params[:page])
   end
 
+  def mercury_update
+    page = AgentPage.find(params[:page_id])
+    page.name = params[:content][:page_name][:value]
+    page.content = params[:content][:page_content][:value]
+    page.save!
+    render text: ""
+  end
 
   private
   

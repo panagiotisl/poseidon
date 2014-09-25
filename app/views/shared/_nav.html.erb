@@ -97,6 +97,8 @@
   		<li class="pull-right"><%= link_to '<span class="icon icon-user"></span>'.html_safe, agent_new_ase_path(:agent_id => params[:id]), :class => "btn btn-default", :title => "Add an employee", :method => :get %></li>
    	  <% end %>
 	  <% if params[:action] == 'show' %>
+    	<li class="pull-right"><a href="#sortOrderModal" title="Edit page order" role="button" class="btn btn-default" data-toggle="modal"><span class="icon icon-list-alt"></span></a></li>
+        <li class="pull-right"><%= link_to '<span class="icon icon-pencil"></span>'.html_safe, "/editor" + agent_path(:page_id => @page.id), id: "edit_link", :class => "btn btn-default", :title => "Edit Page", data: { save_url: mercury_update_agent_path(:page_id=> @page.id) } %></li>
 		<li class="pull-right"><%= link_to '<span class="icon icon-map-marker"></span>'.html_safe, manage_ports_agent_path(:id => params[:id]), :class => "btn btn-default", :title => "Manage ports", :method => :get %></li>
 		<li class="pull-right"><%= link_to '<span class="icon icon-user"></span>'.html_safe, agent_new_ase_path(:agent_id => params[:id]), :class => "btn btn-default", :title => "Add an employee", :method => :get %></li>
    	  <% end %>
@@ -119,7 +121,7 @@
     
 </ul>
 
-<% if authorized_sce? and if params[:controller] == 'shipping_companies' and params[:action] == 'show' %>
+<% if (authorized_sce? && params[:controller] == 'shipping_companies') || (authorized_ase? && params[:controller] == 'agents') && params[:action] == 'show' %>
 	
 
 <!-- Modal -->
@@ -130,7 +132,12 @@
   </div>
   <div class="modal-body">
   
-  <%= tag("table", :id => "sortable", :class => "table table-bordered table-striped", :data => {:update_url => sort_shipping_company_pages_path(:shipping_company_id => @shipping_company.id)}) %>
+  <% if authorized_sce? %>
+  <%= tag("table", :id => "sortable", :class => "table table-bordered table-striped", :data => {:update_url => sort_shipping_company_pages_path(:shipping_company_id => @shipping_company.id)}) %> 
+  <% elsif authorized_ase? %>
+  <%= tag("table", :id => "sortable", :class => "table table-bordered table-striped", :data => {:update_url => sort_agent_agent_pages_path(:agent_id => @agent.id)}) %>
+  <% end %>
+  
       <thead>
           <tr>
               <th>
@@ -139,12 +146,16 @@
           </tr>
       </thead>
       <tbody>
-          <% @shipping_company.pages.rank(:position).each do |page| %>
+      	  <% if authorized_sce? %>
+		  <% @pages = @shipping_company.pages %> 
+		  <% elsif authorized_ase? %>
+		  <% @pages = @agent.agent_pages %>
+		  <% end %>		  
+		  <% @pages.rank(:position).each do |page| %>
 		  <%= tag("tr", :class => "item", :data => {:item_id => page.id}) %>
               <td>
               	<%= page.name.html_safe %>
               </td>
-          <% end %>
           <% end %>
       </tbody>
   </table>

@@ -1,5 +1,6 @@
 <% provide(:title, @agent.name) %>
 <%= render "/shared/nav" %>
+<% if false %>
 <div class="row">
     <div class="span3 roundBox">
         <% @voyages_ports = @agent.voyages_ports.paginate(page: params[:page]) %>
@@ -9,5 +10,36 @@
             <%= render @voyages_ports %>
         </ul>
         <%= will_paginate @voyages_ports %>
+    </div>
+</div>
+<% end %>
+
+
+<div class="row">
+    <div class ="roundBox">
+        <div id="navigation">
+            <ul class="nav nav-tabs" role="tablist">
+                <% @agent.agent_pages.rank(:position).each do |page| %>
+				<% if page.id == @page.id %>
+				<li class="active">
+				<% else %>
+                <li>
+                <% end %>
+                    <%= link_to page.name.html_safe, params.merge(:page_id => page.id) %>
+                </li>
+                <% end %>
+				<% if authorized_ase? %>
+				<li><%= link_to '<span class="icon icon-plus"></span>'.html_safe, new_agent_agent_page_path(:agent_id => @agent.id), :class => "btn btn-default", :title => "Add a page", :method => :get %></li>
+				<% end %>
+            </ul>
+        </div>
+        <div id="header">
+            <h1><span id="page_name" data-mercury="full"><%= raw @page.name %></span></h1>
+        </div>
+        <div id="page_content" data-mercury="full">
+            <p>
+                <%= raw @page.content %>
+            </p>
+        </div>
     </div>
 </div>
