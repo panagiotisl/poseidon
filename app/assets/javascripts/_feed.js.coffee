@@ -23,7 +23,7 @@ $(document).ready ->
   setInterval refreshNavbarPartial, 300000  if myElem?
   
 $(document).on "click", ".conversation", ->  
-  url = "/conversations/small/" + $(this).attr("id")
+  url = "/notifications/small/" + $(this).attr("id")
   console.log url
   $.ajax
     url: url

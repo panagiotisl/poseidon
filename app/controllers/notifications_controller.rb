@@ -19,5 +19,14 @@ class NotificationsController < ApplicationController
     Reader.create(user_id: current_user.id, notification_id: @notification.id)
     render :action => :show    
   end
+
+  def show_small
+    @notification = Notification.find(params[:id])
+    @receipts = @mailbox.receipts_for(@notification).not_trash
+    @receipts.mark_as_read
+    Reader.create(user_id: current_user.id, notification_id: @notification.id)
+    render :layout => false    
+  end
+  
   
 end

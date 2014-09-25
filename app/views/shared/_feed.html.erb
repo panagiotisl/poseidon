@@ -1,5 +1,5 @@
 <div id="messagesFeed" class="bigMarginTop">
-    <%= render :partial => 'conversations/small_conversation', :collection => get_latest_notifications, :as => :notification %>
+    <%= render :partial => 'notifications/small_notification', :collection => get_latest_notifications, :as => :notification %>
 </div>
 <!-- Modal -->
 <div id="myConversationModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myConversationModal" aria-hidden="true">

@@ -6,8 +6,12 @@
 <%= will_paginate @notifications %>
 	
 </div>
-<div id="conversation">
+<div id="myConversationModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myConversationModal" aria-hidden="true">
+	<div id="modalConversation">
+
+	</div>
 </div>
+
 <% else %>
 <div class="center hero-unit">
     <h1>Welcome to POSEIDON</h1>

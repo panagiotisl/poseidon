@@ -1,0 +1,24 @@
+<div class="redBorder marginTop" onclick="window.location='/notifications/<%=notification.id%>';">
+<% if is_readN notification %>
+<% @icon = '<i class="fa fa-exclamation fa-2x"></i>'.html_safe %>
+<% else %>
+<% @icon = '<i class="fa fa-exclamation fa-2x red"></i>'.html_safe %>
+<% end %>
+    <div class="bubbleContent column-wrap">
+        <div class="small-left-column" align="center" valign="middle">
+			<%= @icon %>
+        </div>
+        <div class="big-right-column">
+            <% if !notification.sender %>
+            <div class="dialogTitle">
+                <%= raw(notification.subject) %>
+            </div>
+            <% else %>
+            <div class="dialogTitle">
+                <%= notification.sender.name %>:&thinsp;<%= raw(truncate(notification.subject, :length => 30)) %>
+            </div>
+            <% end %>
+            <%= raw(notification.body) %>
+        </div>
+    </div>
+</div>

@@ -1,10 +1,10 @@
-<div class="redBorder marginTop" onclick="window.location='/notifications/<%=notification.id%>';">
+<div class="redBorder marginTop">
 <% if is_readN notification %>
 <% @icon = '<i class="fa fa-exclamation fa-2x"></i>'.html_safe %>
 <% else %>
 <% @icon = '<i class="fa fa-exclamation fa-2x red"></i>'.html_safe %>
 <% end %>
-    <div class="bubbleContent column-wrap">
+    <div id=<%= notification.id %> class="bubbleContent column-wrap conversation">
         <div class="small-left-column" align="center" valign="middle">
 			<%= @icon %>
         </div>

@@ -61,8 +61,8 @@ SampleApp::Application.routes.draw do
   get "refresh-navbar" , :to => "conversations#refresh_navbar", :as => :refresh_navbar, :constraints => OnlyAjaxRequest.new
   get "refresh-latest-messages" , :to => "conversations#refresh_latest", :as => :refresh_latest_conversations, :constraints => OnlyAjaxRequest.new
   get "refresh-messages-feed" , :to => "conversations#refresh_feed", :as => :refresh_feed_conversations, :constraints => OnlyAjaxRequest.new
-  get "conversations/small/:id" , :to => "conversations#show_small", :as => :show_small_conversations, :constraints => OnlyAjaxRequest.new
-  post "conversations/small/:id" , :to => "conversations#update_small", :as => :update_small_conversations, :constraints => OnlyAjaxRequest.new
+  get "notifications/small/:id" , :to => "notifications#show_small", :as => :show_small_conversations, :constraints => OnlyAjaxRequest.new
+  #post "conversations/small/:id" , :to => "conversations#update_small", :as => :update_small_conversations, :constraints => OnlyAjaxRequest.new
 
   root to: 'static_pages#home'
   get '/signin',  to: 'sessions#new'
