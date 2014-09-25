@@ -1,6 +1,6 @@
 <form class="form-search navbar-form navbar-left" role="search" accept-charset="UTF-8" action="/search_mailbox" method="get">
     <div class="input-append">
-        <input id="term" name="term" type="text" class="span8 search-query">
+        <input id="term" name="term" type="text" class="span8 search-query" value="<%= params[:action]=="search" ? params[:term] : ""  %>">
         <button type="submit" class="btn">
             <span class="icon icon-search"></span>
         </button>

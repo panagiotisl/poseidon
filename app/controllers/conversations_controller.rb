@@ -186,12 +186,17 @@ class ConversationsController < ApplicationController
         endtime = params[:end]
       else
         endtime = Time.now
-      end 
+      end
+      if params[:subject]
+        fields = ["subject^10"]
+      else
+        fields = ["subject^10", "body^5"]
+      end
       unless @mailbox_type.empty?
         if params[:start]
-          @results = Receipt.search @term, misspellings: false, page: params[:inbox_page], per_page: 10, load: false, fields: ["subject^10", "body^5"], partial: true, where: { mailbox_type: @mailbox_type , receiver_id: get_company_id, receiver_type: get_company_type, :created_at=>{:lte=> endtime}, :created_at=>{:gte=>params[:start]} }
+          @results = Receipt.search @term, misspellings: false, page: params[:inbox_page], per_page: 10, load: false, fields: fields, partial: true, where: { mailbox_type: @mailbox_type , receiver_id: get_company_id, receiver_type: get_company_type, :created_at=>{:lte=> endtime}, :created_at=>{:gte=>params[:start]} }
         else
-          @results = Receipt.search @term, misspellings: false, page: params[:inbox_page], per_page: 10, load: false, fields: ["subject^10", "body^5"], partial: true, where: { mailbox_type: @mailbox_type , receiver_id: get_company_id, receiver_type: get_company_type, :created_at=>{:lte=> endtime} }
+          @results = Receipt.search @term, misspellings: false, page: params[:inbox_page], per_page: 10, load: false, fields: fields, partial: true, where: { mailbox_type: @mailbox_type , receiver_id: get_company_id, receiver_type: get_company_type, :created_at=>{:lte=> endtime} }
         end
       else
         @results = Receipt.none
