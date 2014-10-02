@@ -1,8 +1,3 @@
-<% if (sce? and message.sender.name == current_user.shipping_company.name) or (ase? and message.sender.name == current_user.agent.name) %>
-<div class="paddingRight">
-<% else %>
-<div class="paddingLeft">
-<% end %>
 <div class="fullConversation">
     <% if (sce? and message.sender.name == current_user.shipping_company.name) or (ase? and message.sender.name == current_user.agent.name) %>
 	<div class="fullConvSubject fullConvSubjectOut">
@@ -33,5 +28,4 @@
             <% end %>
         </div>
     </div>
-</div>
 </div>
