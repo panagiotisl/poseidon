@@ -17,4 +17,14 @@ module UsersHelper
       link_to sc.name, sc
     end
   end
+
+  def name_works_for(user)
+    if user.kind_of? AUser then
+      Agent.find(user.agent_id).name
+    elsif user.kind_of? SCUser then
+      ShippingCompany.find(user.shipping_company_id).name
+    end
+  end
+
+
 end

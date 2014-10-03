@@ -1,4 +1,13 @@
-<div class="redBorder marginTop">
+<% if notification.subject.include? ':' %>
+<%   @array = notification.subject.split ':' %>
+<%   @incoming = @array[0] == name_works_for(current_user) %>
+<%   @subject = @array[1] %>
+<% else %>
+<%   @incoming = false %>
+<%   @subject = notification.subject %>
+<% end %>
+
+<div class="marginTop <%= @incoming ? "greenBorder" : "redBorder"%>">
 <% if is_readN notification %>
 <% @icon = '<i class="fa fa-exclamation fa-2x"></i>'.html_safe %>
 <% else %>
@@ -11,11 +20,11 @@
         <div class="big-right-column">
             <% if !notification.sender %>
             <div class="dialogTitle">
-                <%= raw(truncate(notification.subject, :length => 60)) %>
+                <%= raw(truncate(@subject, :length => 60)) %>
             </div>
             <% else %>
             <div class="dialogTitle">
-                <%= notification.sender.name %>:&thinsp;<%= raw(truncate(notification.subject, :length => 30)) %>
+                <%= notification.sender.name %>:&thinsp;<%= raw(truncate(@subject, :length => 30)) %>
             </div>
             <% end %>
             <%= raw(truncate(notification.body, :length => 100)) %>
@@ -26,11 +35,7 @@
 	    <% if false %>
         <%= gravatar_for current_user, size: 64 %>
         <h3><%= link_to "Hello #{current_user.name}!", current_user %></h3>
-        <% if sce? %>
-        <%= link_to current_user.shipping_company.name, current_user.shipping_company %>
-        <% elsif ase? %>
-        <%= link_to current_user.agent.name, current_user.agent %>
-        <% end %>
+        <%= works_for(current_user) %>
         <div class="row">
             <div class="span3 roundBeigeBox">
                 <div class="name">

@@ -19,16 +19,34 @@ class OffersController < ApplicationController
     @offer = Offer.find(params[:offer_id])
     if params[:commit] == "Withdraw Offer"
       @voyages_port = @offer.need.voyages_port
-      @receipt = Notification.notify_all(@offer.need.shipping_company, "[#{@voyages_port.voyage.name} - #{@voyages_port.port.name} - #{@voyages_port.date}] Offer for #{@offer.need.service.category} withdrawn", "Agent #{@offer.agent.name} has withdrawn the offer for #{@offer.need.service.category}.")
+      @subject = "#{current_user.agent.name}:[#{@voyages_port.voyage.name} - #{@voyages_port.port.name} - #{@voyages_port.date}] Offer for #{@offer.need.service.category} withdrawn"
+      @content = "Agent #{@offer.agent.name} has withdrawn the offer for #{@offer.need.service.category}."
+
+      @receipt = Notification.notify_all(@offer.need.shipping_company, @subject, @content)
       Label.create(notification_id: @receipt.notification.id, voyages_port_id: @voyages_port.id)
+
+      @receipt = Notification.notify_all(current_user.agent, @subject, @content)
+      Label.create(notification_id: @receipt.notification.id, voyages_port_id: @voyages_port.id)
+
       @offer.destroy
       flash[:success] = "Offer withdrawn"
       redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id],:voyage_port => params[:voyage_port])
     else
       if @offer.update_attributes(offer_params)
         @voyages_port = @offer.need.voyages_port
-        @receipt = Notification.notify_all(@offer.need.shipping_company, "[#{@voyages_port.voyage.name} - #{@voyages_port.port.name} - #{@voyages_port.date}] Offer for #{@offer.need.service.category} updated", "Agent #{@offer.agent.name} has updated the offer for #{@offer.need.service.category}.")
+        @subject = "#{current_user.agent.name}:[#{@voyages_port.voyage.name} - #{@voyages_port.port.name} - #{@voyages_port.date}] Offer for #{@offer.need.service.category} updated"
+        @content = "Agent #{@offer.agent.name} has updated the offer for #{@offer.need.service.category}."
+
+        @receipt = Notification.notify_all(@offer.need.shipping_company, @subject, @content)
         Label.create(notification_id: @receipt.notification.id, voyages_port_id: @voyages_port.id)
+
+        @receipt = Notification.notify_all(@offer.need.shipping_company, @subject, @content)
+        Label.create(notification_id: @receipt.notification.id, voyages_port_id: @voyages_port.id)
+
+        @receipt = Notification.notify_all(current_user.agent, @subject, @content)
+        Label.create(notification_id: @receipt.notification.id, voyages_port_id: @voyages_port.id)
+
+
         flash[:success] = "Offer updated"
         redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id], :voyage_port => params[:voyage_port])
       else

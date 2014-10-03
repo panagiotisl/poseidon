@@ -82,8 +82,19 @@ class VoyagesController < ApplicationController
         end
       end
     end
+    @subject = "#{current_user.shipping_company.name}:[#{@voyages_port.voyage.name} - #{@voyages_port.port.name} - #{@voyages_port.date}]"
+    @content = "There was an update regarding offers for this this voyage."
     @agents = @voyage_port.port.agents.map{ |r| r }
-    Notification.notify_all(@agents  , "#{@voyage_port.voyage.name} - #{@voyage_port.port.name} - #{@voyage_port.date}", "There was an update regarding offers for this this voyage.")
+    @receipts = Notification.notify_all(@agents  , @subject, @content)
+    if @receipts
+      @receipts.each do |receipt|
+        Label.create(notification_id: receipt.notification.id, voyages_port_id: @voyages_port.id)
+      end
+    end
+
+    @receipt = Notification.notify_all(current_user.shipping_company , @subject, @content)
+    Label.create(notification_id: @receipt.notification.id, voyages_port_id: @voyages_port.id)
+
     flash[:success] = "Offer status updated"
     redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id], :voyage_port => params[:voyage_port], :alt => params[:alt])
   end

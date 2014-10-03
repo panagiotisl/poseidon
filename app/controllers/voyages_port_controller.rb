@@ -8,13 +8,19 @@ class VoyagesPortController < ApplicationController
   def create
     @voyages_port = VoyagesPort.new(voyages_port_params)
     if @voyages_port.save
+      @subject = "#{current_user.shipping_company.name}:[#{@voyages_port.voyage.name} - #{@voyages_port.port.name} - #{@voyages_port.date}]"
+      @content = "A new voyage has been registered."
       @agents = @voyages_port.port.agents.map{ |r| r }
-      @receipts = Notification.notify_all(@agents  , "#{@voyages_port.voyage.name} - #{@voyages_port.port.name} - #{@voyages_port.date}", "A new voyage has been registered.")
+      @receipts = Notification.notify_all(@agents  , @subject, @content)
       if @receipts
         @receipts.each do |receipt|
           Label.create(notification_id: receipt.notification.id, voyages_port_id: @voyages_port.id)
         end
       end
+
+      @receipt = Notification.notify_all(current_user.shipping_company , @subject, @content)
+      Label.create(notification_id: @receipt.notification.id, voyages_port_id: @voyages_port.id)
+
       flash[:success] = "Port of Call added!"
       redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id])
     else
