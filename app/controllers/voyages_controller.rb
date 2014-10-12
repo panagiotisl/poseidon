@@ -86,8 +86,9 @@ class VoyagesController < ApplicationController
     @content = "There was an update regarding offers for this this voyage."
     @agents = @voyage_port.port.agents.map{ |r| r }
     @receipts = Notification.notify_all(@agents  , @subject, @content)
+    puts @receipts.class
     if @receipts
-      @receipts.each do |receipt|
+      [*@receipts].each do |receipt|
         Label.create(notification_id: receipt.notification.id, voyages_port_id: @voyage_port.id)
       end
     end
