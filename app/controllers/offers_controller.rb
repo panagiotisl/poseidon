@@ -40,9 +40,6 @@ class OffersController < ApplicationController
         @receipt = Notification.notify_all(@offer.need.shipping_company, @subject, @content)
         Label.create(notification_id: @receipt.notification.id, voyages_port_id: @voyages_port.id)
 
-        @receipt = Notification.notify_all(@offer.need.shipping_company, @subject, @content)
-        Label.create(notification_id: @receipt.notification.id, voyages_port_id: @voyages_port.id)
-
         @receipt = Notification.notify_all(current_user.agent, @subject, @content)
         Label.create(notification_id: @receipt.notification.id, voyages_port_id: @voyages_port.id)
 

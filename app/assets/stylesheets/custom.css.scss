@@ -439,8 +439,8 @@ input {
     float:left;
     width:calc(20% - 4px);
     overflow: hidden;
-    min-height: 500px;
-    max-height: 500px;
+    min-height: 400px;
+    max-height: 400px;
     :hover {
     	overflow: visible;
     }
@@ -454,8 +454,8 @@ input {
     float:left;
     width:calc(25% - 2px);
     overflow: hidden;
-    min-height: 500px;
-    max-height: 500px;
+    min-height: 400px;
+    max-height: 400px;
     :hover {
     	overflow: visible;
     }
@@ -463,8 +463,8 @@ input {
 #content-2-2 {
     float:right;
     width:calc(75% - 2px);
-    min-height: 500px;
-    max-height: 500px;
+    min-height: 400px;
+    max-height: 400px;
     overflow: scroll;
 }
 

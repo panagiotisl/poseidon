@@ -12,17 +12,33 @@ class ConversationsController < ApplicationController
       if params[:conversation_id]
         @conversation = Conversation.find params[:conversation_id]
         @contact = contact_by_conversation params[:conversation_id]
-        @conversations = Conversation.where("id IN (#{conversations_by_contact @contact})").order(created_at: :desc)
+        if @contact.blank?
+          @conversations = Conversation.none
+        else
+          @conversations = Conversation.where("id IN (#{conversations_by_contact @contact})").order(created_at: :desc)
+        end
       elsif params[:receiver_id] and params[:receiver_type]
         @contact = contact_by_receiver params[:receiver_id], params[:receiver_type]
-        @conversations = Conversation.where("id IN (#{conversations_by_contact @contact})").order(created_at: :desc)
+        if @contact.blank?
+          @conversations = Conversation.none
+        else
+        @conversations = Conversation.where("id IN (#{conversations_by_contact @contact})").order(created_at: :desc) unless @contact.blank?
+        end
         @conversation = @conversations.first
       else
         @contact = @contacts.first
-        @conversations = Conversation.where("id IN (#{conversations_by_contact @contact})").order(created_at: :desc)
+        if @contact.blank?
+          @conversations = Conversation.none
+        else
+        @conversations = Conversation.where("id IN (#{conversations_by_contact @contact})").order(created_at: :desc) unless @contact.blank?
+        end
         @conversation = @conversations.first
       end
+      if @conversation.blank?
+        @receipts = Receipt.none
+      else
         @receipts = @mailbox.receipts_for(@conversation).not_trash
+      end
     elsif @box.eql? "inbox"
       @conversations = @mailbox.inbox.page(params[:page])#.per(9)
     elsif @box.eql? "sentbox"
@@ -30,8 +46,8 @@ class ConversationsController < ApplicationController
     else
       @conversations = @mailbox.trash.page(params[:page])#.per(9)
     end
-    @receipts.mark_as_read
-    Reader.create(user_id: current_user.id, conversation_id: @conversation.id)
+    @receipts.mark_as_read unless @receipts.blank?
+    Reader.create(user_id: current_user.id, conversation_id: @conversation.id) unless @conversation.blank?
     @receipts.each do |receipt|
       if (receipt.mailbox_type == "inbox") and ((receipt.receiver_type == "Agent" and current_user.agent_id == receipt.receiver_id) or (receipt.receiver_type == "ShippingCompany" and current_user.shipping_company_id == receipt.receiver_id))
         Reader.create(user_id: current_user.id, notification_id: receipt.notification.id)
