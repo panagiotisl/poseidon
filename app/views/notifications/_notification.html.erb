@@ -27,7 +27,7 @@
                 <%= notification.sender.name %>:&thinsp;<%= raw(truncate(@subject, :length => 30)) %>
             </div>
             <% end %>
-            <%= raw(truncate(notification.body, :length => 100)) %>
+            <%= raw notification.body.truncate(200) %>
         </div>
     </div>
 </div>

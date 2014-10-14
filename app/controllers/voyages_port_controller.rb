@@ -1,6 +1,5 @@
 class VoyagesPortController < ApplicationController
-  
-  
+
   def new
     @voyages_port = VoyagesPort.new
   end
@@ -9,11 +8,11 @@ class VoyagesPortController < ApplicationController
     @voyages_port = VoyagesPort.new(voyages_port_params)
     if @voyages_port.save
       @subject = "#{current_user.shipping_company.name}:[#{@voyages_port.voyage.name} - #{@voyages_port.port.name} - #{@voyages_port.date}]"
-      @content = "A new voyage has been registered."
+      @content = "A new voyage has been registered. Click #{ ActionController::Base.helpers.link_to "here", (url_for :controller => 'voyages', :action => 'show', :id => params[:voyage_id], :voyage_port=>@voyages_port.id)}"
       @agents = @voyages_port.port.agents.map{ |r| r }
       @receipts = Notification.notify_all(@agents  , @subject, @content)
       if @receipts
-        @receipts.each do |receipt|
+        [*@receipts].each do |receipt|
           Label.create(notification_id: receipt.notification.id, voyages_port_id: @voyages_port.id)
         end
       end
