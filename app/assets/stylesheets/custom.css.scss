@@ -348,6 +348,11 @@ input {
   }
 }
 
+.table-ships{
+  width: 100%;
+  border: 1px solid black;
+}
+
 .voyages {
   list-style: none;
   margin: 0;
@@ -860,7 +865,7 @@ top: 26px;
     list-style-type:none;
 }
 
-#leftMenu .accordion-ship {
+#leftMenu .accordion-vessel-type {
     background-image: -moz-linear-gradient(90deg, #726E6D 0%, #837E7C 100%); /* gradient overlay */
     background-image: -o-linear-gradient(90deg, #726E6D 0%, #837E7C 100%); /* gradient overlay */
     background-image: -webkit-linear-gradient(90deg, #726E6D 0%, #837E7C 100%); /* gradient overlay */

@@ -2,12 +2,18 @@ class ShipsController < ApplicationController
   before_action :authorized_sce,     only: [:index, :new, :create, :edit]
   
   def index
-    @title = "All Ships"
-    #@shipping_company = ShippingCompany.find(params[:shipping_company_id])
+
     @fleet = Fleet.find(params[:fleet_id])
     @shipping_company = @fleet.shipping_company
     @fleets = @shipping_company.fleets
-    @ships = @fleet.ships.paginate(page: params[:page])
+    if params[:vessel_type]
+      @ships = @fleet.ships.where(:vessel_type_id => params[:vessel_type]).paginate(page: params[:page])
+      @title = "#{VesselType.find(params[:vessel_type]).category} Ships"
+    else
+      @ships = @fleet.ships.paginate(page: params[:page])
+      @title = "All Ships"
+    end
+
   end
   
   def show

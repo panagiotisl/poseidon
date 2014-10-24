@@ -3,7 +3,7 @@
 <div class="row">
     <div>
         <h3><%= "Edit voyage" %></h3>
-        <%= form_for @voyage , url: shipping_company_fleet_ship_voyage_path do |f| %>
+        <%= form_for @voyage , url: shipping_company_fleet_ship_voyage_path(:vessel_type => params[:vessel_type]) do |f| %>
         <%= render 'shared/error_messages', object: f.object %>
         <%= f.label :name %>
         <%= f.text_field :name %>

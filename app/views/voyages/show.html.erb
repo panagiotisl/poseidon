@@ -9,7 +9,7 @@
                 <% else %>
                 <li class="active">
                     <% end %>
-                    <%= link_to "Main", shipping_company_fleet_ship_voyage_path(:id => params[:id], :ship_id => params[:ship_id], :fleet_id => params[:fleet_id], :shipping_company_id => params[:shipping_company_id]) %>
+                    <%= link_to "Main", shipping_company_fleet_ship_voyage_path(:vessel_type => params[:vessel_type], :id => params[:id], :ship_id => params[:ship_id], :fleet_id => params[:fleet_id], :shipping_company_id => params[:shipping_company_id]) %>
                 </li>
                 <% @voyage.voyages_ports.each do |voyages_port| %>
                 <% if params[:voyage_port] and params[:voyage_port] == voyages_port.id.to_s %>
@@ -17,7 +17,7 @@
                 <% else %>
                 <li>
                     <% end %>
-                    <%= link_to "#{voyages_port.date}: #{voyages_port.port.name}", shipping_company_fleet_ship_voyage_path(:id => params[:id], :ship_id => params[:ship_id], :fleet_id => params[:fleet_id], :shipping_company_id => params[:shipping_company_id],:voyage_port => voyages_port.id) %>
+                    <%= link_to "#{voyages_port.date}: #{voyages_port.port.name}", shipping_company_fleet_ship_voyage_path(:vessel_type => params[:vessel_type], :id => params[:id], :ship_id => params[:ship_id], :fleet_id => params[:fleet_id], :shipping_company_id => params[:shipping_company_id],:voyage_port => voyages_port.id) %>
                 </li>
                 <% end %>
                 </ul>
@@ -162,7 +162,7 @@
                 <% if sce? %>
                 <div class="portsofcallForm roundBox marginTop">
                     <h4>Add a port of call</h4>
-                    <%= form_for @voyages_port, url: shipping_company_fleet_ship_voyage_voyages_port_index_path(:voyage_id => params[:id], :voyage_port => params[:voyage_port]) do |f| %>
+                    <%= form_for @voyages_port, url: shipping_company_fleet_ship_voyage_voyages_port_index_path(:voyage_id => params[:id], :voyage_port => params[:voyage_port], :vessel_type => params[:vessel_type]) do |f| %>
                     <%= render 'shared/error_messages', object: f.object %>
                     <%= f.label :port_of_call %>
                     <%= select "voyages_port", "port_id", Port.order(:name).all.collect {|p| [ p.name, p.id ] }, { :include_blank => true }, class: "input-large" %>

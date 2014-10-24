@@ -1,3 +1,13 @@
-<li>
-	<%= link_to ship.name, shipping_company_fleet_ship_path(:id => ship.id, :fleet_id => ship.fleet_id, :shipping_company_id => ship.fleet.shipping_company.id) %>
-</li>
+<tr>
+  <td style="width: 65%">
+    <h4>
+      <%= link_to ship.name, shipping_company_fleet_ship_voyages_path(:vessel_type => params[:vessel_type], :ship_id => ship.id, :fleet_id => ship.fleet_id, :shipping_company_id => ship.fleet.shipping_company.id) %>
+    </h4>
+  </td>
+  <td>
+    <%= link_to "Details", shipping_company_fleet_ship_path(:vessel_type => params[:vessel_type], :id => ship.id, :fleet_id => ship.fleet_id, :shipping_company_id => ship.fleet.shipping_company.id) %>
+  </td>
+  <td>
+    <%= link_to "Edit", edit_shipping_company_fleet_ship_path(:vessel_type => params[:vessel_type], :id => ship.id, :fleet_id => ship.fleet_id, :shipping_company_id => ship.fleet.shipping_company.id) %>
+  </td>
+</tr>

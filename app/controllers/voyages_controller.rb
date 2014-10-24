@@ -4,11 +4,12 @@ class VoyagesController < ApplicationController
   before_filter :authorized_sce,    only: [:index, :new, :create, :edit, :update, :accept]
   
   def index
-    @title = "All Voyages"
     @ship = Ship.find(params[:ship_id])
     @fleet = @ship.fleet
     @shipping_company = @fleet.shipping_company
+    @fleets = @shipping_company.fleets
     @voyages = @ship.voyages.paginate(page: params[:page])
+    @title = "Voyages of #{@ship.name}"
   end
   
   def show
@@ -44,7 +45,7 @@ class VoyagesController < ApplicationController
     if @voyage.save
       flash[:success] = "Voyage created!"
       @shipping_company = ShippingCompany.find(params[:shipping_company_id])
-      redirect_to shipping_company_fleet_ship_voyage_path(:id => @voyage.id)
+      redirect_to shipping_company_fleet_ship_voyage_path(:vessel_type => params[:vessel_type], :id => @voyage.id)
     else
       @title = "Create Voyage"
       @shipping_company = ShippingCompany.find(params[:shipping_company_id])
@@ -65,7 +66,7 @@ class VoyagesController < ApplicationController
     @voyage = Voyage.find(params[:id])
     if @voyage.update_attributes(voyage_params)
       flash[:success] = "Voyage updated"
-      redirect_to shipping_company_fleet_ship_voyage_path(:id => @voyage.id)
+      redirect_to shipping_company_fleet_ship_voyage_path(:vessel_type => params[:vessel_type], :id => @voyage.id)
     else
       render 'edit'
     end
@@ -96,7 +97,7 @@ class VoyagesController < ApplicationController
     Label.create(notification_id: @receipt.notification.id, voyages_port_id: @voyage_port.id)
 
     flash[:success] = "Offer status updated"
-    redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id], :voyage_port => params[:voyage_port], :alt => params[:alt])
+    redirect_to shipping_company_fleet_ship_voyage_path(:vessel_type => params[:vessel_type], :id => params[:voyage_id], :voyage_port => params[:voyage_port], :alt => params[:alt])
   end
   
   private

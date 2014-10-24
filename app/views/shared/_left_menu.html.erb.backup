@@ -46,11 +46,23 @@
 	        <div id="collapse<%=fleet.name%>" class="accordion-toggle collapse">
 	        <% end %>
 				<div class="accordion" id="leftMenu_<%=fleet.name%>">
-				<% fleet.vessel_types.each do |vessel_type| %>
-	            <div class="accordion-heading accordion-vessel-type">
-                  <a class="accordion-toggle" data-toggle="false" data-parent="#leftMenu" href="<%=shipping_company_fleet_ships_path(:shipping_company_id => fleet.shipping_company.id, :fleet_id => fleet.id, :vessel_type => vessel_type.id )%>"><i class="icon-bookmark"></i> <%=vessel_type.category%></a>
+				<% fleet.ships.each do |ship| %>
+	            <div class="accordion-heading accordion-ship">
+	            <a class="accordion-toggle accordion-left" data-toggle="collapse" data-parent="#leftMenu_<%=fleet.name%>" href="#collapse<%=fleet.name%>_<%=ship.name%>"><i class="icon-th"></i> <%=ship.name%></a>
+				<a class="accordion-toggle accordion-right" data-toggle="" data-parent="#leftMenu_<%=fleet.name%>" href="<%=shipping_company_fleet_ship_path(:id => ship.id, :fleet_id => fleet.id, :shipping_company_id => fleet.shipping_company.id)%>"><i class="icon-circle-arrow-right"></i></a>
 	        	</div>
 				<div style="clear:both;"></div>
+				<% if (params[:ship_id] and params[:ship_id].eql? ship.id.to_s) or (params[:fleet_id] and params[:id].eql? ship.id.to_s) %>
+				<div id="collapse<%=fleet.name%>_<%=ship.name%>" class="accordion-body collapse in">
+				<% else %>
+	        	<div id="collapse<%=fleet.name%>_<%=ship.name%>" class="accordion-body collapse">
+	        	<% end %>
+					<% ship.voyages.each do |voyage| %>
+	            	<div class="accordion-heading accordion-voyage">
+	            	<a class="accordion-toggle" data-toggle="false" data-parent="#leftMenu" href="<%=shipping_company_fleet_ship_voyage_path(:id => voyage.id, :ship_id => ship.id, :fleet_id => fleet.id, :shipping_company_id => fleet.shipping_company.id)%>"><i class="icon-file"></i> <%=voyage.name%></a>
+	        		</div>
+					<% end %>
+	        	</div>
 				<% end %>
 				</div>
 	        </div>

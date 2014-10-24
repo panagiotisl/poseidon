@@ -9,9 +9,9 @@ class OffersController < ApplicationController
       @receipt = Notification.notify_all(@offer.need.shipping_company, "[#{@voyages_port.voyage.name} - #{@voyages_port.port.name} - #{@voyages_port.date}] New offer for #{@offer.need.service.category}", "Agent #{@offer.agent.name} has made a new offer for #{@offer.need.service.category}.")
       Label.create(notification_id: @receipt.notification.id, voyages_port_id: @voyages_port.id)
       flash[:success] = "Offer added!"
-      redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id], :voyage_port => params[:voyage_port])
+      redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id], :voyage_port => params[:voyage_port], :vessel_type => params[:vessel_type])
     else
-      redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id], :voyage_port => params[:voyage_port]), :flash => { :error => "Wrong arguments!" }
+      redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id], :voyage_port => params[:voyage_port], :vessel_type => params[:vessel_type]), :flash => { :error => "Wrong arguments!" }
     end
   end
 
@@ -30,7 +30,7 @@ class OffersController < ApplicationController
 
       @offer.destroy
       flash[:success] = "Offer withdrawn"
-      redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id],:voyage_port => params[:voyage_port])
+      redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id],:voyage_port => params[:voyage_port], :vessel_type => params[:vessel_type])
     else
       if @offer.update_attributes(offer_params)
         @voyages_port = @offer.need.voyages_port
@@ -45,10 +45,10 @@ class OffersController < ApplicationController
 
 
         flash[:success] = "Offer updated"
-        redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id], :voyage_port => params[:voyage_port])
+        redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id], :voyage_port => params[:voyage_port], :vessel_type => params[:vessel_type])
       else
         flash[:fail] = "Something went wrong!"
-        redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id], :voyage_port => params[:voyage_port])
+        redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id], :voyage_port => params[:voyage_port], :vessel_type => params[:vessel_type])
       end
     end
   end
@@ -57,10 +57,10 @@ class OffersController < ApplicationController
     @offer = Offer.find(params[:offer_id])
     if @offer.toggle!(:accepted)
       flash[:success] = "Offer updated"
-      redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id], :voyage_port => params[:voyage_port])
+      redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id], :voyage_port => params[:voyage_port], :vessel_type => params[:vessel_type])
     else
       flash[:fail] = "Something went wrong!"
-      redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id], :voyage_port => params[:voyage_port])
+      redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id], :voyage_port => params[:voyage_port], :vessel_type => params[:vessel_type])
     end
   end
 

@@ -21,9 +21,9 @@ class VoyagesPortController < ApplicationController
       Label.create(notification_id: @receipt.notification.id, voyages_port_id: @voyages_port.id)
 
       flash[:success] = "Port of Call added!"
-      redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id])
+      redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id], :vessel_type => params[:vessel_type])
     else
-      redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id]), :flash => { :error => "Please set a valid date and port of call." }
+      redirect_to shipping_company_fleet_ship_voyage_path(:id => params[:voyage_id], :vessel_type => params[:vessel_type]), :flash => { :error => "Please set a valid date and port of call." }
     end
   end
 
