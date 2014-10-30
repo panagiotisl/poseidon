@@ -9,7 +9,7 @@ class VoyagesController < ApplicationController
     @shipping_company = @fleet.shipping_company
     @fleets = @shipping_company.fleets
     @voyages = @ship.voyages.paginate(page: params[:page])
-    @title = "Voyages of #{@ship.name}"
+    @title = "Agents of #{@ship.name}"
   end
   
   def show

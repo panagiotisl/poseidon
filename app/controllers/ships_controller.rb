@@ -74,7 +74,15 @@ class ShipsController < ApplicationController
       render 'edit'
     end
   end
-  
+
+  def list
+    @title = 'List'
+    @ship = Ship.find(params[:ship_id])
+    @fleet = @ship.fleet
+    @shipping_company = @fleet.shipping_company
+    @fleets = @shipping_company.fleets
+  end
+
   private
   
     def ship_params

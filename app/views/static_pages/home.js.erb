@@ -1,5 +1,8 @@
 $('#latestFeed').append('<%= j render(@notifications) %>');
+console.log(<%= @notifications.next_page %>)
 <% if @notifications.next_page %>
+  console.log("PAOK");
+  console.log(<%= @notifications.next_page %>)
   $('.pagination').replaceWith('<%= j will_paginate(@notifications) %>');
 <% else %>
   $('.pagination').remove();

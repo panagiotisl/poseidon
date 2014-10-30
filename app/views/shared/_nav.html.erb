@@ -31,7 +31,7 @@
     <% if params[:controller] == 'ships'%>
           <li>
             <ol class="breadcrumb">
-              <% if params[:action] == 'show' or params[:action] == 'edit' %>
+              <% if params[:action] == 'show' or params[:action] == 'edit' or params[:action] == 'list' %>
                   <li><%= link_to "Ships", shipping_company_fleet_ships_path(:shipping_company_id => @ship.fleet.shipping_company.id, :fleet_id => @ship.fleet.id, :vessel_type => params[:vessel_type] ) %><span class="divider">/</span></li>
               <% end %>
               <li class="active"><%= @title %></li>
@@ -58,8 +58,9 @@
           <li>
             <ol class="breadcrumb">
               <li><%= link_to "Ships", shipping_company_fleet_ships_path(:shipping_company_id => @ship.fleet.shipping_company.id, :fleet_id => @ship.fleet.id, :vessel_type => params[:vessel_type] ) %><span class="divider">/</span></li>
+              <li><%= link_to "List", shipping_company_fleet_ship_list_path(:shipping_company_id => @ship.fleet.shipping_company.id, :fleet_id => @ship.fleet.id, :ship_id => @ship.id, :vessel_type => params[:vessel_type] ) %><span class="divider">/</span></li>
               <% if params[:action] == 'show' or params[:action] == 'edit' %>
-                  <li><%= link_to "Voyages", shipping_company_fleet_ship_voyages_path(:vessel_type => params[:vessel_type], :shipping_company_id => @ship.fleet.shipping_company.id, :fleet_id => @ship.fleet.id, :vessel_type => params[:vessel_type] ) %><span class="divider">/</span></li>
+                  <li><%= link_to "Agents", shipping_company_fleet_ship_voyages_path(:vessel_type => params[:vessel_type], :shipping_company_id => @ship.fleet.shipping_company.id, :fleet_id => @ship.fleet.id, :vessel_type => params[:vessel_type] ) %><span class="divider">/</span></li>
               <% end %>
               <li class="active"><%= @title %></li>
             </ol>
@@ -71,9 +72,8 @@
 			<li class="pull-right"><%= link_to '<span class="icon icon-plus"></span>'.html_safe, new_shipping_company_fleet_ship_voyage_path(:ship_id => params[:ship_id], :shipping_company_id => params[:shipping_company_id]), :class => "btn btn-default", :title => "Add a voyage", :method => :get %></li>
   			<li class="pull-right"><%= link_to '<span class="icon icon-edit"></span>'.html_safe, edit_shipping_company_fleet_ship_path(:id => params[:ship_id]), :class => "btn btn-default", :title => "Edit ship", :method => :get %></li>
 		<% end %>
-		<% if params[:action] == 'index' %>		
-		  <li class="pull-right"><%= link_to '<span class="icon icon-plus"></span>'.html_safe, new_shipping_company_fleet_path(:shipping_company_id => @shipping_company.id), :class => "btn btn-default", :title => "Add a fleet", :method => :get %></li>
-		  <li class="pull-right"><%= link_to '<span class="icon icon-user"></span>'.html_safe, shipping_company_new_sce_path(:shipping_company_id => @shipping_company.id), :class => "btn btn-default", :title => "Add an employee", :method => :get %></li>
+		<% if params[:action] == 'index' %>
+              <li class="pull-right"><%= link_to '<span class="icon icon-plus"></span>'.html_safe, new_shipping_company_fleet_ship_voyage_path(:ship_id => params[:ship_id], :shipping_company_id => params[:shipping_company_id]), :class => "btn btn-default", :title => "Add a voyage", :method => :get %></li>
 		<% end %>
 	<% end %>
 	
