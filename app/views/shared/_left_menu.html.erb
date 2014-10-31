@@ -36,14 +36,14 @@
 		<% @fleets.each do |fleet| %>
     
 	        <div class="accordion-heading accordion-fleet">
-	            <a class="accordion-toggle accordion-left" data-toggle="collapse" data-parent="#fleets" href="#collapse<%=fleet.name%>"><i class="icon-th"></i> <%=fleet.name%></a>
+	            <a class="accordion-toggle accordion-left" data-toggle="collapse" data-parent="#fleets" href="#collapse<%=fleet.name.delete(' ')%>"><i class="icon-th"></i> <%=fleet.name%></a>
 				<a class="accordion-toggle accordion-right" data-toggle="" data-parent="#fleets" href="<%=shipping_company_fleet_path(:id => fleet.id, :shipping_company_id => fleet.shipping_company.id)%>"><i class="icon-circle-arrow-right"></i></a>
 	        </div>
 			<div style="clear:both;"></div>
 			<% if (params[:fleet_id] and params[:fleet_id].eql? fleet.id.to_s) or (params[:shipping_company_id] and params[:id].eql? fleet.id.to_s) %>
-			<div id="collapse<%=fleet.name%>" class="accordion-toggle collapse in">
+			<div id="collapse<%=fleet.name.delete(' ')%>" class="accordion-toggle collapse in">
 			<% else %>
-	        <div id="collapse<%=fleet.name%>" class="accordion-toggle collapse">
+	        <div id="collapse<%=fleet.name.delete(' ')%>" class="accordion-toggle collapse">
 	        <% end %>
 				<div class="accordion" id="leftMenu_<%=fleet.name%>">
 				<% fleet.vessel_types.each do |vessel_type| %>
