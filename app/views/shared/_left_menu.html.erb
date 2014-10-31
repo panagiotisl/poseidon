@@ -33,7 +33,7 @@
         <% end %>
 	    <div class="accordion" id="fleets">
 	
-		<% @fleets.each do |fleet| %>
+		<% [*@fleets].each do |fleet| %>
     
 	        <div class="accordion-heading accordion-fleet">
 	            <a class="accordion-toggle accordion-left" data-toggle="collapse" data-parent="#fleets" href="#collapse<%=fleet.name.delete(' ')%>"><i class="icon-th"></i> <%=fleet.name%></a>
