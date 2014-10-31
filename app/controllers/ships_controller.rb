@@ -46,6 +46,7 @@ class ShipsController < ApplicationController
       #@fleet = Fleet.find(params[:fleet_id])
       @fleet = @ship.fleet
       @shipping_company = @fleet.shipping_company
+      @fleets = @shipping_company.fleets
       redirect_to shipping_company_fleet_ship_path(:id => @ship.id)
     else
       @title = "Create ship"
@@ -53,6 +54,7 @@ class ShipsController < ApplicationController
       #@fleet = Fleet.find(params[:fleet_id])
       @fleet = @ship.fleet
       @shipping_company = @fleet.shipping_company
+      @fleets = @shipping_company.fleets
       render 'new'
     end
   end
@@ -67,6 +69,9 @@ class ShipsController < ApplicationController
 
   def update
     @ship = Ship.find(params[:id])
+    @fleet = @ship.fleet
+    @shipping_company = @fleet.shipping_company
+    @fleets = @shipping_company.fleets
     if @ship.update_attributes(ship_params)
       flash[:success] = "Ship updated"
       redirect_to shipping_company_fleet_ship_path(:id => @ship.id)
