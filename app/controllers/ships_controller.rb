@@ -39,22 +39,15 @@ class ShipsController < ApplicationController
   
   def create
     @ship = Ship.new(ship_params)
-    p params
+    @fleet = @ship.fleet
+    @shipping_company = @fleet.shipping_company
+    @fleets = @shipping_company.fleets
+
     if @ship.save
       flash[:success] = "Ship created!"
-      #@shipping_company = ShippingCompany.find(params[:shipping_company_id])
-      #@fleet = Fleet.find(params[:fleet_id])
-      @fleet = @ship.fleet
-      @shipping_company = @fleet.shipping_company
-      @fleets = @shipping_company.fleets
       redirect_to shipping_company_fleet_ship_path(:id => @ship.id)
     else
       @title = "Create ship"
-      #@shipping_company = ShippingCompany.find(params[:shipping_company_id])
-      #@fleet = Fleet.find(params[:fleet_id])
-      @fleet = @ship.fleet
-      @shipping_company = @fleet.shipping_company
-      @fleets = @shipping_company.fleets
       render 'new'
     end
   end
